@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Dosen;
-use App\Models\Jurusan;
 use App\Models\Prodi;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -14,16 +13,8 @@ class AdminDosenController extends Controller
 {
     public function index()
     {
-        $jurusans = Jurusan::latest()->get();
+        $prodis = Prodi::latest()->get();
         return view('admin.dosen.index', [
-            'jurusans' => $jurusans,
-        ]);
-    }
-
-    public function prodi($id)
-    {
-        $prodis = Prodi::where('id', $id)->latest()->get();
-        return view('admin.dosen.prodi', [
             'prodis' => $prodis,
         ]);
     }
@@ -41,9 +32,7 @@ class AdminDosenController extends Controller
     public function create($id)
     {
         $prodis = Prodi::where('id', $id)->first();
-        $jurusans = Jurusan::where('id', $prodis->jurusan_id)->first();
         return view('admin.dosen.create', [
-            'jurusans' => $jurusans,
             'prodis' => $prodis,
         ]);
     }
@@ -51,7 +40,6 @@ class AdminDosenController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'jurusan_id' => 'required',
             'prodi_id' => 'required',
             'nip' => 'required|unique:dosens,nip',
             'nama' => 'required',
@@ -63,7 +51,6 @@ class AdminDosenController extends Controller
             'alamat' => 'required',
             'foto_dosen' => 'required|mimes:png,jpeg,jpg|max:2048',
         ], [
-            'jurusan_id.required' => 'Jurusan wajib diisi',
             'prodi_id.required' => 'Program Studi wajib diisi',
             'nip.required' => 'NIP wajib diisi',
             'nip.unique' => 'NIP sudah tersedia',
@@ -114,7 +101,6 @@ class AdminDosenController extends Controller
     public function update(Request $request, $id)
     {
         $validated = $request->validate([
-            'jurusan_id' => 'required',
             'prodi_id' => 'required',
             'nip' => 'required|unique:dosens,nip',
             'nama' => 'required',
@@ -126,7 +112,6 @@ class AdminDosenController extends Controller
             'alamat' => 'required',
             'foto_dosen' => 'required|mimes:png,jpeg,jpg|max:2048',
         ], [
-            'jurusan_id.required' => 'Jurusan wajib diisi',
             'prodi_id.required' => 'Program Studi wajib diisi',
             'nip.required' => 'NIP wajib diisi',
             'nip.unique' => 'NIP sudah tersedia',

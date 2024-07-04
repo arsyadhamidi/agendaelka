@@ -11,11 +11,6 @@ class Dosen extends Model
 
     protected $guarded = [];
 
-    public function jurusan()
-    {
-        return $this->belongsTo(Jurusan::class, 'jurusan_id');
-    }
-
     public function prodi()
     {
         return $this->belongsTo(Prodi::class, 'prodi_id');
