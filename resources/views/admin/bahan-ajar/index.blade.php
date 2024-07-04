@@ -35,7 +35,6 @@
                                         </a>
                                     </td>
                                     <td>{{ $data->dosen->nama ?? '-' }}</td>
-                                    <td>{{ $data->mahasiswa->nama ?? '-' }}</td>
                                     <td>Semester {{ $data->semester ?? '-' }}</td>
                                     <td>{{ $data->tahun ?? '-' }}</td>
                                     <td>

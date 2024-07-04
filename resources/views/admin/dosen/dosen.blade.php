@@ -8,7 +8,7 @@
         <div class="col-lg">
             <div class="card">
                 <div class="card-header">
-                    <a href="{{ route('data-dosen.prodi', $prodis->id) }}" class="btn btn-primary">
+                    <a href="{{ route('data-dosen.index') }}" class="btn btn-primary">
                         <i class="bx bx-left-arrow-alt"></i>
                         Kembali
                     </a>
