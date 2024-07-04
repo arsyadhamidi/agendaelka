@@ -10,7 +10,7 @@
                 @csrf
                 <div class="card">
                     <div class="card-header">
-                        <a href="{{ route('data-prodi.indexprodi', $prodis->jurusan_id) }}" class="btn btn-primary">
+                        <a href="{{ route('data-prodi.index') }}" class="btn btn-primary">
                             <i class="bx bx-left-arrow-alt"></i>
                             Kembali
                         </a>
@@ -22,13 +22,6 @@
                     <div class="card-body">
                         <div class="row">
                             <div class="col-lg">
-                                <div class="mb-3">
-                                    <label>Jurusan</label>
-                                    <input type="text" name="jurusan_id" class="form-control"
-                                        value="{{ $prodis->jurusan_id }}" hidden>
-                                    <input type="text" class="form-control" value="{{ $prodis->jurusan->nama ?? '-' }}"
-                                        readonly>
-                                </div>
                                 <div class="mb-3">
                                     <label>Program Studi</label>
                                     <input type="text" name="nama"

@@ -4,7 +4,6 @@ use App\Http\Controllers\Admin\AdminAkademikController;
 use App\Http\Controllers\Admin\AdminBahanAjarController;
 use App\Http\Controllers\Admin\AdminDosenController;
 use App\Http\Controllers\Admin\AdminJadwalPengajaranController;
-use App\Http\Controllers\Admin\AdminJurusanController;
 use App\Http\Controllers\Admin\AdminLevelController;
 use App\Http\Controllers\Admin\AdminMahasiswaController;
 use App\Http\Controllers\Admin\AdminProdiController;
@@ -110,20 +109,11 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
 
         // Data Prodi
         Route::get('/data-prodi', [AdminProdiController::class, 'index'])->name('data-prodi.index');
-        Route::get('/data-prodi/index_prodi/{id}', [AdminProdiController::class, 'indexprodi'])->name('data-prodi.indexprodi');
-        Route::get('/data-prodi/tambah_prodi/{id}', [AdminProdiController::class, 'create'])->name('data-prodi.tambahprodi');
-        Route::get('/data-prodi/edit_prodi/{id}', [AdminProdiController::class, 'edit'])->name('data-prodi.editprodi');
+        Route::get('/data-prodi/create', [AdminProdiController::class, 'create'])->name('data-prodi.create');
+        Route::get('/data-prodi/edit/{id}', [AdminProdiController::class, 'edit'])->name('data-prodi.edit');
         Route::post('/data-prodi/store', [AdminProdiController::class, 'store'])->name('data-prodi.store');
         Route::post('/data-prodi/update/{id}', [AdminProdiController::class, 'update'])->name('data-prodi.update');
         Route::post('/data-prodi/destroy/{id}', [AdminProdiController::class, 'destroy'])->name('data-prodi.destroy');
-
-        // Data Jurusan
-        Route::get('/data-jurusan', [AdminJurusanController::class, 'index'])->name('data-jurusan.index');
-        Route::get('/data-jurusan/create', [AdminJurusanController::class, 'create'])->name('data-jurusan.create');
-        Route::get('/data-jurusan/edit/{id}', [AdminJurusanController::class, 'edit'])->name('data-jurusan.edit');
-        Route::post('/data-jurusan/store', [AdminJurusanController::class, 'store'])->name('data-jurusan.store');
-        Route::post('/data-jurusan/update/{id}', [AdminJurusanController::class, 'update'])->name('data-jurusan.update');
-        Route::post('/data-jurusan/destroy/{id}', [AdminJurusanController::class, 'destroy'])->name('data-jurusan.destroy');
 
         // Data User
         Route::get('/data-user', [AdminUserController::class, 'index'])->name('data-user.index');

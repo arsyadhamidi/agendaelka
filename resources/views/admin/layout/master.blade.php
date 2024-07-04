@@ -133,11 +133,6 @@
                             </a>
 
                             <ul class="menu-sub">
-                                <li class="menu-item @yield('menuDataJurusan')">
-                                    <a href="{{ route('data-jurusan.index') }}" class="menu-link">
-                                        <div data-i18n="Without menu">Data Jurusan</div>
-                                    </a>
-                                </li>
                                 <li class="menu-item @yield('menuDataProdi')">
                                     <a href="{{ route('data-prodi.index') }}" class="menu-link">
                                         <div data-i18n="Without menu">Data Prodi</div>

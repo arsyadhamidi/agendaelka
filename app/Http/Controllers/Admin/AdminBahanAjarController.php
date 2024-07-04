@@ -37,14 +37,12 @@ class AdminBahanAjarController extends Controller
     {
         $validated = $request->validate([
             'prodi_id' => 'required',
-            'mahasiswa_id' => 'required',
             'dosen_id' => 'required',
             'semester' => 'required',
             'tahun' => 'required',
             'bahan_ajar' => 'required|mimes:pdf|max:2048',
         ], [
             'prodi_id.required' => 'Program Studi wajib diisi',
-            'mahasiswa_id.required' => 'Mahasiswa wajib diisi',
             'dosen_id.required' => 'Dosen wajib diisi',
             'semester.required' => 'Semester wajib diisi',
             'tahun.required' => 'Tahun wajib diisi',
@@ -81,14 +79,12 @@ class AdminBahanAjarController extends Controller
     {
         $validated = $request->validate([
             'prodi_id' => 'required',
-            'mahasiswa_id' => 'required',
             'dosen_id' => 'required',
             'semester' => 'required',
             'tahun' => 'required',
             'bahan_ajar' => 'required|mimes:pdf|max:2048',
         ], [
             'prodi_id.required' => 'Program Studi wajib diisi',
-            'mahasiswa_id.required' => 'Mahasiswa wajib diisi',
             'dosen_id.required' => 'Dosen wajib diisi',
             'semester.required' => 'Semester wajib diisi',
             'tahun.required' => 'Tahun wajib diisi',

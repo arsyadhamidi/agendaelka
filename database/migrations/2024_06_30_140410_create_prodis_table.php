@@ -13,7 +13,6 @@ return new class extends Migration
     {
         Schema::create('prodis', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('jurusan_id');
             $table->string('nama');
             $table->timestamps();
         });

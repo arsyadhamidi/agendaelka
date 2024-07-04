@@ -18,7 +18,6 @@
                                 <th style="width: 5%; text-align:center">No.</th>
                                 <th style="text-align:center">Bahan</th>
                                 <th style="text-align:center">Dosen</th>
-                                <th style="text-align:center">Mahasiswa</th>
                                 <th style="text-align:center">Semester</th>
                                 <th style="text-align:center">Tahun</th>
                                 <th style="text-align:center">Aksi</th>

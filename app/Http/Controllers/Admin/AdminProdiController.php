@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Jurusan;
 use App\Models\Prodi;
 use Illuminate\Http\Request;
 
@@ -11,25 +10,15 @@ class AdminProdiController extends Controller
 {
     public function index()
     {
-        $jurusans = Jurusan::latest()->get();
+        $prodis = Prodi::latest()->get();
         return view('admin.prodi.index', [
-            'jurusans' => $jurusans,
+            'prodis' => $prodis,
         ]);
     }
 
-    public function indexprodi($id)
+    public function create()
     {
-        return view('admin.prodi.prodi', [
-            'prodis' => Prodi::where('jurusan_id', $id)->latest()->get(),
-            'jurusans' => Jurusan::find($id),
-        ]);
-    }
-
-    public function create($id)
-    {
-        return view('admin.prodi.create', [
-            'jurusans' => Jurusan::find($id),
-        ]);
+        return view('admin.prodi.create');
     }
 
     public function store(Request $request)
@@ -40,11 +29,9 @@ class AdminProdiController extends Controller
             'nama.required' => 'Nama Program Studi wajib diisi',
         ]);
 
-        $validated['jurusan_id'] = $request->jurusan_id;
-
         Prodi::create($validated);
 
-        return redirect('data-prodi/index_prodi/' . $request->jurusan_id)->with('success', 'Selamat ! Anda berhasil menambahkan data');
+        return redirect('data-prodi')->with('success', 'Selamat ! Anda berhasil menambahkan data');
     }
 
     public function edit($id)
@@ -62,11 +49,9 @@ class AdminProdiController extends Controller
             'nama.required' => 'Nama Program Studi wajib diisi',
         ]);
 
-        $validated['jurusan_id'] = $request->jurusan_id;
-
         Prodi::where('id', $id)->update($validated);
 
-        return redirect('data-prodi/index_prodi/' . $request->jurusan_id)->with('success', 'Selamat ! Anda berhasil memperbaharui data');
+        return redirect('data-prodi')->with('success', 'Selamat ! Anda berhasil memperbaharui data');
     }
 
     public function destroy($id)
