@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Jurusan;
 use App\Models\Mahasiswa;
 use App\Models\Prodi;
 use App\Models\User;
@@ -14,16 +13,8 @@ class AdminMahasiswaController extends Controller
 {
     public function index()
     {
-        $jurusans = Jurusan::latest()->get();
+        $prodis = Prodi::latest()->get();
         return view('admin.mahasiswa.index', [
-            'jurusans' => $jurusans,
-        ]);
-    }
-
-    public function prodi($id)
-    {
-        $prodis = Prodi::where('id', $id)->latest()->get();
-        return view('admin.mahasiswa.prodi', [
             'prodis' => $prodis,
         ]);
     }
@@ -41,9 +32,7 @@ class AdminMahasiswaController extends Controller
     public function create($id)
     {
         $prodis = Prodi::where('id', $id)->first();
-        $jurusans = Jurusan::where('id', $prodis->jurusan_id)->first();
         return view('admin.mahasiswa.create', [
-            'jurusans' => $jurusans,
             'prodis' => $prodis,
         ]);
     }
@@ -51,7 +40,6 @@ class AdminMahasiswaController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'jurusan_id' => 'required',
             'prodi_id' => 'required',
             'nim' => 'required|unique:mahasiswas,nim',
             'nama' => 'required',
@@ -64,7 +52,6 @@ class AdminMahasiswaController extends Controller
             'alamat' => 'required',
             'foto_mahasiswa' => 'required|mimes:png,jpeg,jpg|max:2048',
         ], [
-            'jurusan_id.required' => 'Jurusan wajib diisi',
             'prodi_id.required' => 'Program Studi wajib diisi',
             'nim.required' => 'NIM wajib diisi',
             'nim.unique' => 'NIM sudah tersedia',
@@ -116,7 +103,6 @@ class AdminMahasiswaController extends Controller
     public function update(Request $request, $id)
     {
         $validated = $request->validate([
-            'jurusan_id' => 'required',
             'prodi_id' => 'required',
             'nim' => 'required|unique:mahasiswas,nim',
             'nama' => 'required',
@@ -129,7 +115,6 @@ class AdminMahasiswaController extends Controller
             'alamat' => 'required',
             'foto_mahasiswa' => 'required|mimes:png,jpeg,jpg|max:2048',
         ], [
-            'jurusan_id.required' => 'Jurusan wajib diisi',
             'prodi_id.required' => 'Program Studi wajib diisi',
             'nim.required' => 'NIM wajib diisi',
             'nim.unique' => 'NIM sudah tersedia',

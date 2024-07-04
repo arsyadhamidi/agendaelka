@@ -23,15 +23,6 @@
                         <div class="row">
                             <div class="col-lg">
                                 <div class="mb-3">
-                                    <label>Jurusan</label>
-                                    <input type="text" name="jurusan_id" class="form-control" value="{{ $jurusans->id }}"
-                                        hidden>
-                                    <input type="text" class="form-control" value="{{ $jurusans->nama ?? '-' }}"
-                                        readonly>
-                                </div>
-                            </div>
-                            <div class="col-lg">
-                                <div class="mb-3">
                                     <label>Program Studi</label>
                                     <input type="text" name="prodi_id" class="form-control" value="{{ $prodis->id }}"
                                         hidden>
