@@ -38,26 +38,6 @@
                                     @enderror
                                 </div>
                             </div>
-                            <div class="col-lg">
-                                <div class="mb-3">
-                                    <label>Mahasiswa</label>
-                                    <select name="mahasiswa_id"
-                                        class="form-control @error('mahasiswa_id') is-invalid @enderror"
-                                        id="selectedMahasiswa">
-                                        <option value="" selected>Pilih Mahasiswa</option>
-                                        @foreach ($mahasiswas as $data)
-                                            <option
-                                                value="{{ $data->id }}"{{ old('mahasiswa_id') == $data->id ? 'selected' : '' }}>
-                                                {{ $data->nama ?? '-' }}</option>
-                                        @endforeach
-                                    </select>
-                                    @error('mahasiswa_id')
-                                        <div class="invalid-feedback">
-                                            {{ $message }}
-                                        </div>
-                                    @enderror
-                                </div>
-                            </div>
                         </div>
                         <div class="row">
                             <div class="col-lg">

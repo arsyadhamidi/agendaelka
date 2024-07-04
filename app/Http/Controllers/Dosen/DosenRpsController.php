@@ -38,13 +38,11 @@ class DosenRpsController extends Controller
     {
         $validated = $request->validate([
             'prodi_id' => 'required',
-            'mahasiswa_id' => 'required',
             'semester' => 'required',
             'tahun' => 'required',
             'file_rps' => 'required|mimes:pdf|max:2048',
         ], [
             'prodi_id.required' => 'Program Studi wajib diisi',
-            'mahasiswa_id.required' => 'Mahasiswa wajib diisi',
             'semester.required' => 'Semester wajib diisi',
             'tahun.required' => 'Tahun wajib diisi',
             'file_rps.required' => 'File Rps wajib diisi',
@@ -81,13 +79,11 @@ class DosenRpsController extends Controller
     {
         $validated = $request->validate([
             'prodi_id' => 'required',
-            'mahasiswa_id' => 'required',
             'semester' => 'required',
             'tahun' => 'required',
             'file_rps' => 'required|mimes:pdf|max:2048',
         ], [
             'prodi_id.required' => 'Program Studi wajib diisi',
-            'mahasiswa_id.required' => 'Mahasiswa wajib diisi',
             'semester.required' => 'Semester wajib diisi',
             'tahun.required' => 'Tahun wajib diisi',
             'file_rps.required' => 'File Rps wajib diisi',
