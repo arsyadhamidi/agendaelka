@@ -1,5 +1,5 @@
 @extends('admin.layout.master')
-@section('title', 'Bahan Ajar | Agenda Elka')
+@section('title', 'Bahan Ajar| Agenda Elka')
 @section('menuDataBahanAjar', 'active')
 @section('content')
     <div class="row">
@@ -21,11 +21,11 @@
                             @foreach ($prodis as $data)
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
+                                    <td>{{ $data->nama ?? '-' }}</td>
                                     <td>
-                                        <a href="{{ asset('storage/' . $data->bahan_ajar) }}" class="btn btn-info"
-                                            target="_blank">
-                                            <i class="bx bx-download"></i>
-                                            Download
+                                        <a href="{{ route('data-mahasiswa.tahun', $data->id) }}"
+                                            class="btn btn-sm btn-outline-info">
+                                            <i class="bx bx-edit"></i>
                                         </a>
                                     </td>
                                 </tr>
@@ -36,5 +36,4 @@
             </div>
         </div>
     </div>
-    >>>>>>> Stashed changes
 @endsection
