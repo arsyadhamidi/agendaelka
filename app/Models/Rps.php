@@ -20,4 +20,9 @@ class Rps extends Model
     {
         return $this->belongsTo(Dosen::class, 'dosen_id');
     }
+
+    public function tahun()
+    {
+        return $this->belongsTo(Tahun::class, 'tahun_id', 'id');
+    }
 }

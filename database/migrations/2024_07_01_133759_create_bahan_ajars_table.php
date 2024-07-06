@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('bahan_ajars', function (Blueprint $table) {
             $table->id();
             $table->foreignId('prodi_id');
+            $table->foreignId('tahun_id');
             $table->foreignId('dosen_id');
             $table->string('semester');
             $table->string('tahun');

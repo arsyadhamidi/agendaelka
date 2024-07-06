@@ -2,13 +2,12 @@
 @section('title', 'Data Mahasiswa | Agenda Elka')
 @section('menuDataMaster', 'active')
 @section('menuDataMahasiswa', 'active')
-
 @section('content')
     <div class="row">
         <div class="col-lg">
             <div class="card">
                 <div class="card-header">
-                    Data Mahasiswa
+                    <<<<<<< Updated upstream Data Mahasiswa=======Data Program Studi>>>>>>> Stashed changes
                 </div>
                 <div class="card-body table-responsive">
                     <table class="table table-bordered table-striped" id="myTable">

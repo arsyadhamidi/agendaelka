@@ -23,7 +23,7 @@ class AdminBahanAjarController extends Controller
     public function bahanajar($id)
     {
         $bahans = BahanAjar::where('id', $id)->latest()->get();
-        return view('admin.bahan-ajar.index', [
+        return view('admin.bahan-ajar.bahan-ajar', [
             'bahans' => $bahans,
         ]);
     }
