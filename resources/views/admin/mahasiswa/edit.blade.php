@@ -30,6 +30,15 @@
                                         readonly>
                                 </div>
                             </div>
+                            <div class="col-lg">
+                                <div class="mb-3">
+                                    <label>Tahun Angkatan</label>
+                                    <input type="text" name="tahun_id" class="form-control"
+                                        value="{{ $mahasiswas->tahun_id }}" hidden>
+                                    <input type="text" class="form-control"
+                                        value="{{ $mahasiswas->tahun->tahun ?? '-' }}" readonly>
+                                </div>
+                            </div>
                         </div>
                         <div class="row">
                             <div class="col-lg">
@@ -115,26 +124,10 @@
                         <div class="row">
                             <div class="col-lg">
                                 <div class="mb-3">
-                                    <label>Tahun Angkatan</label>
-                                    <input type="number" name="tahun"
-                                        class="form-control @error('tahun') is-invalid @enderror"
-                                        value="{{ old('tahun', $mahasiswas->tahun ?? '-') }}"
-                                        placeholder="Masukan tahun angkatan">
-                                    @error('tahun')
-                                        <div class="invalid-feedback">
-                                            {{ $message }}
-                                        </div>
-                                    @enderror
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-lg">
-                                <div class="mb-3">
                                     <label>Alamat Email</label>
                                     <input type="email" name="email"
                                         class="form-control @error('email') is-invalid @enderror"
-                                        value="{{ old('nim', $mahasiswas->email ?? '-') }}"
+                                        value="{{ old('email', $mahasiswas->email ?? '-') }}"
                                         placeholder="Masukan Alamat Email">
                                     @error('email')
                                         <div class="invalid-feedback">

@@ -8,51 +8,32 @@
         <div class="col-lg">
             <div class="card">
                 <div class="card-header">
-                    <a href="{{ route('data-mahasiswa.tahun', $tahuns->prodi_id) }}" class="btn btn-primary">
+                    <a href="{{ route('data-mahasiswa.index') }}" class="btn btn-primary">
                         <i class="bx bx-left-arrow-alt"></i>
                         Kembali
-                    </a>
-                    <a href="{{ route('data-mahasiswa.create', $tahuns->id) }}" class="btn btn-primary">
-                        <i class="bx bx-plus"></i>
-                        Tambahkan Data Mahasiswa
                     </a>
                 </div>
                 <div class="card-body table-responsive">
                     <table class="table table-bordered table-striped" id="myTable">
                         <thead>
                             <tr>
-                                <th style="width: 5%; text-align:center">No</th>
-                                <th style="text-align:center">NIM</th>
-                                <th style="text-align:center">Nama</th>
-                                <th style="text-align:center">TTL</th>
-                                <th style="text-align:center">JK</th>
-                                <th style="text-align:center">Telp</th>
-                                <th style="text-align:center">Angkatan</th>
+                                <th style="width: 4%; text-align:center">No.</th>
+                                <th style="text-align:center">Program Studi</th>
+                                <th style="text-align:center">Tahun</th>
                                 <th style="text-align:center">Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($mahasiswas as $data)
+                            @foreach ($tahuns as $data)
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
-                                    <td>{{ $data->nim ?? '-' }}</td>
-                                    <td>{{ $data->nama ?? '-' }}</td>
-                                    <td>{{ $data->tmp_lahir ?? '-' }} / {{ $data->tgl_lahir ?? '-' }}</td>
-                                    <td>{{ $data->jk ?? '-' }}</td>
-                                    <td>{{ $data->telp ?? '-' }}</td>
-                                    <td>{{ $data->tahun->tahun ?? '-' }}</td>
+                                    <td>{{ $data->prodi->nama ?? '-' }}</td>
+                                    <td>{{ $data->tahun ?? '-' }}</td>
                                     <td>
-                                        <form action="{{ route('data-mahasiswa.destroy', $data->id) }}" method="POST"
-                                            class="d-flex flex-wrap">
-                                            @csrf
-                                            <a href="{{ route('data-mahasiswa.edit', $data->id) }}"
-                                                class="btn btn-sm btn-outline-info mx-2">
-                                                <i class="bx bx-edit"></i>
-                                            </a>
-                                            <button type="submit" class="btn btn-sm btn-outline-danger" id="hapusData">
-                                                <i class="bx bx-trash-alt"></i>
-                                            </button>
-                                        </form>
+                                        <a href="{{ route('data-mahasiswa.mahasiswa', $data->id) }}"
+                                            class="btn btn-sm btn-outline-info mx-2">
+                                            <i class="bx bx-edit"></i>
+                                        </a>
                                     </td>
                                 </tr>
                             @endforeach
@@ -86,7 +67,7 @@
             // Tampilkan SweetAlert saat tombol di klik
             Swal.fire({
                 icon: 'question',
-                title: 'Hapus Data Mahasiswa?',
+                title: 'Hapus Data Tahun?',
                 text: 'Apakah anda yakin untuk menghapus data ini?',
                 showCancelButton: true, // Tampilkan tombol batal
                 confirmButtonText: 'Ya',

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Mahasiswa;
 use App\Models\Prodi;
+use App\Models\Tahun;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -19,21 +20,29 @@ class AdminMahasiswaController extends Controller
         ]);
     }
 
+    public function tahun($id)
+    {
+        $tahuns = Tahun::where('prodi_id', $id)->latest()->get();
+        return view('admin.mahasiswa.tahun', [
+            'tahuns' => $tahuns,
+        ]);
+    }
+
     public function mahasiswa($id)
     {
-        $prodis = Prodi::where('id', $id)->first();
-        $mahasiswas = Mahasiswa::where('prodi_id', $id)->latest()->get();
+        $tahuns = Tahun::where('id', $id)->first();
+        $mahasiswas = Mahasiswa::where('tahun_id', $id)->latest()->get();
         return view('admin.mahasiswa.mahasiswa', [
             'mahasiswas' => $mahasiswas,
-            'prodis' => $prodis,
+            'tahuns' => $tahuns,
         ]);
     }
 
     public function create($id)
     {
-        $prodis = Prodi::where('id', $id)->first();
+        $tahuns = Tahun::where('id', $id)->first();
         return view('admin.mahasiswa.create', [
-            'prodis' => $prodis,
+            'tahuns' => $tahuns,
         ]);
     }
 
@@ -41,9 +50,9 @@ class AdminMahasiswaController extends Controller
     {
         $validated = $request->validate([
             'prodi_id' => 'required',
+            'tahun_id' => 'required',
             'nim' => 'required|unique:mahasiswas,nim',
             'nama' => 'required',
-            'tahun' => 'required',
             'tmp_lahir' => 'required',
             'tgl_lahir' => 'required',
             'jk' => 'required',
@@ -53,6 +62,7 @@ class AdminMahasiswaController extends Controller
             'foto_mahasiswa' => 'required|mimes:png,jpeg,jpg|max:2048',
         ], [
             'prodi_id.required' => 'Program Studi wajib diisi',
+            'tahun_id.required' => 'Tahun wajib diisi',
             'nim.required' => 'NIM wajib diisi',
             'nim.unique' => 'NIM sudah tersedia',
             'nama.required' => 'Nama Lengkap wajib diisi',
@@ -89,7 +99,7 @@ class AdminMahasiswaController extends Controller
             'mahasiswa_id' => $mahasiswas->id,
         ]);
 
-        return redirect()->route('data-mahasiswa.mahasiswa', $request->prodi_id)->with('success', 'Selamat! Anda berhasil menambahkan data');
+        return redirect()->route('data-mahasiswa.mahasiswa', $request->tahun_id)->with('success', 'Selamat! Anda berhasil menambahkan data');
     }
 
     public function edit($id)
@@ -104,9 +114,9 @@ class AdminMahasiswaController extends Controller
     {
         $validated = $request->validate([
             'prodi_id' => 'required',
+            'tahun_id' => 'required',
             'nim' => 'required|unique:mahasiswas,nim',
             'nama' => 'required',
-            'tahun' => 'required',
             'tmp_lahir' => 'required',
             'tgl_lahir' => 'required',
             'jk' => 'required',
@@ -116,10 +126,10 @@ class AdminMahasiswaController extends Controller
             'foto_mahasiswa' => 'required|mimes:png,jpeg,jpg|max:2048',
         ], [
             'prodi_id.required' => 'Program Studi wajib diisi',
+            'tahun_id.required' => 'Tahun wajib diisi',
             'nim.required' => 'NIM wajib diisi',
             'nim.unique' => 'NIM sudah tersedia',
             'nama.required' => 'Nama Lengkap wajib diisi',
-            'tahun.required' => 'Tahun Angkatan wajib diisi',
             'tmp_lahir.required' => 'Tempat Lahir wajib diisi',
             'tgl_lahir.required' => 'Tanggal Lahir wajib diisi',
             'jk.required' => 'Jenis Kelamin wajib diisi',
@@ -143,7 +153,7 @@ class AdminMahasiswaController extends Controller
 
         $mahasiswas->update($validated);
 
-        return redirect()->route('data-mahasiswa.mahasiswa', $request->prodi_id)->with('success', 'Selamat! Anda berhasil memperbaharui data');
+        return redirect()->route('data-mahasiswa.mahasiswa', $request->tahun_id)->with('success', 'Selamat! Anda berhasil memperbaharui data');
     }
 
     public function destroy($id)

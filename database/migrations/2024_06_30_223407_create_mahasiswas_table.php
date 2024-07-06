@@ -14,11 +14,11 @@ return new class extends Migration
         Schema::create('mahasiswas', function (Blueprint $table) {
             $table->id();
             $table->foreignId('prodi_id');
+            $table->foreignId('tahun_id');
             $table->string('nim')->unique();
             $table->string('nama');
             $table->string('tmp_lahir');
             $table->date('tgl_lahir');
-            $table->string('tahun');
             $table->string('jk');
             $table->string('email');
             $table->string('telp');

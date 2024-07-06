@@ -109,6 +109,7 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
 
         // Mahasiswa
         Route::get('/data-mahasiswa', [AdminMahasiswaController::class, 'index'])->name('data-mahasiswa.index');
+        Route::get('/data-mahasiswa/tahun/{id}', [AdminMahasiswaController::class, 'tahun'])->name('data-mahasiswa.tahun');
         Route::get('/data-mahasiswa/mahasiswa/{id}', [AdminMahasiswaController::class, 'mahasiswa'])->name('data-mahasiswa.mahasiswa');
         Route::get('/data-mahasiswa/create/{id}', [AdminMahasiswaController::class, 'create'])->name('data-mahasiswa.create');
         Route::get('/data-mahasiswa/edit/{id}', [AdminMahasiswaController::class, 'edit'])->name('data-mahasiswa.edit');

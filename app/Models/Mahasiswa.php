@@ -15,4 +15,9 @@ class Mahasiswa extends Model
     {
         return $this->belongsTo(Prodi::class, 'prodi_id');
     }
+
+    public function tahun()
+    {
+        return $this->belongsTo(Tahun::class, 'tahun_id', 'id');
+    }
 }
