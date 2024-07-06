@@ -33,7 +33,7 @@ class DosenRpsController extends Controller
     public function rps($id)
     {
         $tahuns = Tahun::where('id', $id)->first();
-        $rps = Rps::where('tahun_id', $id)->latest()->get();
+        $rps = Rps::where('dosen_id', Auth::user()->dosen_id)->where('tahun_id', $id)->latest()->get();
         return view('dosen.rps.rps', [
             'rps' => $rps,
             'tahuns' => $tahuns,
