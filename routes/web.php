@@ -66,6 +66,7 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
 
         // Data Akademik
         Route::get('/data-akademik', [AdminAkademikController::class, 'index'])->name('data-akademik.index');
+        Route::get('/data-akademik/tahun/{id}', [AdminAkademikController::class, 'tahun'])->name('data-akademik.tahun');
         Route::get('/data-akademik/create/{id}', [AdminAkademikController::class, 'create'])->name('data-akademik.create');
         Route::get('/data-akademik/akademik/{id}', [AdminAkademikController::class, 'akademik'])->name('data-akademik.akademik');
         Route::get('/data-akademik/edit/{id}', [AdminAkademikController::class, 'edit'])->name('data-akademik.edit');

@@ -6,37 +6,52 @@ use App\Http\Controllers\Controller;
 use App\Models\Akademik;
 use App\Models\Dosen;
 use App\Models\Mahasiswa;
+use App\Models\Prodi;
+use App\Models\Tahun;
 use Illuminate\Http\Request;
 
 class AdminAkademikController extends Controller
 {
     public function index()
     {
-        $dosens = Dosen::latest()->get();
+        $prodis = Prodi::latest()->get();
         return view('admin.akademik.index', [
-            'dosens' => $dosens,
+            'prodis' => $prodis,
+        ]);
+    }
+
+    public function tahun($id)
+    {
+        $tahuns = Tahun::where('prodi_id', $id)->latest()->get();
+        return view('admin.akademik.tahun', [
+            'tahuns' => $tahuns,
         ]);
     }
 
     public function akademik($id)
     {
-        $dosens = Dosen::where('id', $id)->first();
-        $akademiks = Akademik::where('dosen_id', $id)->latest()->get();
+        $tahuns = Tahun::where('id', $id)->first();
+        $akademiks = Akademik::where('tahun_id', $id)->latest()->get();
 
         return view('admin.akademik.akademik', [
-            'dosens' => $dosens,
+            'tahuns' => $tahuns,
             'akademiks' => $akademiks,
         ]);
     }
 
     public function create($id)
     {
-        $mahasiswas = Mahasiswa::latest()->get();
-        $dosens = Dosen::where('id', $id)->first();
+        $tahuns = Tahun::where('id', $id)->first();
+        $mahasiswas = Mahasiswa::where('prodi_id', $tahuns->prodi_id)
+            ->where('id', $tahuns->id)
+            ->latest()
+            ->get();
+        $dosens = Dosen::where('prodi_id', $tahuns->prodi_id)->latest()->get();
 
         return view('admin.akademik.create', [
-            'dosens' => $dosens,
+            'tahuns' => $tahuns,
             'mahasiswas' => $mahasiswas,
+            'dosens' => $dosens,
         ]);
     }
 
@@ -44,20 +59,24 @@ class AdminAkademikController extends Controller
     {
         $validated = $request->validate([
             'dosen_id' => 'required',
+            'prodi_id' => 'required',
+            'tahun_id' => 'required',
             'mahasiswa_id' => 'required',
-            'tahun' => 'required',
         ]);
 
         Akademik::create($validated);
 
-        return redirect('data-akademik/akademik/' . $request->dosen_id)->with('success', 'Selamat ! Anda berhasil menambahkan data');
+        return redirect('data-akademik/akademik/' . $request->tahun_id)->with('success', 'Selamat ! Anda berhasil menambahkan data');
     }
 
     public function edit($id)
     {
-        $mahasiswas = Mahasiswa::latest()->get();
-        $dosens = Dosen::latest()->get();
         $akademiks = Akademik::where('id', $id)->first();
+        $mahasiswas = Mahasiswa::where('prodi_id', $akademiks->prodi_id)
+            ->where('tahun_id', $akademiks->tahun_id)
+            ->latest()
+            ->get();
+        $dosens = Dosen::where('prodi_id', $akademiks->prodi_id)->latest()->get();
 
         return view('admin.akademik.edit', [
             'dosens' => $dosens,
@@ -70,13 +89,14 @@ class AdminAkademikController extends Controller
     {
         $validated = $request->validate([
             'dosen_id' => 'required',
+            'prodi_id' => 'required',
+            'tahun_id' => 'required',
             'mahasiswa_id' => 'required',
-            'tahun' => 'required',
         ]);
 
         Akademik::where('id', $id)->update($validated);
 
-        return redirect('data-akademik/akademik/' . $request->dosen_id)->with('success', 'Selamat ! Anda berhasil memperbaharui data');
+        return redirect('data-akademik/akademik/' . $request->tahun_id)->with('success', 'Selamat ! Anda berhasil memperbaharui data');
     }
 
     public function destroy($id)

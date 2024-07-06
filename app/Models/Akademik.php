@@ -11,6 +11,16 @@ class Akademik extends Model
 
     protected $guarded = [];
 
+    public function prodi()
+    {
+        return $this->belongsTo(Prodi::class, 'prodi_id');
+    }
+
+    public function tahun()
+    {
+        return $this->belongsTo(Tahun::class, 'tahun_id');
+    }
+
     public function mahasiswa()
     {
         return $this->belongsTo(Mahasiswa::class, 'mahasiswa_id');
