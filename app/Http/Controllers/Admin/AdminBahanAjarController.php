@@ -14,7 +14,15 @@ class AdminBahanAjarController extends Controller
 {
     public function index()
     {
-        $bahans = BahanAjar::latest()->get();
+        $prodis = Prodi::latest()->get();
+        return view('admin.bahan-ajar.index', [
+            'prodis' => $prodis,
+        ]);
+    }
+
+    public function bahanajar($id)
+    {
+        $bahans = BahanAjar::where('id', $id)->latest()->get();
         return view('admin.bahan-ajar.index', [
             'bahans' => $bahans,
         ]);
