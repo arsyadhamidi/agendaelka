@@ -7,7 +7,7 @@
         <div class="col-lg">
             <div class="card">
                 <div class="card-header">
-                    <<<<<<< Updated upstream Data Mahasiswa=======Data Program Studi>>>>>>> Stashed changes
+                    Data Program Studi
                 </div>
                 <div class="card-body table-responsive">
                     <table class="table table-bordered table-striped" id="myTable">
