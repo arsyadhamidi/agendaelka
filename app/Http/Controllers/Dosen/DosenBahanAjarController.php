@@ -7,6 +7,7 @@ use App\Models\BahanAjar;
 use App\Models\Dosen;
 use App\Models\Mahasiswa;
 use App\Models\Prodi;
+use App\Models\Tahun;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -15,14 +16,33 @@ class DosenBahanAjarController extends Controller
 {
     public function index()
     {
-        $bahans = BahanAjar::latest()->get();
+        $prodis = Prodi::latest()->get();
         return view('dosen.bahan-ajar.index', [
-            'bahans' => $bahans,
+            'prodis' => $prodis,
         ]);
     }
 
-    public function create()
+    public function tahun($id)
     {
+        $tahuns = Tahun::where('prodi_id', $id)->latest()->get();
+        return view('dosen.bahan-ajar.tahun', [
+            'tahuns' => $tahuns,
+        ]);
+    }
+
+    public function bahanajar($id)
+    {
+        $tahuns = Tahun::where('id', $id)->first();
+        $bahans = BahanAjar::where('dosen_id', Auth::user()->dosen_id)->where('tahun_id', $id)->latest()->get();
+        return view('dosen.bahan-ajar.bahan-ajar', [
+            'bahans' => $bahans,
+            'tahuns' => $tahuns,
+        ]);
+    }
+
+    public function create($id)
+    {
+        $tahuns = Tahun::where('id', $id)->first();
         $prodis = Prodi::latest()->get();
         $mahasiswas = Mahasiswa::latest()->get();
         $dosens = Dosen::latest()->get();
@@ -31,6 +51,7 @@ class DosenBahanAjarController extends Controller
             'prodis' => $prodis,
             'mahasiswas' => $mahasiswas,
             'dosens' => $dosens,
+            'tahuns' => $tahuns,
         ]);
     }
 
@@ -38,13 +59,13 @@ class DosenBahanAjarController extends Controller
     {
         $validated = $request->validate([
             'prodi_id' => 'required',
+            'tahun_id' => 'required',
             'semester' => 'required',
-            'tahun' => 'required',
             'bahan_ajar' => 'required|mimes:pdf|max:2048',
         ], [
             'prodi_id.required' => 'Program Studi wajib diisi',
+            'tahun_id.required' => 'Tahun wajib diisi',
             'semester.required' => 'Semester wajib diisi',
-            'tahun.required' => 'Tahun wajib diisi',
             'bahan_ajar.required' => 'Bahan Ajar wajib diisi',
             'bahan_ajar.mimes' => 'Bahan Ajar harus memiliki format PDF',
             'bahan_ajar.max' => 'Bahan Ajar maksimal 2 MB',
@@ -58,7 +79,7 @@ class DosenBahanAjarController extends Controller
 
         BahanAjar::create($validated);
 
-        return redirect('dosen-bahanajar')->with('success', 'Selamat ! Anda berhasil menambahkan data!');
+        return redirect()->route('dosen-bahanajar.bahanajar', $request->tahun_id)->with('success', 'Selamat ! Anda berhasil menambahkan data!');
     }
 
     public function edit($id)
@@ -80,13 +101,13 @@ class DosenBahanAjarController extends Controller
     {
         $validated = $request->validate([
             'prodi_id' => 'required',
+            'tahun_id' => 'required',
             'semester' => 'required',
-            'tahun' => 'required',
             'bahan_ajar' => 'required|mimes:pdf|max:2048',
         ], [
             'prodi_id.required' => 'Program Studi wajib diisi',
+            'tahun_id.required' => 'Tahun wajib diisi',
             'semester.required' => 'Semester wajib diisi',
-            'tahun.required' => 'Tahun wajib diisi',
             'bahan_ajar.required' => 'Bahan Ajar wajib diisi',
             'bahan_ajar.mimes' => 'Bahan Ajar harus memiliki format PDF',
             'bahan_ajar.max' => 'Bahan Ajar maksimal 2 MB',
@@ -106,7 +127,7 @@ class DosenBahanAjarController extends Controller
 
         $bahans->update($validated);
 
-        return redirect('dosen-bahanajar')->with('success', 'Selamat ! Anda berhasil memperbaharui data!');
+        return redirect()->route('dosen-bahanajar.bahanajar', $request->tahun_id)->with('success', 'Selamat ! Anda berhasil memperbaharui data!');
     }
 
     public function destroy($id)

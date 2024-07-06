@@ -179,7 +179,9 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
         Route::post('/dosen-rps/destroy/{id}', [DosenRpsController::class, 'destroy'])->name('dosen-rps.destroy');
         // Bahan Ajar
         Route::get('/dosen-bahanajar', [DosenBahanAjarController::class, 'index'])->name('dosen-bahanajar.index');
-        Route::get('/dosen-bahanajar/create', [DosenBahanAjarController::class, 'create'])->name('dosen-bahanajar.create');
+        Route::get('/dosen-bahanajar/create/{id}', [DosenBahanAjarController::class, 'create'])->name('dosen-bahanajar.create');
+        Route::get('/dosen-bahanajar/tahun/{id}', [DosenBahanAjarController::class, 'tahun'])->name('dosen-bahanajar.tahun');
+        Route::get('/dosen-bahanajar/bahanajar/{id}', [DosenBahanAjarController::class, 'bahanajar'])->name('dosen-bahanajar.bahanajar');
         Route::get('/dosen-bahanajar/edit/{id}', [DosenBahanAjarController::class, 'edit'])->name('dosen-bahanajar.edit');
         Route::post('/dosen-bahanajar/store', [DosenBahanAjarController::class, 'store'])->name('dosen-bahanajar.store');
         Route::post('/dosen-bahanajar/update/{id}', [DosenBahanAjarController::class, 'update'])->name('dosen-bahanajar.update');
