@@ -24,7 +24,7 @@ class AdminRpsController extends Controller
     public function tahun($id)
     {
         $prodis = Prodi::where('id', $id)->first();
-        $tahuns = Tahun::latest()->get();
+        $tahuns = Tahun::where('prodi_id', $id)->latest()->get();
         return view('admin.rps.tahun', [
             'prodis' => $prodis,
             'tahuns' => $tahuns,
@@ -43,10 +43,10 @@ class AdminRpsController extends Controller
 
     public function create($id)
     {
+        $tahuns = Tahun::where('id', $id)->first();
         $prodis = Prodi::latest()->get();
         $mahasiswas = Mahasiswa::latest()->get();
-        $dosens = Dosen::latest()->get();
-        $tahuns = Tahun::where('id', $id)->first();
+        $dosens = Dosen::where('prodi_id', $tahuns->prodi_id)->latest()->get();
 
         return view('admin.rps.create', [
             'prodis' => $prodis,
@@ -85,10 +85,10 @@ class AdminRpsController extends Controller
 
     public function edit($id)
     {
+        $rps = Rps::where('id', $id)->first();
         $prodis = Prodi::latest()->get();
         $mahasiswas = Mahasiswa::latest()->get();
-        $dosens = Dosen::latest()->get();
-        $rps = Rps::where('id', $id)->first();
+        $dosens = Dosen::where('prodi_id', $rps->prodi_id)->latest()->get();
 
         return view('admin.rps.edit', [
             'prodis' => $prodis,

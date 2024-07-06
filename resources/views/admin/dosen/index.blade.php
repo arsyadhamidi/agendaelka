@@ -25,7 +25,8 @@
                                     <td>{{ $loop->iteration }}</td>
                                     <td>{{ $data->nama ?? '-' }}</td>
                                     <td>
-                                        <a href="{{ route('data-dosen.dosen', $data->id) }}" class="btn btn-sm btn-primary">
+                                        <a href="{{ route('data-dosen.dosen', $data->id) }}"
+                                            class="btn btn-sm btn-outline-info">
                                             <i class="bx bx-edit"></i>
                                         </a>
                                     </td>

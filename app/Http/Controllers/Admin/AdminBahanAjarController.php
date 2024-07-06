@@ -41,10 +41,10 @@ class AdminBahanAjarController extends Controller
 
     public function create($id)
     {
+        $tahuns = Tahun::where('id', $id)->first();
         $prodis = Prodi::latest()->get();
         $mahasiswas = Mahasiswa::latest()->get();
-        $dosens = Dosen::latest()->get();
-        $tahuns = Tahun::where('id', $id)->first();
+        $dosens = Dosen::where('prodi_id', $tahuns->prodi_id)->latest()->get();
 
         return view('admin.bahan-ajar.create', [
             'prodis' => $prodis,
@@ -83,10 +83,10 @@ class AdminBahanAjarController extends Controller
 
     public function edit($id)
     {
+        $bahans = BahanAjar::where('id', $id)->first();
         $prodis = Prodi::latest()->get();
         $mahasiswas = Mahasiswa::latest()->get();
-        $dosens = Dosen::latest()->get();
-        $bahans = BahanAjar::where('id', $id)->first();
+        $dosens = Dosen::where('prodi_id', $bahans->prodi_id)->latest()->get();
 
         return view('admin.bahan-ajar.edit', [
             'prodis' => $prodis,
