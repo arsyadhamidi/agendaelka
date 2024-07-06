@@ -138,6 +138,11 @@
                                         <div data-i18n="Without menu">Data Prodi</div>
                                     </a>
                                 </li>
+                                <li class="menu-item @yield('menuDataTahun')">
+                                    <a href="{{ route('data-tahun.index') }}" class="menu-link">
+                                        <div data-i18n="Without menu">Data Tahun</div>
+                                    </a>
+                                </li>
                                 <li class="menu-item @yield('menuDataMahasiswa')">
                                     <a href="{{ route('data-mahasiswa.index') }}" class="menu-link">
                                         <div data-i18n="Without menu">Data Mahasiswa</div>

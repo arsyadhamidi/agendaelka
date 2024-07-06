@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\AdminLevelController;
 use App\Http\Controllers\Admin\AdminMahasiswaController;
 use App\Http\Controllers\Admin\AdminProdiController;
 use App\Http\Controllers\Admin\AdminRpsController;
+use App\Http\Controllers\Admin\AdminTahunController;
 use App\Http\Controllers\Admin\AdminUserController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Dashboard\DashboardController;
@@ -53,6 +54,15 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
 
     // Admin
     Route::group(['middleware' => [CekLevel::class . ':1']], function () {
+
+        // Data Tahun
+        Route::get('/data-tahun', [AdminTahunController::class, 'index'])->name('data-tahun.index');
+        Route::get('/data-tahun/tahun/{id}', [AdminTahunController::class, 'tahun'])->name('data-tahun.tahun');
+        Route::get('/data-tahun/create/{id}', [AdminTahunController::class, 'create'])->name('data-tahun.create');
+        Route::get('/data-tahun/edit/{id}', [AdminTahunController::class, 'edit'])->name('data-tahun.edit');
+        Route::post('/data-tahun/store', [AdminTahunController::class, 'store'])->name('data-tahun.store');
+        Route::post('/data-tahun/update/{id}', [AdminTahunController::class, 'update'])->name('data-tahun.update');
+        Route::post('/data-tahun/destroy/{id}', [AdminTahunController::class, 'destroy'])->name('data-tahun.destroy');
 
         // Data Akademik
         Route::get('/data-akademik', [AdminAkademikController::class, 'index'])->name('data-akademik.index');
