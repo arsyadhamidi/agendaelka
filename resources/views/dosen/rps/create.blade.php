@@ -8,7 +8,7 @@
                 @csrf
                 <div class="card">
                     <div class="card-header">
-                        <a href="{{ route('dosen-rps.index') }}" class="btn btn-primary">
+                        <a href="{{ route('dosen-rps.rps', $tahuns->id) }}" class="btn btn-primary">
                             <i class="bx bx-left-arrow-alt"></i>
                             Kembali
                         </a>
@@ -22,20 +22,18 @@
                             <div class="col-lg">
                                 <div class="mb-3">
                                     <label>Program Studi</label>
-                                    <select name="prodi_id" class="form-control @error('prodi_id') is-invalid @enderror"
-                                        id="selectedProdi">
-                                        <option value="" selected>Pilih Program Studi</option>
-                                        @foreach ($prodis as $data)
-                                            <option
-                                                value="{{ $data->id }}"{{ old('prodi_id') == $data->id ? 'selected' : '' }}>
-                                                {{ $data->nama ?? '-' }}</option>
-                                        @endforeach
-                                    </select>
-                                    @error('prodi_id')
-                                        <div class="invalid-feedback">
-                                            {{ $message }}
-                                        </div>
-                                    @enderror
+                                    <input type="text" name="prodi_id" class="form-control"
+                                        value="{{ $tahuns->prodi_id }}" hidden>
+                                    <input type="text" class="form-control" value="{{ $tahuns->prodi->nama ?? '-' }}"
+                                        readonly>
+                                </div>
+                            </div>
+                            <div class="col-lg">
+                                <div class="mb-3">
+                                    <label>Tahun</label>
+                                    <input type="text" name="tahun_id" class="form-control" value="{{ $tahuns->id }}"
+                                        hidden>
+                                    <input type="text" class="form-control" value="{{ $tahuns->tahun ?? '-' }}" readonly>
                                 </div>
                             </div>
                         </div>
@@ -47,19 +45,6 @@
                                         class="form-control @error('semester') is-invalid @enderror"
                                         value="{{ old('semester') }}" placeholder="Masukan semester">
                                     @error('semester')
-                                        <div class="invalid-feedback">
-                                            {{ $message }}
-                                        </div>
-                                    @enderror
-                                </div>
-                            </div>
-                            <div class="col-lg">
-                                <div class="mb-3">
-                                    <label>Tahun</label>
-                                    <input type="number" name="tahun"
-                                        class="form-control @error('tahun') is-invalid @enderror"
-                                        value="{{ old('tahun') }}" placeholder="Masukan tahun">
-                                    @error('tahun')
                                         <div class="invalid-feedback">
                                             {{ $message }}
                                         </div>

@@ -7,6 +7,7 @@ use App\Models\Dosen;
 use App\Models\Mahasiswa;
 use App\Models\Prodi;
 use App\Models\Rps;
+use App\Models\Tahun;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -15,22 +16,42 @@ class DosenRpsController extends Controller
 {
     public function index()
     {
-        $rps = Rps::latest()->get();
+        $prodis = Prodi::latest()->get();
         return view('dosen.rps.index', [
-            'rps' => $rps,
+            'prodis' => $prodis,
         ]);
     }
 
-    public function create()
+    public function tahun($id)
     {
+        $tahuns = Tahun::where('prodi_id', $id)->latest()->get();
+        return view('dosen.rps.tahun', [
+            'tahuns' => $tahuns,
+        ]);
+    }
+
+    public function rps($id)
+    {
+        $tahuns = Tahun::where('id', $id)->first();
+        $rps = Rps::where('tahun_id', $id)->latest()->get();
+        return view('dosen.rps.rps', [
+            'rps' => $rps,
+            'tahuns' => $tahuns,
+        ]);
+    }
+
+    public function create($id)
+    {
+        $tahuns = Tahun::where('id', $id)->first();
         $prodis = Prodi::latest()->get();
         $mahasiswas = Mahasiswa::latest()->get();
-        $dosens = Dosen::latest()->get();
+        $dosens = Dosen::where('prodi_id', $tahuns->prodi_id)->latest()->get();
 
         return view('dosen.rps.create', [
             'prodis' => $prodis,
             'mahasiswas' => $mahasiswas,
             'dosens' => $dosens,
+            'tahuns' => $tahuns,
         ]);
     }
 
@@ -38,13 +59,13 @@ class DosenRpsController extends Controller
     {
         $validated = $request->validate([
             'prodi_id' => 'required',
+            'tahun_id' => 'required',
             'semester' => 'required',
-            'tahun' => 'required',
             'file_rps' => 'required|mimes:pdf|max:2048',
         ], [
             'prodi_id.required' => 'Program Studi wajib diisi',
+            'tahun_id.required' => 'Tahun wajib diisi',
             'semester.required' => 'Semester wajib diisi',
-            'tahun.required' => 'Tahun wajib diisi',
             'file_rps.required' => 'File Rps wajib diisi',
             'file_rps.mimes' => 'File Rps harus memiliki format PDF',
             'file_rps.max' => 'File Rps maksimal 2 MB',
@@ -57,7 +78,7 @@ class DosenRpsController extends Controller
 
         Rps::create($validated);
 
-        return redirect('dosen-rps')->with('success', 'Selamat ! Anda berhasil menambahkan data!');
+        return redirect()->route('dosen-rps.rps', $request->tahun_id)->with('success', 'Selamat ! Anda berhasil menambahkan data!');
     }
 
     public function edit($id)
@@ -79,13 +100,13 @@ class DosenRpsController extends Controller
     {
         $validated = $request->validate([
             'prodi_id' => 'required',
+            'tahun_id' => 'required',
             'semester' => 'required',
-            'tahun' => 'required',
             'file_rps' => 'required|mimes:pdf|max:2048',
         ], [
             'prodi_id.required' => 'Program Studi wajib diisi',
+            'tahun_id.required' => 'Tahun wajib diisi',
             'semester.required' => 'Semester wajib diisi',
-            'tahun.required' => 'Tahun wajib diisi',
             'file_rps.required' => 'File Rps wajib diisi',
             'file_rps.mimes' => 'File Rps harus memiliki format PDF',
             'file_rps.max' => 'File Rps maksimal 2 MB',
@@ -105,7 +126,7 @@ class DosenRpsController extends Controller
 
         $rps->update($validated);
 
-        return redirect('dosen-rps')->with('success', 'Selamat ! Anda berhasil memperbaharui data!');
+        return redirect()->route('dosen-rps.rps', $request->tahun_id)->with('success', 'Selamat ! Anda berhasil memperbaharui data!');
     }
 
     public function destroy($id)
@@ -113,6 +134,6 @@ class DosenRpsController extends Controller
         $rps = Rps::where('id', $id)->first();
         $rps->delete();
 
-        return redirect('dosen-rps')->with('success', 'Selamat ! Anda berhasil menghapus data!');
+        return back()->with('success', 'Selamat ! Anda berhasil menghapus data!');
     }
 }

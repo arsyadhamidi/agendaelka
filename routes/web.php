@@ -172,7 +172,9 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
     Route::group(['middleware' => [CekLevel::class . ':5']], function () {
         // Rps
         Route::get('/dosen-rps', [DosenRpsController::class, 'index'])->name('dosen-rps.index');
-        Route::get('/dosen-rps/create', [DosenRpsController::class, 'create'])->name('dosen-rps.create');
+        Route::get('/dosen-rps/create/{id}', [DosenRpsController::class, 'create'])->name('dosen-rps.create');
+        Route::get('/dosen-rps/tahun/{id}', [DosenRpsController::class, 'tahun'])->name('dosen-rps.tahun');
+        Route::get('/dosen-rps/rps/{id}', [DosenRpsController::class, 'rps'])->name('dosen-rps.rps');
         Route::get('/dosen-rps/edit/{id}', [DosenRpsController::class, 'edit'])->name('dosen-rps.edit');
         Route::post('/dosen-rps/store', [DosenRpsController::class, 'store'])->name('dosen-rps.store');
         Route::post('/dosen-rps/update/{id}', [DosenRpsController::class, 'update'])->name('dosen-rps.update');
