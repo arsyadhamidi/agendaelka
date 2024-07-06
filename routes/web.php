@@ -75,7 +75,9 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
 
         // Rps
         Route::get('/data-rps', [AdminRpsController::class, 'index'])->name('data-rps.index');
-        Route::get('/data-rps/create', [AdminRpsController::class, 'create'])->name('data-rps.create');
+        Route::get('/data-rps/tahun/{id}', [AdminRpsController::class, 'tahun'])->name('data-rps.tahun');
+        Route::get('/data-rps/rps/{id}', [AdminRpsController::class, 'rps'])->name('data-rps.rps');
+        Route::get('/data-rps/create/{id}', [AdminRpsController::class, 'create'])->name('data-rps.create');
         Route::get('/data-rps/edit/{id}', [AdminRpsController::class, 'edit'])->name('data-rps.edit');
         Route::post('/data-rps/store', [AdminRpsController::class, 'store'])->name('data-rps.store');
         Route::post('/data-rps/update/{id}', [AdminRpsController::class, 'update'])->name('data-rps.update');
