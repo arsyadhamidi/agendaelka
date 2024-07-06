@@ -1,7 +1,6 @@
 @extends('admin.layout.master')
 @section('title', 'Bahan Ajar | Agenda Elka')
 @section('menuDataBahanAjar', 'active')
-
 @section('content')
     <div class="row">
         <div class="col-lg">
@@ -22,10 +21,11 @@
                             @foreach ($prodis as $data)
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
-                                    <td>{{ $data->nama ?? '-' }}</td>
                                     <td>
-                                        <a href="#" class="btn btn-sm btn-outline-info">
-                                            <i class="bx bx-edit"></i>
+                                        <a href="{{ asset('storage/' . $data->bahan_ajar) }}" class="btn btn-info"
+                                            target="_blank">
+                                            <i class="bx bx-download"></i>
+                                            Download
                                         </a>
                                     </td>
                                 </tr>
