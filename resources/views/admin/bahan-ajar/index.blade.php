@@ -23,7 +23,7 @@
                                     <td>{{ $loop->iteration }}</td>
                                     <td>{{ $data->nama ?? '-' }}</td>
                                     <td>
-                                        <a href="{{ route('data-mahasiswa.tahun', $data->id) }}"
+                                        <a href="{{ route('data-bahanajar.tahun', $data->id) }}"
                                             class="btn btn-sm btn-outline-info">
                                             <i class="bx bx-edit"></i>
                                         </a>

@@ -17,7 +17,6 @@ return new class extends Migration
             $table->foreignId('tahun_id');
             $table->foreignId('dosen_id');
             $table->string('semester');
-            $table->string('tahun');
             $table->string('file_rps');
             $table->timestamps();
         });

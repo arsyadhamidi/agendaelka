@@ -7,6 +7,7 @@ use App\Models\BahanAjar;
 use App\Models\Dosen;
 use App\Models\Mahasiswa;
 use App\Models\Prodi;
+use App\Models\Tahun;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -20,24 +21,36 @@ class AdminBahanAjarController extends Controller
         ]);
     }
 
-    public function bahanajar($id)
+    public function tahun($id)
     {
-        $bahans = BahanAjar::where('tahun_id', $id)->latest()->get();
-        return view('admin.bahan-ajar.bahan-ajar', [
-            'bahans' => $bahans,
+        $tahuns = Tahun::where('prodi_id', $id)->latest()->get();
+        return view('admin.bahan-ajar.tahun', [
+            'tahuns' => $tahuns,
         ]);
     }
 
-    public function create()
+    public function bahanajar($id)
+    {
+        $bahans = BahanAjar::where('tahun_id', $id)->latest()->get();
+        $tahuns = Tahun::where('id', $id)->first();
+        return view('admin.bahan-ajar.bahan-ajar', [
+            'bahans' => $bahans,
+            'tahuns' => $tahuns,
+        ]);
+    }
+
+    public function create($id)
     {
         $prodis = Prodi::latest()->get();
         $mahasiswas = Mahasiswa::latest()->get();
         $dosens = Dosen::latest()->get();
+        $tahuns = Tahun::where('id', $id)->first();
 
         return view('admin.bahan-ajar.create', [
             'prodis' => $prodis,
             'mahasiswas' => $mahasiswas,
             'dosens' => $dosens,
+            'tahuns' => $tahuns,
         ]);
     }
 
@@ -45,15 +58,15 @@ class AdminBahanAjarController extends Controller
     {
         $validated = $request->validate([
             'prodi_id' => 'required',
+            'tahun_id' => 'required',
             'dosen_id' => 'required',
             'semester' => 'required',
-            'tahun' => 'required',
             'bahan_ajar' => 'required|mimes:pdf|max:2048',
         ], [
             'prodi_id.required' => 'Program Studi wajib diisi',
             'dosen_id.required' => 'Dosen wajib diisi',
+            'tahun_id.required' => 'Tahun wajib diisi',
             'semester.required' => 'Semester wajib diisi',
-            'tahun.required' => 'Tahun wajib diisi',
             'bahan_ajar.required' => 'Bahan Ajar wajib diisi',
             'bahan_ajar.mimes' => 'Bahan Ajar harus memiliki format PDF',
             'bahan_ajar.max' => 'Bahan Ajar maksimal 2 MB',
@@ -65,7 +78,7 @@ class AdminBahanAjarController extends Controller
 
         BahanAjar::create($validated);
 
-        return redirect('data-bahanajar')->with('success', 'Selamat ! Anda berhasil menambahkan data!');
+        return redirect('data-bahanajar/bahanajar/' . $request->tahun_id)->with('success', 'Selamat ! Anda berhasil menambahkan data!');
     }
 
     public function edit($id)
@@ -88,14 +101,14 @@ class AdminBahanAjarController extends Controller
         $validated = $request->validate([
             'prodi_id' => 'required',
             'dosen_id' => 'required',
+            'tahun_id' => 'required',
             'semester' => 'required',
-            'tahun' => 'required',
             'bahan_ajar' => 'required|mimes:pdf|max:2048',
         ], [
             'prodi_id.required' => 'Program Studi wajib diisi',
             'dosen_id.required' => 'Dosen wajib diisi',
+            'tahun_id.required' => 'Tahun wajib diisi',
             'semester.required' => 'Semester wajib diisi',
-            'tahun.required' => 'Tahun wajib diisi',
             'bahan_ajar.required' => 'Bahan Ajar wajib diisi',
             'bahan_ajar.mimes' => 'Bahan Ajar harus memiliki format PDF',
             'bahan_ajar.max' => 'Bahan Ajar maksimal 2 MB',
@@ -114,7 +127,7 @@ class AdminBahanAjarController extends Controller
 
         $bahans->update($validated);
 
-        return redirect('data-bahanajar')->with('success', 'Selamat ! Anda berhasil memperbaharui data!');
+        return redirect('data-bahanajar/bahanajar/' . $request->tahun_id)->with('success', 'Selamat ! Anda berhasil memperbaharui data!');
     }
 
     public function destroy($id)
@@ -122,6 +135,6 @@ class AdminBahanAjarController extends Controller
         $bahans = BahanAjar::where('id', $id)->first();
         $bahans->delete();
 
-        return redirect('data-bahanajar')->with('success', 'Selamat ! Anda berhasil menghapus data!');
+        return back()->with('success', 'Selamat ! Anda berhasil menghapus data!');
     }
 }

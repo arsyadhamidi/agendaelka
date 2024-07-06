@@ -83,7 +83,9 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
 
         // Bahan Ajar
         Route::get('/data-bahanajar', [AdminBahanAjarController::class, 'index'])->name('data-bahanajar.index');
-        Route::get('/data-bahanajar/create', [AdminBahanAjarController::class, 'create'])->name('data-bahanajar.create');
+        Route::get('/data-bahanajar/create/{id}', [AdminBahanAjarController::class, 'create'])->name('data-bahanajar.create');
+        Route::get('/data-bahanajar/tahun/{id}', [AdminBahanAjarController::class, 'tahun'])->name('data-bahanajar.tahun');
+        Route::get('/data-bahanajar/bahanajar/{id}', [AdminBahanAjarController::class, 'bahanajar'])->name('data-bahanajar.bahanajar');
         Route::get('/data-bahanajar/edit/{id}', [AdminBahanAjarController::class, 'edit'])->name('data-bahanajar.edit');
         Route::post('/data-bahanajar/store', [AdminBahanAjarController::class, 'store'])->name('data-bahanajar.store');
         Route::post('/data-bahanajar/update/{id}', [AdminBahanAjarController::class, 'update'])->name('data-bahanajar.update');

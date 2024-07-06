@@ -6,7 +6,11 @@
         <div class="col-lg">
             <div class="card">
                 <div class="card-header">
-                    <a href="{{ route('data-bahanajar.create') }}" class="btn btn-primary">
+                    <a href="{{ route('data-bahanajar.tahun', $tahuns->id) }}" class="btn btn-primary">
+                        <i class="bx bx-left-arrow-alt"></i>
+                        Kembali
+                    </a>
+                    <a href="{{ route('data-bahanajar.create', $tahuns->id) }}" class="btn btn-primary">
                         <i class="bx bx-plus"></i>
                         Tambahkan Data Bahan Ajar
                     </a>
@@ -36,7 +40,7 @@
                                     </td>
                                     <td>{{ $data->dosen->nama ?? '-' }}</td>
                                     <td>Semester {{ $data->semester ?? '-' }}</td>
-                                    <td>{{ $data->tahun ?? '-' }}</td>
+                                    <td>{{ $data->tahun->tahun ?? '-' }}</td>
                                     <td>
                                         <form action="{{ route('data-bahanajar.destroy', $data->id) }}" method="POST"
                                             class="d-flex flex-wrap">
