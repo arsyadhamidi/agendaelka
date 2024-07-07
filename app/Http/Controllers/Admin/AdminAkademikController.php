@@ -43,7 +43,7 @@ class AdminAkademikController extends Controller
     {
         $tahuns = Tahun::where('id', $id)->first();
         $mahasiswas = Mahasiswa::where('prodi_id', $tahuns->prodi_id)
-            ->where('id', $tahuns->id)
+            ->where('tahun_id', $tahuns->id)
             ->latest()
             ->get();
         $dosens = Dosen::where('prodi_id', $tahuns->prodi_id)->latest()->get();
