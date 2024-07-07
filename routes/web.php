@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\AdminLevelController;
 use App\Http\Controllers\Admin\AdminMahasiswaController;
 use App\Http\Controllers\Admin\AdminProdiController;
 use App\Http\Controllers\Admin\AdminRpsController;
+use App\Http\Controllers\Admin\AdminSeminarController;
 use App\Http\Controllers\Admin\AdminTahunController;
 use App\Http\Controllers\Admin\AdminUserController;
 use App\Http\Controllers\Auth\LoginController;
@@ -54,6 +55,16 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
 
     // Admin
     Route::group(['middleware' => [CekLevel::class . ':1']], function () {
+
+        // Seminar
+        Route::get('/data-seminar', [AdminSeminarController::class, 'index'])->name('data-seminar.index');
+        Route::get('/data-seminar/tahun/{id}', [AdminSeminarController::class, 'tahun'])->name('data-seminar.tahun');
+        Route::get('/data-seminar/seminar/{id}', [AdminSeminarController::class, 'seminar'])->name('data-seminar.seminar');
+        Route::get('/data-seminar/create/{id}', [AdminSeminarController::class, 'create'])->name('data-seminar.create');
+        Route::get('/data-seminar/edit/{id}', [AdminSeminarController::class, 'edit'])->name('data-seminar.edit');
+        Route::post('/data-seminar/store', [AdminSeminarController::class, 'store'])->name('data-seminar.store');
+        Route::post('/data-seminar/update/{id}', [AdminSeminarController::class, 'update'])->name('data-seminar.update');
+        Route::post('/data-seminar/destroy/{id}', [AdminSeminarController::class, 'destroy'])->name('data-seminar.destroy');
 
         // Data Tahun
         Route::get('/data-tahun', [AdminTahunController::class, 'index'])->name('data-tahun.index');

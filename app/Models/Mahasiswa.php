@@ -20,4 +20,5 @@ class Mahasiswa extends Model
     {
         return $this->belongsTo(Tahun::class, 'tahun_id', 'id');
     }
+    
 }

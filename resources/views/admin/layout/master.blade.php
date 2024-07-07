@@ -190,6 +190,14 @@
                             </a>
                         </li>
 
+                        {{-- Seminar / Ujian --}}
+                        <li class="menu-item @yield('menuDataSeminar')">
+                            <a href="{{ route('data-seminar.index') }}" class="menu-link">
+                                <i class="menu-icon tf-icons bx bx-folder-open"></i>
+                                <div data-i18n="Analytics">Seminar / Ujian</div>
+                            </a>
+                        </li>
+
                         <!-- Data User -->
                         <li class="menu-item @yield('menuStatusAutentikasi')">
                             <a href="javascript:void(0);" class="menu-link menu-toggle">
