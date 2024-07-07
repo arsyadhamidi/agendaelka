@@ -1,5 +1,6 @@
 @extends('admin.layout.master')
 @section('title', 'Jadwal Pengajaran | Agenda Elka')
+@section('menuDataPengajaran', 'active')
 @section('menuDataJadwalPengajaran', 'active')
 @section('content')
     <div class="row">

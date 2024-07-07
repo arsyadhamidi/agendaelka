@@ -15,10 +15,8 @@
                                 <th style="width: 5%; text-align:center">No.</th>
                                 <th style="text-align:center">Bahan</th>
                                 <th style="text-align:center">Dosen</th>
-                                <th style="text-align:center">Mahasiswa</th>
                                 <th style="text-align:center">Semester</th>
                                 <th style="text-align:center">Tahun</th>
-                                <th style="text-align:center">Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -33,9 +31,8 @@
                                         </a>
                                     </td>
                                     <td>{{ $data->dosen->nama ?? '-' }}</td>
-                                    <td>{{ $data->mahasiswa->nama ?? '-' }}</td>
                                     <td>Semester {{ $data->semester ?? '-' }}</td>
-                                    <td>{{ $data->tahun ?? '-' }}</td>
+                                    <td>{{ $data->tahun->tahun ?? '-' }}</td>
                                 </tr>
                             @endforeach
                         </tbody>

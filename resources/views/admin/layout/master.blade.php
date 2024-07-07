@@ -156,28 +156,30 @@
                             </ul>
                         </li>
 
-                        <!-- Jadwal Pengajaran -->
-                        <li class="menu-item @yield('menuDataJadwalPengajaran')">
-                            <a href="{{ route('data-jadwalpengajaran.index') }}" class="menu-link">
-                                <i class="menu-icon tf-icons bx bx-calendar"></i>
-                                <div data-i18n="Analytics">Jadwal Pengajaran</div>
-                            </a>
-                        </li>
-
-                        <!-- Bahan Ajar -->
-                        <li class="menu-item @yield('menuDataBahanAjar')">
-                            <a href="{{ route('data-bahanajar.index') }}" class="menu-link">
+                        {{-- Pengajaran --}}
+                        <li class="menu-item @yield('menuDataPengajaran')">
+                            <a href="javascript:void(0);" class="menu-link menu-toggle">
                                 <i class="menu-icon tf-icons bx bx-book"></i>
-                                <div data-i18n="Analytics">Bahan Ajar</div>
+                                <div data-i18n="Layouts">Pengajaran</div>
                             </a>
-                        </li>
 
-                        <!-- Bahan Ajar -->
-                        <li class="menu-item @yield('menuDataRps')">
-                            <a href="{{ route('data-rps.index') }}" class="menu-link">
-                                <i class="menu-icon tf-icons bx bx-file"></i>
-                                <div data-i18n="Analytics">Rps</div>
-                            </a>
+                            <ul class="menu-sub">
+                                <li class="menu-item @yield('menuDataJadwalPengajaran')">
+                                    <a href="{{ route('data-jadwalpengajaran.index') }}" class="menu-link">
+                                        <div data-i18n="Without menu">Jadwal Pengajaran</div>
+                                    </a>
+                                </li>
+                                <li class="menu-item @yield('menuDataBahanAjar')">
+                                    <a href="{{ route('data-bahanajar.index') }}" class="menu-link">
+                                        <div data-i18n="Without menu">Bahan Ajar</div>
+                                    </a>
+                                </li>
+                                <li class="menu-item @yield('menuDataRps')">
+                                    <a href="{{ route('data-rps.index') }}" class="menu-link">
+                                        <div data-i18n="Without menu">Data Rps</div>
+                                    </a>
+                                </li>
+                            </ul>
                         </li>
 
                         <!-- Akademik -->
