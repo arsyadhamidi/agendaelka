@@ -40,7 +40,7 @@
                                         </a>
                                     </td>
                                     <td>{{ $data->dosen->nama ?? '-' }}</td>
-                                    <td>Semester {{ $data->semester ?? '-' }}</td>
+                                    <td>{{ $data->semester ?? '-' }}</td>
                                     <td>{{ $data->tahun->tahun ?? '-' }}</td>
                                     <td>
                                         <form action="{{ route('data-bahanajar.destroy', $data->id) }}" method="POST"
