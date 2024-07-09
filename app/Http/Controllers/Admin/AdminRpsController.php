@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Dosen;
 use App\Models\Mahasiswa;
+use App\Models\Matkul;
 use App\Models\Prodi;
 use App\Models\Rps;
 use App\Models\Tahun;
@@ -47,12 +48,14 @@ class AdminRpsController extends Controller
         $prodis = Prodi::latest()->get();
         $mahasiswas = Mahasiswa::latest()->get();
         $dosens = Dosen::where('prodi_id', $tahuns->prodi_id)->latest()->get();
+        $matkuls = Matkul::where('prodi_id', $tahuns->prodi_id)->where('tahun_id', $tahuns->id)->latest()->get();
 
         return view('admin.rps.create', [
             'prodis' => $prodis,
             'mahasiswas' => $mahasiswas,
             'dosens' => $dosens,
             'tahuns' => $tahuns,
+            'matkuls' => $matkuls,
         ]);
     }
 
@@ -62,12 +65,14 @@ class AdminRpsController extends Controller
             'prodi_id' => 'required',
             'tahun_id' => 'required',
             'dosen_id' => 'required',
+            'matkul_id' => 'required',
             'semester' => 'required',
             'file_rps' => 'required|mimes:pdf|max:2048',
         ], [
             'prodi_id.required' => 'Program Studi wajib diisi',
             'dosen_id.required' => 'Dosen wajib diisi',
             'tahun_id.required' => 'Tahun wajib diisi',
+            'matkul_id.required' => 'Mata Kuliah wajib diisi',
             'semester.required' => 'Semester wajib diisi',
             'file_rps.required' => 'File Rps wajib diisi',
             'file_rps.mimes' => 'File Rps harus memiliki format PDF',
@@ -89,12 +94,14 @@ class AdminRpsController extends Controller
         $prodis = Prodi::latest()->get();
         $mahasiswas = Mahasiswa::latest()->get();
         $dosens = Dosen::where('prodi_id', $rps->prodi_id)->latest()->get();
+        $matkuls = Matkul::where('prodi_id', $rps->prodi_id)->where('tahun_id', $rps->tahun_id)->latest()->get();
 
         return view('admin.rps.edit', [
             'prodis' => $prodis,
             'mahasiswas' => $mahasiswas,
             'dosens' => $dosens,
             'rps' => $rps,
+            'matkuls' => $matkuls,
         ]);
     }
 
@@ -104,12 +111,14 @@ class AdminRpsController extends Controller
             'prodi_id' => 'required',
             'tahun_id' => 'required',
             'dosen_id' => 'required',
+            'matkul_id' => 'required',
             'semester' => 'required',
             'file_rps' => 'required|mimes:pdf|max:2048',
         ], [
             'prodi_id.required' => 'Program Studi wajib diisi',
             'dosen_id.required' => 'Dosen wajib diisi',
             'tahun_id.required' => 'Tahun wajib diisi',
+            'matkul_id.required' => 'Mata Kuliah wajib diisi',
             'semester.required' => 'Semester wajib diisi',
             'file_rps.required' => 'File Rps wajib diisi',
             'file_rps.mimes' => 'File Rps harus memiliki format PDF',
