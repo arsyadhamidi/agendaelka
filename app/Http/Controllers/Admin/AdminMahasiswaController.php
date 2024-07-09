@@ -59,7 +59,6 @@ class AdminMahasiswaController extends Controller
             'email' => 'required',
             'telp' => 'required',
             'alamat' => 'required',
-            'foto_mahasiswa' => 'required|mimes:png,jpeg,jpg|max:2048',
         ], [
             'prodi_id.required' => 'Program Studi wajib diisi',
             'tahun_id.required' => 'Tahun wajib diisi',
@@ -73,9 +72,6 @@ class AdminMahasiswaController extends Controller
             'email.required' => 'Alamat Email wajib diisi',
             'telp.required' => 'Nomor Telepon wajib diisi',
             'alamat.required' => 'Alamat Domisili wajib diisi',
-            'foto_mahasiswa.required' => 'Foto Mahasiswa wajib diisi',
-            'foto_mahasiswa.mimes' => 'Foto Mahasiswa harus memiliki format PNG, JPG, atau JPEG',
-            'foto_mahasiswa.max' => 'Foto Mahasiswa maksimal 2 MB',
         ]);
 
         if ($request->file('foto_mahasiswa')) {
@@ -123,7 +119,6 @@ class AdminMahasiswaController extends Controller
             'email' => 'required',
             'telp' => 'required',
             'alamat' => 'required',
-            'foto_mahasiswa' => 'required|mimes:png,jpeg,jpg|max:2048',
         ], [
             'prodi_id.required' => 'Program Studi wajib diisi',
             'tahun_id.required' => 'Tahun wajib diisi',
@@ -136,9 +131,6 @@ class AdminMahasiswaController extends Controller
             'email.required' => 'Alamat Email wajib diisi',
             'telp.required' => 'Nomor Telepon wajib diisi',
             'alamat.required' => 'Alamat Domisili wajib diisi',
-            'foto_mahasiswa.required' => 'Foto Mahasiswa wajib diisi',
-            'foto_mahasiswa.mimes' => 'Foto Mahasiswa harus memiliki format PNG, JPG, atau JPEG',
-            'foto_mahasiswa.max' => 'Foto Mahasiswa maksimal 2 MB',
         ]);
 
         $mahasiswas = Mahasiswa::where('id', $id)->first();

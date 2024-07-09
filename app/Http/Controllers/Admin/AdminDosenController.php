@@ -49,7 +49,6 @@ class AdminDosenController extends Controller
             'email' => 'required',
             'telp' => 'required',
             'alamat' => 'required',
-            'foto_dosen' => 'required|mimes:png,jpeg,jpg|max:2048',
         ], [
             'prodi_id.required' => 'Program Studi wajib diisi',
             'nip.required' => 'NIP wajib diisi',
@@ -61,9 +60,6 @@ class AdminDosenController extends Controller
             'email.required' => 'Alamat Email wajib diisi',
             'telp.required' => 'Nomor Telepon wajib diisi',
             'alamat.required' => 'Alamat Domisili wajib diisi',
-            'foto_dosen.required' => 'Foto Dosen wajib diisi',
-            'foto_dosen.mimes' => 'Foto Dosen harus memiliki format PNG, JPG, atau JPEG',
-            'foto_dosen.max' => 'Foto Dosen maksimal 2 MB',
         ]);
 
         if ($request->file('foto_dosen')) {
@@ -110,7 +106,6 @@ class AdminDosenController extends Controller
             'email' => 'required',
             'telp' => 'required',
             'alamat' => 'required',
-            'foto_dosen' => 'required|mimes:png,jpeg,jpg|max:2048',
         ], [
             'prodi_id.required' => 'Program Studi wajib diisi',
             'nip.required' => 'NIP wajib diisi',
@@ -122,9 +117,6 @@ class AdminDosenController extends Controller
             'email.required' => 'Alamat Email wajib diisi',
             'telp.required' => 'Nomor Telepon wajib diisi',
             'alamat.required' => 'Alamat Domisili wajib diisi',
-            'foto_dosen.required' => 'Foto Dosen wajib diisi',
-            'foto_dosen.mimes' => 'Foto Dosen harus memiliki format PNG, JPG, atau JPEG',
-            'foto_dosen.max' => 'Foto Dosen maksimal 2 MB',
         ]);
 
         $dosens = Dosen::where('id', $id)->first();
