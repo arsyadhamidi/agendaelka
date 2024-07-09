@@ -34,9 +34,14 @@
                                 </div>
                                 <div class="mb-3">
                                     <label>Semester</label>
-                                    <input type="number" name="semester"
-                                        class="form-control @error('semester') is-invalid @enderror"
-                                        value="{{ old('semester', $jadwals->semester) }}" placeholder="Masukan semester">
+                                    <select name="semester" class="form-control @error('semester') is-invalid @enderror"
+                                        id="selectedSemester">
+                                        <option value="" selected>Pilih Semester</option>
+                                        <option value="Ganjil" {{ $jadwals->semester == 'Ganjil' ? 'selected' : '' }}>Ganjil
+                                        </option>
+                                        <option value="Genap" {{ $jadwals->semester == 'Genap' ? 'selected' : '' }}>Genap
+                                        </option>
+                                    </select>
                                     @error('semester')
                                         <div class="invalid-feedback">
                                             {{ $message }}
@@ -61,3 +66,12 @@
         </div>
     </div>
 @endsection
+@push('custom-script')
+    <script>
+        $(document).ready(function() {
+            $('#selectedSemester').select2({
+                theme: 'bootstrap4',
+            });
+        });
+    </script>
+@endpush
