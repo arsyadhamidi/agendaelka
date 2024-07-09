@@ -42,10 +42,37 @@
                             <div class="col-lg">
                                 <div class="mb-3">
                                     <label>Semester</label>
-                                    <input type="number" name="semester"
-                                        class="form-control @error('semester') is-invalid @enderror"
-                                        value="{{ old('semester', $bahans->semester) }}" placeholder="Masukan semester">
+                                    <select name="semester" class="form-control @error('semester') is-invalid @enderror"
+                                        id="selectedSemester">
+                                        <option value="" selected>Pilih Semester</option>
+                                        <option value="Ganjil" {{ $bahans->semester == 'Ganjil' ? 'selected' : '' }}>
+                                            Ganjil
+                                        </option>
+                                        <option value="Genap" {{ $bahans->semester == 'Genap' ? 'selected' : '' }}>Genap
+                                        </option>
+                                    </select>
                                     @error('semester')
+                                        <div class="invalid-feedback">
+                                            {{ $message }}
+                                        </div>
+                                    @enderror
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg">
+                                <div class="mb-3">
+                                    <label>Mata Kuliah</label>
+                                    <select name="matkul_id" class="form-control @error('matkul_id') is-invalid @enderror"
+                                        id="selectedMatkul">
+                                        <option value="" selected>Pilih Mata Kuliah</option>
+                                        @foreach ($matkuls as $data)
+                                            <option
+                                                value="{{ $data->id }}"{{ $bahans->matkul_id == $data->id ? 'selected' : '' }}>
+                                                {{ $data->matkul ?? '-' }}</option>
+                                        @endforeach
+                                    </select>
+                                    @error('matkul_id')
                                         <div class="invalid-feedback">
                                             {{ $message }}
                                         </div>
@@ -80,6 +107,12 @@
                 theme: 'bootstrap4',
             });
             $('#selectedDosen').select2({
+                theme: 'bootstrap4',
+            });
+            $('#selectedSemester').select2({
+                theme: 'bootstrap4',
+            });
+            $('#selectedMatkul').select2({
                 theme: 'bootstrap4',
             });
         });

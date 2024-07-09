@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\BahanAjar;
 use App\Models\Dosen;
 use App\Models\Mahasiswa;
+use App\Models\Matkul;
 use App\Models\Prodi;
 use App\Models\Tahun;
 use Illuminate\Http\Request;
@@ -46,12 +47,14 @@ class DosenBahanAjarController extends Controller
         $prodis = Prodi::latest()->get();
         $mahasiswas = Mahasiswa::latest()->get();
         $dosens = Dosen::latest()->get();
+        $matkuls = Matkul::where('prodi_id', $tahuns->prodi_id)->where('tahun_id', $tahuns->id)->latest()->get();
 
         return view('dosen.bahan-ajar.create', [
             'prodis' => $prodis,
             'mahasiswas' => $mahasiswas,
             'dosens' => $dosens,
             'tahuns' => $tahuns,
+            'matkuls' => $matkuls,
         ]);
     }
 
@@ -60,11 +63,13 @@ class DosenBahanAjarController extends Controller
         $validated = $request->validate([
             'prodi_id' => 'required',
             'tahun_id' => 'required',
+            'matkul_id' => 'required',
             'semester' => 'required',
             'bahan_ajar' => 'required|mimes:pdf|max:2048',
         ], [
             'prodi_id.required' => 'Program Studi wajib diisi',
             'tahun_id.required' => 'Tahun wajib diisi',
+            'matkul_id.required' => 'Mata Kuliah wajib diisi',
             'semester.required' => 'Semester wajib diisi',
             'bahan_ajar.required' => 'Bahan Ajar wajib diisi',
             'bahan_ajar.mimes' => 'Bahan Ajar harus memiliki format PDF',
@@ -88,12 +93,14 @@ class DosenBahanAjarController extends Controller
         $mahasiswas = Mahasiswa::latest()->get();
         $dosens = Dosen::latest()->get();
         $bahans = BahanAjar::where('id', $id)->first();
+        $matkuls = Matkul::where('prodi_id', $bahans->prodi_id)->where('tahun_id', $bahans->tahun_id)->latest()->get();
 
         return view('dosen.bahan-ajar.edit', [
             'prodis' => $prodis,
             'mahasiswas' => $mahasiswas,
             'dosens' => $dosens,
             'bahans' => $bahans,
+            'matkuls' => $matkuls,
         ]);
     }
 
@@ -102,11 +109,13 @@ class DosenBahanAjarController extends Controller
         $validated = $request->validate([
             'prodi_id' => 'required',
             'tahun_id' => 'required',
+            'matkul_id' => 'required',
             'semester' => 'required',
             'bahan_ajar' => 'required|mimes:pdf|max:2048',
         ], [
             'prodi_id.required' => 'Program Studi wajib diisi',
             'tahun_id.required' => 'Tahun wajib diisi',
+            'matkul_id.required' => 'Mata Kuliah wajib diisi',
             'semester.required' => 'Semester wajib diisi',
             'bahan_ajar.required' => 'Bahan Ajar wajib diisi',
             'bahan_ajar.mimes' => 'Bahan Ajar harus memiliki format PDF',
