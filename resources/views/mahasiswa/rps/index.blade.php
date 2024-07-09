@@ -17,6 +17,7 @@
                                 <th style="text-align:center">Dosen</th>
                                 <th style="text-align:center">Semester</th>
                                 <th style="text-align:center">Tahun</th>
+                                <th style="text-align:center">Matkul</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -33,6 +34,7 @@
                                     <td>{{ $data->dosen->nama ?? '-' }}</td>
                                     <td>Semester {{ $data->semester ?? '-' }}</td>
                                     <td>{{ $data->tahun->tahun ?? '-' }}</td>
+                                    <td>{{ $data->matkul->matkul ?? '-' }}</td>
                                 </tr>
                             @endforeach
                         </tbody>
