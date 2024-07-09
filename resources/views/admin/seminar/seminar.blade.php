@@ -25,7 +25,8 @@
                                 <th style="text-align:center">Pembimbing</th>
                                 <th style="text-align:center">Penelaah 1</th>
                                 <th style="text-align:center">Penelaah 2</th>
-                                <th style="text-align:center">Tahun</th>
+                                <th style="text-align:center">Seminar</th>
+                                <th style="text-align:center">Ujian</th>
                                 <th style="text-align:center">Berkas</th>
                                 <th style="text-align:center">Aksi</th>
                             </tr>
@@ -39,10 +40,12 @@
                                     <td>{{ $data->dosen->nama ?? '-' }}</td>
                                     <td>{{ $data->penelaah1->nama ?? '-' }}</td>
                                     <td>{{ $data->penelaah2->nama ?? '-' }}</td>
-                                    <td>{{ $data->tahun ?? '-' }}</td>
+                                    <td>{{ $data->tgl_seminar ?? '-' }}</td>
+                                    <td>{{ $data->tgl_ujian ?? '-' }}</td>
                                     <td>
                                         @if (!empty($data->file_seminar))
-                                            <a href="{{ asset('storage/' . $data->file_seminar) }}" class="btn btn-primary">
+                                            <a href="{{ asset('storage/' . $data->file_seminar) }}"
+                                                class="btn btn-primary">
                                                 <i class="bx bx-download"></i>
                                                 Download
                                             </a>

@@ -124,11 +124,24 @@
                         <div class="row">
                             <div class="col-lg">
                                 <div class="mb-3">
-                                    <label>Tahun Lulus</label>
-                                    <input type="number" name="tahun"
-                                        class="form-control @error('tahun') is-invalid @enderror"
-                                        value="{{ old('tahun', $seminars->tahun ?? '-') }}" placeholder="Masukan tahun">
-                                    @error('tahun')
+                                    <label>Tanggal Seminar</label>
+                                    <input type="date" name="tgl_seminar"
+                                        class="form-control @error('tgl_seminar') is-invalid @enderror"
+                                        value="{{ old('tgl_seminar', $seminars->tgl_seminar) }}">
+                                    @error('tgl_seminar')
+                                        <div class="invalid-feedback">
+                                            {{ $message }}
+                                        </div>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="col-lg">
+                                <div class="mb-3">
+                                    <label>Tanggal Ujian</label>
+                                    <input type="date" name="tgl_ujian"
+                                        class="form-control @error('tgl_ujian') is-invalid @enderror"
+                                        value="{{ old('tgl_ujian', $seminars->tgl_ujian) }}">
+                                    @error('tgl_ujian')
                                         <div class="invalid-feedback">
                                             {{ $message }}
                                         </div>

@@ -63,7 +63,8 @@ class AdminSeminarController extends Controller
             'penelaah1_id' => 'required',
             'penelaah2_id' => 'required',
             'judul' => 'required',
-            'tahun' => 'required',
+            'tgl_seminar' => 'required',
+            'tgl_ujian' => 'required',
         ], [
             'prodi_id.required' => 'Program Studi wajib diisi',
             'tahun_id.required' => 'Tahun wajib diisi',
@@ -72,7 +73,8 @@ class AdminSeminarController extends Controller
             'penelaah1_id.required' => 'Penelaah 1 wajib diisi',
             'penelaah2_id.required' => 'Penelaah 2 wajib diisi',
             'judul.required' => 'Judul wajib diisi',
-            'tahun.required' => 'Tahun wajib diisi',
+            'tgl_seminar.required' => 'Tanggal Seminar wajib diisi',
+            'tgl_ujian.required' => 'Tanggal Ujian wajib diisi',
         ]);
 
         Seminar::create($validated);
@@ -105,7 +107,8 @@ class AdminSeminarController extends Controller
             'penelaah1_id' => 'required',
             'penelaah2_id' => 'required',
             'judul' => 'required',
-            'tahun' => 'required',
+            'tgl_seminar' => 'required',
+            'tgl_ujian' => 'required',
         ], [
             'prodi_id.required' => 'Program Studi wajib diisi',
             'tahun_id.required' => 'Tahun wajib diisi',
@@ -114,7 +117,8 @@ class AdminSeminarController extends Controller
             'penelaah1_id.required' => 'Penelaah 1 wajib diisi',
             'penelaah2_id.required' => 'Penelaah 2 wajib diisi',
             'judul.required' => 'Judul wajib diisi',
-            'tahun.required' => 'Tahun wajib diisi',
+            'tgl_seminar.required' => 'Tanggal Seminar wajib diisi',
+            'tgl_ujian.required' => 'Tanggal Ujian wajib diisi',
         ]);
 
         Seminar::where('id', $id)->update($validated);
