@@ -285,6 +285,14 @@
                                 <div data-i18n="Analytics">Rps</div>
                             </a>
                         </li>
+
+                        {{-- Seminar Mahasiswa --}}
+                        <li class="menu-item @yield('menuMahasiswaSeminar')">
+                            <a href="{{ route('mahasiswa-seminar.index') }}" class="menu-link">
+                                <i class="menu-icon tf-icons bx bx-folder-open"></i>
+                                <div data-i18n="Analytics">Seminar / Ujian</div>
+                            </a>
+                        </li>
                     @endif
                 </ul>
             </aside>

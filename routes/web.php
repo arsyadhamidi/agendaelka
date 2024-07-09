@@ -22,6 +22,7 @@ use App\Http\Controllers\KepalaDepartemen\KepalaDepartemenJadwalPengajaranContro
 use App\Http\Controllers\Mahasiswa\MahasiswaBahanAjarController;
 use App\Http\Controllers\Mahasiswa\MahasiswaJadwalPengajaranController;
 use App\Http\Controllers\Mahasiswa\MahasiswaRpsController;
+use App\Http\Controllers\Mahasiswa\MahasiswaSeminarController;
 use App\Http\Controllers\Setting\SettingController;
 use App\Http\Middleware\CekLevel;
 use Illuminate\Support\Facades\Route;
@@ -217,6 +218,12 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
 
     // Mahasiswa
     Route::group(['middleware' => [CekLevel::class . ':6']], function () {
+
+        // Seminar
+        Route::get('mahasiswa-seminar', [MahasiswaSeminarController::class, 'index'])->name('mahasiswa-seminar.index');
+        Route::get('mahasiswa-seminar/balas/{id}', [MahasiswaSeminarController::class, 'balas'])->name('mahasiswa-seminar.balas');
+        Route::post('mahasiswa-seminar/update/{id}', [MahasiswaSeminarController::class, 'update'])->name('mahasiswa-seminar.update');
+
         // Mahasiswa
         Route::get('/mahasiswa-rps', [MahasiswaRpsController::class, 'index'])->name('mahasiswa-rps.index');
         // Bahan Ajar
