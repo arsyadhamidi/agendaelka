@@ -25,4 +25,9 @@ class BahanAjar extends Model
     {
         return $this->belongsTo(Tahun::class, 'tahun_id', 'id');
     }
+
+    public function matkul()
+    {
+        return $this->belongsTo(Matkul::class, 'matkul_id', 'id');
+    }
 }

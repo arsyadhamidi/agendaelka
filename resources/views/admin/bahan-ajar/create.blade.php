@@ -9,7 +9,7 @@
                 @csrf
                 <div class="card">
                     <div class="card-header">
-                        <a href="{{ route('data-bahanajar.index') }}" class="btn btn-primary">
+                        <a href="{{ route('data-bahanajar.bahanajar', $tahuns->id) }}" class="btn btn-primary">
                             <i class="bx bx-left-arrow-alt"></i>
                             Kembali
                         </a>
@@ -80,6 +80,27 @@
                         <div class="row">
                             <div class="col-lg">
                                 <div class="mb-3">
+                                    <label>Mata Kuliah</label>
+                                    <select name="matkul_id" class="form-control @error('matkul_id') is-invalid @enderror"
+                                        id="selectedMatkul">
+                                        <option value="" selected>Pilih Mata Kuliah</option>
+                                        @foreach ($matkuls as $data)
+                                            <option
+                                                value="{{ $data->id }}"{{ old('matkul_id') == $data->id ? 'selected' : '' }}>
+                                                {{ $data->matkul ?? '-' }}</option>
+                                        @endforeach
+                                    </select>
+                                    @error('matkul_id')
+                                        <div class="invalid-feedback">
+                                            {{ $message }}
+                                        </div>
+                                    @enderror
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg">
+                                <div class="mb-3">
                                     <label>Upload Bahan Ajar</label>
                                     <input type="file" name="bahan_ajar"
                                         class="form-control @error('bahan_ajar') is-invalid @enderror">
@@ -107,6 +128,9 @@
                 theme: 'bootstrap4',
             });
             $('#selectedSemester').select2({
+                theme: 'bootstrap4',
+            });
+            $('#selectedMatkul').select2({
                 theme: 'bootstrap4',
             });
         });

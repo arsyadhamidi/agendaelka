@@ -7,7 +7,7 @@
         <div class="col-lg">
             <div class="card">
                 <div class="card-header">
-                    <a href="{{ route('data-bahanajar.tahun', $tahuns->id) }}" class="btn btn-primary">
+                    <a href="{{ route('data-bahanajar.tahun', $tahuns->prodi_id) }}" class="btn btn-primary">
                         <i class="bx bx-left-arrow-alt"></i>
                         Kembali
                     </a>
@@ -25,6 +25,7 @@
                                 <th style="text-align:center">Dosen</th>
                                 <th style="text-align:center">Semester</th>
                                 <th style="text-align:center">Tahun</th>
+                                <th style="text-align:center">Matkul</th>
                                 <th style="text-align:center">Aksi</th>
                             </tr>
                         </thead>
@@ -42,6 +43,7 @@
                                     <td>{{ $data->dosen->nama ?? '-' }}</td>
                                     <td>{{ $data->semester ?? '-' }}</td>
                                     <td>{{ $data->tahun->tahun ?? '-' }}</td>
+                                    <td>{{ $data->matkul->matkul ?? '-' }}</td>
                                     <td>
                                         <form action="{{ route('data-bahanajar.destroy', $data->id) }}" method="POST"
                                             class="d-flex flex-wrap">
