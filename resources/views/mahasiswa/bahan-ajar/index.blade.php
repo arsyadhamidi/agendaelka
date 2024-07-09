@@ -13,10 +13,10 @@
                         <thead>
                             <tr>
                                 <th style="width: 5%; text-align:center">No.</th>
+                                <th style="text-align:center">Matkul</th>
                                 <th style="text-align:center">Dosen</th>
                                 <th style="text-align:center">Semester</th>
                                 <th style="text-align:center">Tahun</th>
-                                <th style="text-align:center">Matkul</th>
                                 <th style="text-align:center">Bahan</th>
                             </tr>
                         </thead>
@@ -24,10 +24,10 @@
                             @foreach ($bahans as $data)
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
+                                    <td>{{ $data->matkul->matkul ?? '-' }}</td>
                                     <td>{{ $data->dosen->nama ?? '-' }}</td>
                                     <td>{{ $data->semester ?? '-' }}</td>
                                     <td>{{ $data->tahun->tahun ?? '-' }}</td>
-                                    <td>{{ $data->matkul->matkul ?? '-' }}</td>
                                     <td>
                                         <a href="{{ asset('storage/' . $data->bahan_ajar) }}" class="btn btn-info"
                                             target="_blank">
