@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Mahasiswa;
 
 use App\Http\Controllers\Controller;
+use App\Models\Mahasiswa;
 use App\Models\Seminar;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -11,7 +12,11 @@ class MahasiswaSeminarController extends Controller
 {
     public function index()
     {
-        $seminars = Seminar::where('mahasiswa_id', Auth::user()->mahasiswa_id)->latest()->get();
+        $mahasiswas = Mahasiswa::where('id', Auth::user()->mahasiswa_id)->first();
+        $seminars = Seminar::where('prodi_id', $mahasiswas->prodi_id)
+            ->where('tahun_id', $mahasiswas->tahun_id)
+            ->latest()
+            ->get();
         return view('mahasiswa.seminar.index', [
             'seminars' => $seminars,
         ]);
