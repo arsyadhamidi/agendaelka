@@ -24,6 +24,7 @@
                                 <th style="text-align:center">Dosen</th>
                                 <th style="text-align:center">Semester</th>
                                 <th style="text-align:center">Tahun</th>
+                                <th style="text-align:center">Matkul</th>
                                 <th style="text-align:center">Aksi</th>
                             </tr>
                         </thead>
@@ -39,8 +40,9 @@
                                         </a>
                                     </td>
                                     <td>{{ $data->dosen->nama ?? '-' }}</td>
-                                    <td>Semester {{ $data->semester ?? '-' }}</td>
+                                    <td>{{ $data->semester ?? '-' }}</td>
                                     <td>{{ $data->tahun->tahun ?? '-' }}</td>
+                                    <td>{{ $data->matkul->matkul ?? '-' }}</td>
                                     <td>
                                         <form action="{{ route('dosen-rps.destroy', $data->id) }}" method="POST"
                                             class="d-flex flex-wrap">
