@@ -21,11 +21,11 @@
                         <thead>
                             <tr>
                                 <th style="width: 5%; text-align:center">No.</th>
-                                <th style="text-align:center">Bahan</th>
+                                <th style="text-align:center">Matkul</th>
                                 <th style="text-align:center">Dosen</th>
                                 <th style="text-align:center">Semester</th>
                                 <th style="text-align:center">Tahun</th>
-                                <th style="text-align:center">Matkul</th>
+                                <th style="text-align:center">Bahan</th>
                                 <th style="text-align:center">Aksi</th>
                             </tr>
                         </thead>
@@ -33,6 +33,10 @@
                             @foreach ($rps as $data)
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
+                                    <td>{{ $data->matkul->matkul ?? '-' }}</td>
+                                    <td>{{ $data->dosen->nama ?? '-' }}</td>
+                                    <td>{{ $data->semester ?? '-' }}</td>
+                                    <td>{{ $data->tahun->tahun ?? '-' }}</td>
                                     <td>
                                         <a href="{{ asset('storage/' . $data->file_rps) }}" class="btn btn-info"
                                             target="_blank">
@@ -40,10 +44,6 @@
                                             Download
                                         </a>
                                     </td>
-                                    <td>{{ $data->dosen->nama ?? '-' }}</td>
-                                    <td>{{ $data->semester ?? '-' }}</td>
-                                    <td>{{ $data->tahun->tahun ?? '-' }}</td>
-                                    <td>{{ $data->matkul->matkul ?? '-' }}</td>
                                     <td>
                                         <form action="{{ route('data-rps.destroy', $data->id) }}" method="POST"
                                             class="d-flex flex-wrap">
