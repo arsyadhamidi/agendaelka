@@ -19,6 +19,7 @@ use App\Http\Controllers\Dosen\DosenJadwalPengajaranController;
 use App\Http\Controllers\Dosen\DosenRpsController;
 use App\Http\Controllers\Kaprodi\KaprodiAkademikController;
 use App\Http\Controllers\KepalaDepartemen\KepalaDepartemenJadwalPengajaranController;
+use App\Http\Controllers\Mahasiswa\MahasiswaAkademikController;
 use App\Http\Controllers\Mahasiswa\MahasiswaBahanAjarController;
 use App\Http\Controllers\Mahasiswa\MahasiswaJadwalPengajaranController;
 use App\Http\Controllers\Mahasiswa\MahasiswaRpsController;
@@ -218,6 +219,11 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
 
     // Mahasiswa
     Route::group(['middleware' => [CekLevel::class . ':6']], function () {
+
+        // Akademik
+        Route::get('/mahasiswa-akademik', [MahasiswaAkademikController::class, 'index'])->name('mahasiswa-akademik.index');
+        Route::get('/mahasiswa-akademik/dosen/{id}', [MahasiswaAkademikController::class, 'dosen'])->name('mahasiswa-akademik.dosen');
+        Route::get('/mahasiswa-akademik/akademik/{id}', [MahasiswaAkademikController::class, 'akademik'])->name('mahasiswa-akademik.akademik');
 
         // Seminar
         Route::get('mahasiswa-seminar', [MahasiswaSeminarController::class, 'index'])->name('mahasiswa-seminar.index');

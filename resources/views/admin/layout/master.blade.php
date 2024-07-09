@@ -293,6 +293,14 @@
                                 <div data-i18n="Analytics">Seminar / Ujian</div>
                             </a>
                         </li>
+
+                        {{-- Akademik --}}
+                        <li class="menu-item @yield('menuMahasiswaAkademik')">
+                            <a href="{{ route('mahasiswa-akademik.index') }}" class="menu-link">
+                                <i class="menu-icon tf-icons bx bx-table"></i>
+                                <div data-i18n="Analytics">Akademik</div>
+                            </a>
+                        </li>
                     @endif
                 </ul>
             </aside>
