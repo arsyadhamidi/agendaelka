@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\AdminDosenController;
 use App\Http\Controllers\Admin\AdminJadwalPengajaranController;
 use App\Http\Controllers\Admin\AdminLevelController;
 use App\Http\Controllers\Admin\AdminMahasiswaController;
+use App\Http\Controllers\Admin\AdminMatkulController;
 use App\Http\Controllers\Admin\AdminProdiController;
 use App\Http\Controllers\Admin\AdminRpsController;
 use App\Http\Controllers\Admin\AdminSeminarController;
@@ -55,6 +56,16 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
 
     // Admin
     Route::group(['middleware' => [CekLevel::class . ':1']], function () {
+
+        // Matkul
+        Route::get('/data-matkul', [AdminMatkulController::class, 'index'])->name('data-matkul.index');
+        Route::get('/data-matkul/tahun/{id}', [AdminMatkulController::class, 'tahun'])->name('data-matkul.tahun');
+        Route::get('/data-matkul/create/{id}', [AdminMatkulController::class, 'create'])->name('data-matkul.create');
+        Route::get('/data-matkul/edit/{id}', [AdminMatkulController::class, 'edit'])->name('data-matkul.edit');
+        Route::get('/data-matkul/matkul/{id}', [AdminMatkulController::class, 'matkul'])->name('data-matkul.matkul');
+        Route::post('/data-matkul/store', [AdminMatkulController::class, 'store'])->name('data-matkul.store');
+        Route::post('/data-matkul/update/{id}', [AdminMatkulController::class, 'update'])->name('data-matkul.update');
+        Route::post('/data-matkul/destroy/{id}', [AdminMatkulController::class, 'destroy'])->name('data-matkul.destroy');
 
         // Seminar
         Route::get('/data-seminar', [AdminSeminarController::class, 'index'])->name('data-seminar.index');

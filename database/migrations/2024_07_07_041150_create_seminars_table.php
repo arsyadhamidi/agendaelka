@@ -20,7 +20,8 @@ return new class extends Migration
             $table->foreignId('penelaah1_id');
             $table->foreignId('penelaah2_id');
             $table->text('judul');
-            $table->string('tahun');
+            $table->date('tgl_seminar');
+            $table->date('tgl_ujian');
             $table->string('file_seminar')->nullable();
             $table->timestamps();
         });

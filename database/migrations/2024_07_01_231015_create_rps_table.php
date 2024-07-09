@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('prodi_id');
             $table->foreignId('tahun_id');
+            $table->foreignId('matkul_id');
             $table->foreignId('dosen_id');
             $table->string('semester');
             $table->string('file_rps');
