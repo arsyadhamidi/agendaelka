@@ -185,6 +185,7 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
     Route::group(['middleware' => [CekLevel::class . ':4']], function () {
         // Data Akademik
         Route::get('/kaprodi-akademik', [KaprodiAkademikController::class, 'index'])->name('kaprodi-akademik.index');
+        Route::get('/kaprodi-akademik/tahun/{id}', [KaprodiAkademikController::class, 'tahun'])->name('kaprodi-akademik.tahun');
         Route::get('/kaprodi-akademik/create/{id}', [KaprodiAkademikController::class, 'create'])->name('kaprodi-akademik.create');
         Route::get('/kaprodi-akademik/akademik/{id}', [KaprodiAkademikController::class, 'akademik'])->name('kaprodi-akademik.akademik');
         Route::get('/kaprodi-akademik/edit/{id}', [KaprodiAkademikController::class, 'edit'])->name('kaprodi-akademik.edit');

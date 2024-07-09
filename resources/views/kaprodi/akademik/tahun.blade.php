@@ -7,47 +7,32 @@
         <div class="col-lg">
             <div class="card">
                 <div class="card-header">
-                    <a href="{{ route('kaprodi-akademik.tahun', $tahuns->prodi_id) }}" class="btn btn-primary">
+                    <a href="{{ route('kaprodi-akademik.index') }}" class="btn btn-primary">
                         <i class="bx bx-left-arrow-alt"></i>
                         Kembali
-                    </a>
-                    <a href="{{ route('kaprodi-akademik.create', $tahuns->id) }}" class="btn btn-primary">
-                        <i class="bx bx-plus"></i>
-                        Tambahkan Data Akademik
                     </a>
                 </div>
                 <div class="card-body table-responsive">
                     <table class="table table-bordered table-striped" id="myTable">
                         <thead>
                             <tr>
-                                <th style="width: 5%; text-align:center">No.</th>
-                                <th style="text-align:center">Prodi</th>
-                                <th style="text-align:center">Dosen</th>
-                                <th style="text-align:center">Mahasiswa</th>
+                                <th style="width: 4%; text-align:center">No.</th>
+                                <th style="text-align:center">Program Studi</th>
                                 <th style="text-align:center">Tahun</th>
                                 <th style="text-align:center">Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($akademiks as $data)
+                            @foreach ($tahuns as $data)
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
                                     <td>{{ $data->prodi->nama ?? '-' }}</td>
-                                    <td>{{ $data->dosen->nama ?? '-' }}</td>
-                                    <td>{{ $data->mahasiswa->nama ?? '-' }}</td>
-                                    <td>{{ $data->tahun->tahun ?? '-' }}</td>
+                                    <td>{{ $data->tahun ?? '-' }}</td>
                                     <td>
-                                        <form action="{{ route('kaprodi-akademik.destroy', $data->id) }}" method="POST"
-                                            class="d-flex flex-wrap">
-                                            @csrf
-                                            <a href="{{ route('kaprodi-akademik.edit', $data->id) }}"
-                                                class="btn btn-sm btn-outline-info mx-2">
-                                                <i class="bx bx-edit"></i>
-                                            </a>
-                                            <button type="submit" class="btn btn-sm btn-outline-danger" id="hapusData">
-                                                <i class="bx bx-trash-alt"></i>
-                                            </button>
-                                        </form>
+                                        <a href="{{ route('kaprodi-akademik.akademik', $data->id) }}"
+                                            class="btn btn-sm btn-outline-info mx-2">
+                                            <i class="bx bx-edit"></i>
+                                        </a>
                                     </td>
                                 </tr>
                             @endforeach
@@ -81,7 +66,7 @@
             // Tampilkan SweetAlert saat tombol di klik
             Swal.fire({
                 icon: 'question',
-                title: 'Hapus Data Akademik?',
+                title: 'Hapus Data Tahun?',
                 text: 'Apakah anda yakin untuk menghapus data ini?',
                 showCancelButton: true, // Tampilkan tombol batal
                 confirmButtonText: 'Ya',
