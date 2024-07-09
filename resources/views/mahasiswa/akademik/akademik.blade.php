@@ -16,20 +16,16 @@
                             <thead>
                                 <tr>
                                     <th style="width: 5%; text-align:center">No.</th>
-                                    <th style="text-align:center">Prodi</th>
                                     <th style="text-align:center">Dosen</th>
                                     <th style="text-align:center">Mahasiswa</th>
-                                    <th style="text-align:center">Tahun</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach ($akademiks as $data)
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
-                                        <td>{{ $data->prodi->nama ?? '-' }}</td>
                                         <td>{{ $data->dosen->nama ?? '-' }}</td>
                                         <td>{{ $data->mahasiswa->nama ?? '-' }}</td>
-                                        <td>{{ $data->tahun->tahun ?? '-' }}</td>
                                     </tr>
                                 @endforeach
                             </tbody>

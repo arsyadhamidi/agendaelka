@@ -18,9 +18,6 @@
                                 <th style="width: 5%; text-align:center">No</th>
                                 <th style="text-align:center">NIP</th>
                                 <th style="text-align:center">Nama</th>
-                                <th style="text-align:center">TTL</th>
-                                <th style="text-align:center">JK</th>
-                                <th style="text-align:center">Telp</th>
                                 <th style="text-align:center">Aksi</th>
                             </tr>
                         </thead>
@@ -30,9 +27,6 @@
                                     <td>{{ $loop->iteration }}</td>
                                     <td>{{ $data->nip ?? '-' }}</td>
                                     <td>{{ $data->nama ?? '-' }}</td>
-                                    <td>{{ $data->tmp_lahir ?? '-' }} / {{ $data->tgl_lahir ?? '-' }}</td>
-                                    <td>{{ $data->jk ?? '-' }}</td>
-                                    <td>{{ $data->telp ?? '-' }}</td>
                                     <td>
                                         <a href="{{ route('mahasiswa-akademik.akademik', $data->id) }}"
                                             class="btn btn-sm btn-outline-info mx-2">
