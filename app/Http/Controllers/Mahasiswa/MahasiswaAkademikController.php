@@ -4,8 +4,8 @@ namespace App\Http\Controllers\Mahasiswa;
 
 use App\Http\Controllers\Controller;
 use App\Models\Akademik;
-use App\Models\Dosen;
 use App\Models\Prodi;
+use App\Models\Tahun;
 
 class MahasiswaAkademikController extends Controller
 {
@@ -17,24 +17,23 @@ class MahasiswaAkademikController extends Controller
         ]);
     }
 
-    public function dosen($id)
+    public function tahun($id)
     {
-        $dosens = Dosen::where('prodi_id', $id)->latest()->get();
-        return view('mahasiswa.akademik.dosen', [
-            'dosens' => $dosens,
+        $tahuns = Tahun::where('prodi_id', $id)->latest()->get();
+        return view('mahasiswa.akademik.tahun', [
+            'tahuns' => $tahuns,
         ]);
     }
 
     public function akademik($id)
     {
-        $dosens = Dosen::where('id', $id)->first();
-        $akademiks = Akademik::where('prodi_id', $dosens->prodi_id)
-            ->where('dosen_id', $dosens->id)
+        $tahuns = Tahun::where('id', $id)->first();
+        $akademiks = Akademik::where('tahun_id', $tahuns->id)
             ->latest()
             ->get();
         return view('mahasiswa.akademik.akademik', [
             'akademiks' => $akademiks,
-            'dosens' => $dosens,
+            'tahuns' => $tahuns,
         ]);
     }
 }
