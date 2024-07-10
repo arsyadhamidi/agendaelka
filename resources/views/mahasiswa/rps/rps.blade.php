@@ -1,39 +1,44 @@
 @extends('admin.layout.master')
-@section('title', 'Jadwal Pengajaran | Agenda Elka')
+@section('title', 'Rps | Agenda Elka')
 @section('menuMahasiswaDataPengajaran', 'active')
-@section('menuMahasiswaJadwalPengajaran', 'active')
+@section('menuMahasiswaRps', 'active')
 @section('content')
     <div class="row">
         <div class="col-lg">
             <div class="card">
                 <div class="card-header">
-                    Jadwal Pengajaran
+                    <a href="{{ route('mahasiswa-rps.tahun', $tahuns->prodi_id) }}" class="btn btn-primary">
+                        <i class="bx bx-left-arrow-alt"></i>
+                        Kembali
+                    </a>
                 </div>
                 <div class="card-body table-responsive">
                     <table class="table table-bordered table-striped" id="myTable">
                         <thead>
                             <tr>
                                 <th style="width: 5%; text-align:center">No.</th>
-                                <th style="text-align:center">Berkas</th>
-                                <th style="text-align:center">Tahun</th>
+                                <th style="text-align:center">Matkul</th>
+                                <th style="text-align:center">Dosen</th>
                                 <th style="text-align:center">Semester</th>
+                                <th style="text-align:center">Tahun</th>
+                                <th style="text-align:center">Bahan</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($jadwals as $data)
+                            @foreach ($rps as $data)
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
+                                    <td>{{ $data->matkul->matkul ?? '-' }}</td>
+                                    <td>{{ $data->dosen->nama ?? '-' }}</td>
+                                    <td>Semester {{ $data->semester ?? '-' }}</td>
+                                    <td>{{ $data->tahun->tahun ?? '-' }}</td>
                                     <td>
-                                        <a href="{{ asset('storage/' . $data->jadwal_pengajaran) }}" class="btn btn-info"
+                                        <a href="{{ asset('storage/' . $data->file_rps) }}" class="btn btn-info"
                                             target="_blank">
                                             <i class="bx bx-download"></i>
                                             Download
                                         </a>
                                     </td>
-                                    <td>
-                                        {{ $data->tahun ?? '-' }}
-                                    </td>
-                                    <td>Semester {{ $data->semester ?? '-' }}</td>
                                 </tr>
                             @endforeach
                         </tbody>
@@ -66,7 +71,7 @@
             // Tampilkan SweetAlert saat tombol di klik
             Swal.fire({
                 icon: 'question',
-                title: 'Hapus Jadwal Pengajaran?',
+                title: 'Hapus Data Rps?',
                 text: 'Apakah anda yakin untuk menghapus data ini?',
                 showCancelButton: true, // Tampilkan tombol batal
                 confirmButtonText: 'Ya',

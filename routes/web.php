@@ -233,8 +233,13 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
 
         // Mahasiswa
         Route::get('/mahasiswa-rps', [MahasiswaRpsController::class, 'index'])->name('mahasiswa-rps.index');
+        Route::get('/mahasiswa-rps/tahun/{id}', [MahasiswaRpsController::class, 'tahun'])->name('mahasiswa-rps.tahun');
+        Route::get('/mahasiswa-rps/rps/{id}', [MahasiswaRpsController::class, 'rps'])->name('mahasiswa-rps.rps');
+
         // Bahan Ajar
         Route::get('/mahasiswa-bahanajar', [MahasiswaBahanAjarController::class, 'index'])->name('mahasiswa-bahanajar.index');
+        Route::get('/mahasiswa-bahanajar/tahun/{id}', [MahasiswaBahanAjarController::class, 'tahun'])->name('mahasiswa-bahanajar.tahun');
+        Route::get('/mahasiswa-bahanajar/bahanajar/{id}', [MahasiswaBahanAjarController::class, 'bahanajar'])->name('mahasiswa-bahanajar.bahanajar');
         // Jadwal Pengajaran
         Route::get('/mahasiswa-jadwalpengajaran', [MahasiswaJadwalPengajaranController::class, 'index'])->name('mahasiswa-jadwalpengajaran.index');
     });

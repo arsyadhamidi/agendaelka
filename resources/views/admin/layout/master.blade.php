@@ -263,27 +263,30 @@
                             </a>
                         </li>
                     @elseif(Auth()->user()->level_id == '6')
-                        <!-- Jadwal Pengajaran -->
-                        <li class="menu-item @yield('menuMahasiswaJadwalPengajaran')">
-                            <a href="{{ route('mahasiswa-jadwalpengajaran.index') }}" class="menu-link">
-                                <i class="menu-icon tf-icons bx bx-calendar"></i>
-                                <div data-i18n="Analytics">Jadwal Pengajaran</div>
-                            </a>
-                        </li>
-                        <!-- Bahan Ajar -->
-                        <li class="menu-item @yield('menuMahasiswaBahanAjar')">
-                            <a href="{{ route('mahasiswa-bahanajar.index') }}" class="menu-link">
+                        {{-- Pengajaran --}}
+                        <li class="menu-item @yield('menuMahasiswaDataPengajaran')">
+                            <a href="javascript:void(0);" class="menu-link menu-toggle">
                                 <i class="menu-icon tf-icons bx bx-book"></i>
-                                <div data-i18n="Analytics">Bahan Ajar</div>
+                                <div data-i18n="Layouts">Pengajaran</div>
                             </a>
-                        </li>
 
-                        <!-- Bahan Rps -->
-                        <li class="menu-item @yield('menuMahasiswaRps')">
-                            <a href="{{ route('mahasiswa-rps.index') }}" class="menu-link">
-                                <i class="menu-icon tf-icons bx bx-file"></i>
-                                <div data-i18n="Analytics">Rps</div>
-                            </a>
+                            <ul class="menu-sub">
+                                <li class="menu-item @yield('menuMahasiswaJadwalPengajaran')">
+                                    <a href="{{ route('mahasiswa-jadwalpengajaran.index') }}" class="menu-link">
+                                        <div data-i18n="Without menu">Jadwal Pengajaran</div>
+                                    </a>
+                                </li>
+                                <li class="menu-item @yield('menuMahasiswaBahanAjar')">
+                                    <a href="{{ route('mahasiswa-bahanajar.index') }}" class="menu-link">
+                                        <div data-i18n="Without menu">Bahan Ajar</div>
+                                    </a>
+                                </li>
+                                <li class="menu-item @yield('menuMahasiswaRps')">
+                                    <a href="{{ route('mahasiswa-rps.index') }}" class="menu-link">
+                                        <div data-i18n="Without menu">Data Rps</div>
+                                    </a>
+                                </li>
+                            </ul>
                         </li>
 
                         {{-- Seminar Mahasiswa --}}
