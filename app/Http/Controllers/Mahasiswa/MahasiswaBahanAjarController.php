@@ -27,7 +27,7 @@ class MahasiswaBahanAjarController extends Controller
 
     public function bahanajar($id)
     {
-        $tahuns = Tahun::where('prodi_id', $id)->first();
+        $tahuns = Tahun::where('id', $id)->first();
         $bahans = BahanAjar::where('tahun_id', $tahuns->id)
             ->latest()
             ->get();
