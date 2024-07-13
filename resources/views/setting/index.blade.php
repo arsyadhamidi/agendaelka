@@ -237,7 +237,6 @@
                                 foto
                                 profil akan dihapus secara permanen.
                                 <br>
-                                <br>
                                 <button type="submit" class="btn btn-danger" id="hapusData">
                                     <i class='bx bx-trash'></i>
                                     Hapus Gambar

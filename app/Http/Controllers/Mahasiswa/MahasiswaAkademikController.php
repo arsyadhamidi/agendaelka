@@ -4,16 +4,18 @@ namespace App\Http\Controllers\Mahasiswa;
 
 use App\Http\Controllers\Controller;
 use App\Models\Akademik;
-use App\Models\Prodi;
 use App\Models\Tahun;
+use Illuminate\Support\Facades\Auth;
 
 class MahasiswaAkademikController extends Controller
 {
     public function index()
     {
-        $prodis = Prodi::latest()->get();
+        $akademiks = Akademik::where('mahasiswa_id', Auth::user()->mahasiswa_id)
+            ->latest()
+            ->get();
         return view('mahasiswa.akademik.index', [
-            'prodis' => $prodis,
+            'akademiks' => $akademiks,
         ]);
     }
 
