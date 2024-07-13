@@ -17,9 +17,9 @@ class DosenRpsController extends Controller
 {
     public function index()
     {
-        $prodis = Prodi::latest()->get();
+        $rps = Rps::where('dosen_id', Auth::user()->dosen_id)->latest()->get();
         return view('dosen.rps.index', [
-            'prodis' => $prodis,
+            'rps' => $rps,
         ]);
     }
 
@@ -41,13 +41,13 @@ class DosenRpsController extends Controller
         ]);
     }
 
-    public function create($id)
+    public function create()
     {
-        $tahuns = Tahun::where('id', $id)->first();
-        $prodis = Prodi::latest()->get();
         $mahasiswas = Mahasiswa::latest()->get();
-        $dosens = Dosen::where('prodi_id', $tahuns->prodi_id)->latest()->get();
-        $matkuls = Matkul::where('prodi_id', $tahuns->prodi_id)->where('tahun_id', $tahuns->id)->latest()->get();
+        $dosens = Dosen::where('id', Auth::user()->dosen_id)->first();
+        $prodis = Prodi::where('id', $dosens->prodi_id)->first();
+        $tahuns = Tahun::where('prodi_id', $prodis->id)->latest()->get();
+        $matkuls = Matkul::where('prodi_id', $prodis->id)->latest()->get();
 
         return view('dosen.rps.create', [
             'prodis' => $prodis,
@@ -83,22 +83,24 @@ class DosenRpsController extends Controller
 
         Rps::create($validated);
 
-        return redirect()->route('dosen-rps.rps', $request->tahun_id)->with('success', 'Selamat ! Anda berhasil menambahkan data!');
+        return redirect()->route('dosen-rps.index')->with('success', 'Selamat ! Anda berhasil menambahkan data!');
     }
 
     public function edit($id)
     {
-        $prodis = Prodi::latest()->get();
         $mahasiswas = Mahasiswa::latest()->get();
-        $dosens = Dosen::latest()->get();
+        $dosens = Dosen::where('id', Auth::user()->dosen_id)->first();
+        $prodis = Prodi::where('id', $dosens->prodi_id)->first();
+        $tahuns = Tahun::where('prodi_id', $prodis->id)->latest()->get();
+        $matkuls = Matkul::where('prodi_id', $prodis->id)->latest()->get();
         $rps = Rps::where('id', $id)->first();
-        $matkuls = Matkul::where('prodi_id', $rps->prodi_id)->where('tahun_id', $rps->tahun_id)->latest()->get();
 
         return view('dosen.rps.edit', [
             'prodis' => $prodis,
             'mahasiswas' => $mahasiswas,
             'dosens' => $dosens,
             'rps' => $rps,
+            'tahuns' => $tahuns,
             'matkuls' => $matkuls,
         ]);
     }
@@ -135,7 +137,7 @@ class DosenRpsController extends Controller
 
         $rps->update($validated);
 
-        return redirect()->route('dosen-rps.rps', $request->tahun_id)->with('success', 'Selamat ! Anda berhasil memperbaharui data!');
+        return redirect()->route('dosen-rps.index')->with('success', 'Selamat ! Anda berhasil memperbaharui data!');
     }
 
     public function destroy($id)

@@ -8,7 +8,7 @@
                 @csrf
                 <div class="card">
                     <div class="card-header">
-                        <a href="{{ route('dosen-rps.rps', $tahuns->id) }}" class="btn btn-primary">
+                        <a href="{{ route('dosen-rps.index') }}" class="btn btn-primary">
                             <i class="bx bx-left-arrow-alt"></i>
                             Kembali
                         </a>
@@ -23,17 +23,28 @@
                                 <div class="mb-3">
                                     <label>Program Studi</label>
                                     <input type="text" name="prodi_id" class="form-control"
-                                        value="{{ $tahuns->prodi_id }}" hidden>
-                                    <input type="text" class="form-control" value="{{ $tahuns->prodi->nama ?? '-' }}"
+                                        value="{{ $dosens->prodi_id }}" hidden>
+                                    <input type="text" class="form-control" value="{{ $dosens->prodi->nama ?? '-' }}"
                                         readonly>
                                 </div>
                             </div>
                             <div class="col-lg">
                                 <div class="mb-3">
                                     <label>Tahun</label>
-                                    <input type="text" name="tahun_id" class="form-control" value="{{ $tahuns->id }}"
-                                        hidden>
-                                    <input type="text" class="form-control" value="{{ $tahuns->tahun ?? '-' }}" readonly>
+                                    <select name="tahun_id" class="form-control @error('tahun_id') is-invalid @enderror"
+                                        id="selectedTahun">
+                                        <option value="" selected>Pilih Tahun</option>
+                                        @foreach ($tahuns as $tahun)
+                                            <option value="{{ $tahun->id }}"
+                                                {{ old('tahun_id') == $tahun->id ? 'selected' : '' }}>
+                                                {{ $tahun->tahun ?? '-' }}</option>
+                                        @endforeach
+                                    </select>
+                                    @error('tahun_id')
+                                        <div class="invalid-feedback">
+                                            {{ $message }}
+                                        </div>
+                                    @enderror
                                 </div>
                             </div>
                         </div>
@@ -114,6 +125,9 @@
                 theme: 'bootstrap4',
             });
             $('#selectedMatkul').select2({
+                theme: 'bootstrap4',
+            });
+            $('#selectedTahun').select2({
                 theme: 'bootstrap4',
             });
         });
