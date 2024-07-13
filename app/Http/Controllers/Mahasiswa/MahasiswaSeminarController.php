@@ -13,7 +13,8 @@ class MahasiswaSeminarController extends Controller
     public function index()
     {
         $mahasiswas = Mahasiswa::where('id', Auth::user()->mahasiswa_id)->first();
-        $seminars = Seminar::where('prodi_id', $mahasiswas->prodi_id)
+        $seminars = Seminar::where('mahasiswa_id', $mahasiswas->id)
+            ->where('prodi_id', $mahasiswas->prodi_id)
             ->where('tahun_id', $mahasiswas->tahun_id)
             ->latest()
             ->get();
