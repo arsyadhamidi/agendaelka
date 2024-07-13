@@ -17,9 +17,9 @@ class DosenBahanAjarController extends Controller
 {
     public function index()
     {
-        $prodis = Prodi::latest()->get();
+        $bahans = BahanAjar::where('dosen_id', Auth::user()->dosen_id)->latest()->get();
         return view('dosen.bahan-ajar.index', [
-            'prodis' => $prodis,
+            'bahans' => $bahans,
         ]);
     }
 
@@ -41,13 +41,13 @@ class DosenBahanAjarController extends Controller
         ]);
     }
 
-    public function create($id)
+    public function create()
     {
-        $tahuns = Tahun::where('id', $id)->first();
-        $prodis = Prodi::latest()->get();
         $mahasiswas = Mahasiswa::latest()->get();
-        $dosens = Dosen::latest()->get();
-        $matkuls = Matkul::where('prodi_id', $tahuns->prodi_id)->where('tahun_id', $tahuns->id)->latest()->get();
+        $dosens = Dosen::where('id', Auth::user()->dosen_id)->first();
+        $prodis = Prodi::where('id', $dosens->prodi_id)->first();
+        $tahuns = Tahun::where('prodi_id', $prodis->id)->latest()->get();
+        $matkuls = Matkul::where('prodi_id', $dosens->prodi_id)->latest()->get();
 
         return view('dosen.bahan-ajar.create', [
             'prodis' => $prodis,
@@ -84,16 +84,17 @@ class DosenBahanAjarController extends Controller
 
         BahanAjar::create($validated);
 
-        return redirect()->route('dosen-bahanajar.bahanajar', $request->tahun_id)->with('success', 'Selamat ! Anda berhasil menambahkan data!');
+        return redirect()->route('dosen-bahanajar.index')->with('success', 'Selamat ! Anda berhasil menambahkan data!');
     }
 
     public function edit($id)
     {
-        $prodis = Prodi::latest()->get();
         $mahasiswas = Mahasiswa::latest()->get();
-        $dosens = Dosen::latest()->get();
+        $dosens = Dosen::where('id', Auth::user()->dosen_id)->first();
+        $prodis = Prodi::where('id', $dosens->prodi_id)->first();
+        $tahuns = Tahun::where('prodi_id', $prodis->id)->latest()->get();
+        $matkuls = Matkul::where('prodi_id', $dosens->prodi_id)->latest()->get();
         $bahans = BahanAjar::where('id', $id)->first();
-        $matkuls = Matkul::where('prodi_id', $bahans->prodi_id)->where('tahun_id', $bahans->tahun_id)->latest()->get();
 
         return view('dosen.bahan-ajar.edit', [
             'prodis' => $prodis,
@@ -101,6 +102,7 @@ class DosenBahanAjarController extends Controller
             'dosens' => $dosens,
             'bahans' => $bahans,
             'matkuls' => $matkuls,
+            'tahuns' => $tahuns,
         ]);
     }
 
@@ -136,7 +138,7 @@ class DosenBahanAjarController extends Controller
 
         $bahans->update($validated);
 
-        return redirect()->route('dosen-bahanajar.bahanajar', $request->tahun_id)->with('success', 'Selamat ! Anda berhasil memperbaharui data!');
+        return redirect()->route('dosen-bahanajar.index')->with('success', 'Selamat ! Anda berhasil memperbaharui data!');
     }
 
     public function destroy($id)
