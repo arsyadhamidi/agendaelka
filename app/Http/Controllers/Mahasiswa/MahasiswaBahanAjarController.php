@@ -4,16 +4,20 @@ namespace App\Http\Controllers\Mahasiswa;
 
 use App\Http\Controllers\Controller;
 use App\Models\BahanAjar;
-use App\Models\Prodi;
+use App\Models\Mahasiswa;
 use App\Models\Tahun;
+use Illuminate\Support\Facades\Auth;
 
 class MahasiswaBahanAjarController extends Controller
 {
     public function index()
     {
-        $prodis = Prodi::latest()->get();
+        $mahasiswa = Mahasiswa::where('id', Auth::user()->mahasiswa_id)->first();
+        $bahans = BahanAjar::where('prodi_id', $mahasiswa->prodi_id)
+            ->latest()
+            ->get();
         return view('mahasiswa.bahan-ajar.index', [
-            'prodis' => $prodis,
+            'bahans' => $bahans,
         ]);
     }
 
