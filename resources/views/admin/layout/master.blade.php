@@ -203,6 +203,14 @@
                             </a>
                         </li>
 
+                        {{-- Seminar / Ujian --}}
+                        <li class="menu-item @yield('menuDataRapat')">
+                            <a href="{{ route('data-rapat.index') }}" class="menu-link">
+                                <i class="menu-icon tf-icons bx bx-table"></i>
+                                <div data-i18n="Analytics">Rapat</div>
+                            </a>
+                        </li>
+
                         <!-- Data User -->
                         <li class="menu-item @yield('menuStatusAutentikasi')">
                             <a href="javascript:void(0);" class="menu-link menu-toggle">
@@ -231,12 +239,26 @@
                                 <div data-i18n="Analytics">Jadwal Pengajaran</div>
                             </a>
                         </li>
+                        {{-- Data Rapat --}}
+                        <li class="menu-item @yield('menuKepalaRapat')">
+                            <a href="{{ route('kepala-rapat.index') }}" class="menu-link">
+                                <i class="menu-icon tf-icons bx bx-table"></i>
+                                <div data-i18n="Analytics">Rapat</div>
+                            </a>
+                        </li>
                     @elseif(Auth()->user()->level_id == '4')
                         <!-- Akademik -->
                         <li class="menu-item @yield('menuKaprodiAkademik')">
                             <a href="{{ route('kaprodi-akademik.index') }}" class="menu-link">
                                 <i class="menu-icon tf-icons bx bx-data"></i>
                                 <div data-i18n="Analytics">Akademik</div>
+                            </a>
+                        </li>
+                        {{-- Data Rapat --}}
+                        <li class="menu-item @yield('menuKaprodiRapat')">
+                            <a href="{{ route('kaprodi-rapat.index') }}" class="menu-link">
+                                <i class="menu-icon tf-icons bx bx-table"></i>
+                                <div data-i18n="Analytics">Rapat</div>
                             </a>
                         </li>
                     @elseif(Auth()->user()->level_id == '5')
@@ -260,6 +282,14 @@
                             <a href="{{ route('dosen-rps.index') }}" class="menu-link">
                                 <i class="menu-icon tf-icons bx bx-file"></i>
                                 <div data-i18n="Analytics">Rps</div>
+                            </a>
+                        </li>
+
+                        {{-- Data Rapat --}}
+                        <li class="menu-item @yield('menuDosenRapat')">
+                            <a href="{{ route('dosen-rapat.index') }}" class="menu-link">
+                                <i class="menu-icon tf-icons bx bx-table"></i>
+                                <div data-i18n="Analytics">Rapat</div>
                             </a>
                         </li>
                     @elseif(Auth()->user()->level_id == '6')

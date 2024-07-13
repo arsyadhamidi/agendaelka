@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\AdminLevelController;
 use App\Http\Controllers\Admin\AdminMahasiswaController;
 use App\Http\Controllers\Admin\AdminMatkulController;
 use App\Http\Controllers\Admin\AdminProdiController;
+use App\Http\Controllers\Admin\AdminRapatController;
 use App\Http\Controllers\Admin\AdminRpsController;
 use App\Http\Controllers\Admin\AdminSeminarController;
 use App\Http\Controllers\Admin\AdminTahunController;
@@ -16,9 +17,12 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Dashboard\DashboardController;
 use App\Http\Controllers\Dosen\DosenBahanAjarController;
 use App\Http\Controllers\Dosen\DosenJadwalPengajaranController;
+use App\Http\Controllers\Dosen\DosenRapatController;
 use App\Http\Controllers\Dosen\DosenRpsController;
 use App\Http\Controllers\Kaprodi\KaprodiAkademikController;
+use App\Http\Controllers\Kaprodi\KaprodiRapatController;
 use App\Http\Controllers\KepalaDepartemen\KepalaDepartemenJadwalPengajaranController;
+use App\Http\Controllers\KepalaDepartemen\KepalaDepartemenRapatController;
 use App\Http\Controllers\Mahasiswa\MahasiswaAkademikController;
 use App\Http\Controllers\Mahasiswa\MahasiswaBahanAjarController;
 use App\Http\Controllers\Mahasiswa\MahasiswaJadwalPengajaranController;
@@ -58,6 +62,14 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
 
     // Admin
     Route::group(['middleware' => [CekLevel::class . ':1']], function () {
+
+        // Data Rapat
+        Route::get('/data-rapat', [AdminRapatController::class, 'index'])->name('data-rapat.index');
+        Route::get('/data-rapat/create', [AdminRapatController::class, 'create'])->name('data-rapat.create');
+        Route::get('/data-rapat/edit/{id}', [AdminRapatController::class, 'edit'])->name('data-rapat.edit');
+        Route::post('/data-rapat/store', [AdminRapatController::class, 'store'])->name('data-rapat.store');
+        Route::post('/data-rapat/update/{id}', [AdminRapatController::class, 'update'])->name('data-rapat.update');
+        Route::post('/data-rapat/destroy/{id}', [AdminRapatController::class, 'destroy'])->name('data-rapat.destroy');
 
         // Matkul
         Route::get('/data-matkul', [AdminMatkulController::class, 'index'])->name('data-matkul.index');
@@ -173,6 +185,16 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
 
     // Kepala Departemen
     Route::group(['middleware' => [CekLevel::class . ':3']], function () {
+
+        // Data Rapat
+        Route::get('/kepala-rapat', [KepalaDepartemenRapatController::class, 'index'])->name('kepala-rapat.index');
+        Route::get('/kepala-rapat/create', [KepalaDepartemenRapatController::class, 'create'])->name('kepala-rapat.create');
+        Route::get('/kepala-rapat/edit/{id}', [KepalaDepartemenRapatController::class, 'edit'])->name('kepala-rapat.edit');
+        Route::post('/kepala-rapat/store', [KepalaDepartemenRapatController::class, 'store'])->name('kepala-rapat.store');
+        Route::post('/kepala-rapat/update/{id}', [KepalaDepartemenRapatController::class, 'update'])->name('kepala-rapat.update');
+        Route::post('/kepala-rapat/destroy/{id}', [KepalaDepartemenRapatController::class, 'destroy'])->name('kepala-rapat.destroy');
+
+        // Jadwal Pengajaran
         Route::get('/kepala-jadwalpengajaran', [KepalaDepartemenJadwalPengajaranController::class, 'index'])->name('kepala-jadwalpengajaran.index');
         Route::get('/kepala-jadwalpengajaran/create', [KepalaDepartemenJadwalPengajaranController::class, 'create'])->name('kepala-jadwalpengajaran.create');
         Route::get('/kepala-jadwalpengajaran/edit/{id}', [KepalaDepartemenJadwalPengajaranController::class, 'edit'])->name('kepala-jadwalpengajaran.edit');
@@ -183,6 +205,15 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
 
     // Kaprodi
     Route::group(['middleware' => [CekLevel::class . ':4']], function () {
+
+        // Data Rapat
+        Route::get('/kaprodi-rapat', [KaprodiRapatController::class, 'index'])->name('kaprodi-rapat.index');
+        Route::get('/kaprodi-rapat/create', [KaprodiRapatController::class, 'create'])->name('kaprodi-rapat.create');
+        Route::get('/kaprodi-rapat/edit/{id}', [KaprodiRapatController::class, 'edit'])->name('kaprodi-rapat.edit');
+        Route::post('/kaprodi-rapat/store', [KaprodiRapatController::class, 'store'])->name('kaprodi-rapat.store');
+        Route::post('/kaprodi-rapat/update/{id}', [KaprodiRapatController::class, 'update'])->name('kaprodi-rapat.update');
+        Route::post('/kaprodi-rapat/destroy/{id}', [KaprodiRapatController::class, 'destroy'])->name('kaprodi-rapat.destroy');
+
         // Data Akademik
         Route::get('/kaprodi-akademik', [KaprodiAkademikController::class, 'index'])->name('kaprodi-akademik.index');
         Route::get('/kaprodi-akademik/tahun/{id}', [KaprodiAkademikController::class, 'tahun'])->name('kaprodi-akademik.tahun');
@@ -195,6 +226,10 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
     });
     // Dosen
     Route::group(['middleware' => [CekLevel::class . ':5']], function () {
+
+        // Data Rapat
+        Route::get('/dosen-rapat', [DosenRapatController::class, 'index'])->name('dosen-rapat.index');
+
         // Rps
         Route::get('/dosen-rps', [DosenRpsController::class, 'index'])->name('dosen-rps.index');
         Route::get('/dosen-rps/create', [DosenRpsController::class, 'create'])->name('dosen-rps.create');
