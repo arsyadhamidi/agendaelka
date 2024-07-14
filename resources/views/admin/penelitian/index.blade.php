@@ -1,76 +1,55 @@
 @extends('admin.layout.master')
-@section('title', 'Data Program Studi | Agenda Elka')
-@section('menuDataMaster', 'active')
-@section('menuDataProdi', 'active')
+@section('title', 'Data Penelitian | Agenda Elka')
+@section('menuDataNonAkademik', 'active')
+@section('menuDataPenelitian', 'active')
 
 @section('content')
-
-    <!-- Modal -->
-    <form action="{{ route('data-prodi.importexcel') }}" method="POST" enctype="multipart/form-data">
-        @csrf
-        <div class="modal fade" id="importModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="exampleModalLabel">Import Data</h1>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <input type="file" name="file" class="form-control @error('file') is-invalid @enderror"
-                            required>
-                        @error('file')
-                            <div class="invalid-feedback">
-                                {{ $message }}
-                            </div>
-                        @enderror
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary">Save changes</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </form>
-
     <div class="row">
         <div class="col-lg">
             <div class="card">
-                <div class="card-header d-flex justify-content-between align-content-between">
-                    <a href="{{ route('data-prodi.create') }}" class="btn btn-primary">
+                <div class="card-header">
+                    <a href="{{ route('data-penelitian.create') }}" class="btn btn-primary">
                         <i class="bx bx-plus"></i>
-                        Tambah Data Prodi
+                        Tambahkan Data Penelitian
                     </a>
-                    <div class="form-group">
-                        <a href="{{ route('data-prodi.generateexcel') }}" class="btn btn-success" target="_blank">
-                            <i class="bx bx-download"></i>
-                            Download Excel
-                        </a>
-                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#importModal">
-                            <i class="bx bx-import"></i>
-                            Import Excel
-                        </button>
-                    </div>
                 </div>
                 <div class="card-body table-responsive">
                     <table class="table table-bordered table-striped" id="myTable">
                         <thead>
                             <tr>
-                                <th style="width: 5%; text-align:center">No</th>
-                                <th style="text-align:center">Prodi</th>
+                                <th style="width: 5%; text-align:center">No.</th>
+                                <th style="text-align:center">Dosen</th>
+                                <th style="text-align:center">Tanggal</th>
+                                <th style="text-align:center">Judul</th>
+                                <th style="text-align:center">Lokasi</th>
+                                <th style="text-align:center">Berkas</th>
                                 <th style="text-align:center">Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($prodis as $data)
+                            @foreach ($penelitians as $data)
                                 <tr>
-                                    <td>{{ $loop->iteration }}</td>
-                                    <td>{{ $data->nama ?? '-' }}</td>
+                                    <td>{{ $loop->iteration ?? '-' }}</td>
+                                    <td>{{ $data->dosen->nama ?? '-' }}</td>
+                                    <td>{{ $data->tanggal ?? '-' }}</td>
+                                    <td>{{ $data->judul ?? '-' }}</td>
+                                    <td>{{ $data->lokasi ?? '-' }}</td>
                                     <td>
-                                        <form action="{{ route('data-prodi.destroy', $data->id) }}" method="POST"
+                                        @if (!empty($data->file_penelitian))
+                                            <a href="{{ asset('storage/' . $data->file_penelitian) }}"
+                                                class="btn btn-primary">
+                                                <i class="bx bx-download"></i>
+                                                Download
+                                            </a>
+                                        @else
+                                            -
+                                        @endif
+                                    </td>
+                                    <td>
+                                        <form action="{{ route('data-penelitian.destroy', $data->id) }}" method="POST"
                                             class="d-flex flex-wrap">
                                             @csrf
-                                            <a href="{{ route('data-prodi.edit', $data->id) }}"
+                                            <a href="{{ route('data-penelitian.edit', $data->id) }}"
                                                 class="btn btn-sm btn-outline-info mx-2">
                                                 <i class="bx bx-edit"></i>
                                             </a>
@@ -111,7 +90,7 @@
             // Tampilkan SweetAlert saat tombol di klik
             Swal.fire({
                 icon: 'question',
-                title: 'Hapus Data Prodi?',
+                title: 'Hapus Data Penelitian ?',
                 text: 'Apakah anda yakin untuk menghapus data ini?',
                 showCancelButton: true, // Tampilkan tombol batal
                 confirmButtonText: 'Ya',

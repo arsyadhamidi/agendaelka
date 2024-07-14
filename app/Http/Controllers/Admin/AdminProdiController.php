@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Exports\ProdiExport;
 use App\Http\Controllers\Controller;
+use App\Imports\ProdiImport;
 use App\Models\Prodi;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
 
 class AdminProdiController extends Controller
 {
@@ -14,6 +17,38 @@ class AdminProdiController extends Controller
         return view('admin.prodi.index', [
             'prodis' => $prodis,
         ]);
+    }
+
+    public function generateexcel()
+    {
+        $query = Prodi::query();
+        $data = $query->orderBy('id', 'desc')->get();
+
+        return Excel::download(new ProdiExport($data), 'data-prodi.xlsx');
+    }
+
+    public function importexcel(Request $request)
+    {
+        // Validasi file yang diunggah
+        $request->validate([
+            'file' => 'required|mimes:xls,xlsx',
+        ], [
+            'file.required' => 'File wajib diisi',
+            'file.mimes' => 'File harus memiliki format xls atau xlsx',
+        ]);
+
+        // Ambil file dari request
+        $file = $request->file('file');
+        $namaFile = $file->getClientOriginalName();
+
+        // Pindahkan file ke direktori 'DataProdi'
+        $file->move(public_path('DataProdi'), $namaFile);
+
+        // Impor file Excel menggunakan kelas ProdiImport
+        Excel::import(new ProdiImport, public_path('DataProdi/' . $namaFile));
+
+        // Redirect ke route 'data-prodi' dengan pesan sukses
+        return redirect()->route('data-prodi.index')->with('success', 'Selamat! Anda berhasil mengimport data prodi.');
     }
 
     public function create()

@@ -203,12 +203,43 @@
                             </a>
                         </li>
 
-                        {{-- Seminar / Ujian --}}
+                        {{-- Data Rapat --}}
                         <li class="menu-item @yield('menuDataRapat')">
                             <a href="{{ route('data-rapat.index') }}" class="menu-link">
                                 <i class="menu-icon tf-icons bx bx-table"></i>
-                                <div data-i18n="Analytics">Rapat</div>
+                                <div data-i18n="Analytics">Data Rapat</div>
                             </a>
+                        </li>
+
+                        <!-- Data Non Akademik -->
+                        <li class="menu-item @yield('menuDataNonAkademik')">
+                            <a href="javascript:void(0);" class="menu-link menu-toggle">
+                                <i class="menu-icon tf-icons bx bx-qr"></i>
+                                <div data-i18n="Layouts">Non Akademik</div>
+                            </a>
+
+                            <ul class="menu-sub">
+                                <li class="menu-item @yield('menuDataPenelitian')">
+                                    <a href="{{ route('data-penelitian.index') }}" class="menu-link">
+                                        <div data-i18n="Without menu">Data Penelitian</div>
+                                    </a>
+                                </li>
+                                <li class="menu-item @yield('menuDataPengabdian')">
+                                    <a href="{{ route('data-pengabdian.index') }}" class="menu-link">
+                                        <div data-i18n="Without menu">Pengabdian Masyarakat</div>
+                                    </a>
+                                </li>
+                                <li class="menu-item @yield('menuDataPublikasi')">
+                                    <a href="#" class="menu-link">
+                                        <div data-i18n="Without menu">Publikasi Ilmiah</div>
+                                    </a>
+                                </li>
+                                <li class="menu-item @yield('menuDataStudiLanjut')">
+                                    <a href="#" class="menu-link">
+                                        <div data-i18n="Without menu">Pendidikan Studi Lanjut</div>
+                                    </a>
+                                </li>
+                            </ul>
                         </li>
 
                         <!-- Data User -->

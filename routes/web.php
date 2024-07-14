@@ -7,6 +7,8 @@ use App\Http\Controllers\Admin\AdminJadwalPengajaranController;
 use App\Http\Controllers\Admin\AdminLevelController;
 use App\Http\Controllers\Admin\AdminMahasiswaController;
 use App\Http\Controllers\Admin\AdminMatkulController;
+use App\Http\Controllers\Admin\AdminPenelitianController;
+use App\Http\Controllers\Admin\AdminPengabdianController;
 use App\Http\Controllers\Admin\AdminProdiController;
 use App\Http\Controllers\Admin\AdminRapatController;
 use App\Http\Controllers\Admin\AdminRpsController;
@@ -62,6 +64,22 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
 
     // Admin
     Route::group(['middleware' => [CekLevel::class . ':1']], function () {
+
+        // Data Pengabdian
+        Route::get('/data-pengabdian', [AdminPengabdianController::class, 'index'])->name('data-pengabdian.index');
+        Route::get('/data-pengabdian/create', [AdminPengabdianController::class, 'create'])->name('data-pengabdian.create');
+        Route::get('/data-pengabdian/edit/{id}', [AdminPengabdianController::class, 'edit'])->name('data-pengabdian.edit');
+        Route::post('/data-pengabdian/store', [AdminPengabdianController::class, 'store'])->name('data-pengabdian.store');
+        Route::post('/data-pengabdian/update/{id}', [AdminPengabdianController::class, 'update'])->name('data-pengabdian.update');
+        Route::post('/data-pengabdian/destroy/{id}', [AdminPengabdianController::class, 'destroy'])->name('data-pengabdian.destroy');
+
+        // Data Penelitian
+        Route::get('/data-penelitian', [AdminPenelitianController::class, 'index'])->name('data-penelitian.index');
+        Route::get('/data-penelitian/create', [AdminPenelitianController::class, 'create'])->name('data-penelitian.create');
+        Route::get('/data-penelitian/edit/{id}', [AdminPenelitianController::class, 'edit'])->name('data-penelitian.edit');
+        Route::post('/data-penelitian/store', [AdminPenelitianController::class, 'store'])->name('data-penelitian.store');
+        Route::post('/data-penelitian/update/{id}', [AdminPenelitianController::class, 'update'])->name('data-penelitian.update');
+        Route::post('/data-penelitian/destroy/{id}', [AdminPenelitianController::class, 'destroy'])->name('data-penelitian.destroy');
 
         // Data Rapat
         Route::get('/data-rapat', [AdminRapatController::class, 'index'])->name('data-rapat.index');
@@ -160,6 +178,8 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
 
         // Data Prodi
         Route::get('/data-prodi', [AdminProdiController::class, 'index'])->name('data-prodi.index');
+        Route::get('/data-prodi/generateexcel', [AdminProdiController::class, 'generateexcel'])->name('data-prodi.generateexcel');
+        Route::post('/data-prodi/importexcel', [AdminProdiController::class, 'importexcel'])->name('data-prodi.importexcel');
         Route::get('/data-prodi/create', [AdminProdiController::class, 'create'])->name('data-prodi.create');
         Route::get('/data-prodi/edit/{id}', [AdminProdiController::class, 'edit'])->name('data-prodi.edit');
         Route::post('/data-prodi/store', [AdminProdiController::class, 'store'])->name('data-prodi.store');
