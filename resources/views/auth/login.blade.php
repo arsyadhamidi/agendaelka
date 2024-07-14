@@ -148,9 +148,23 @@
                                 </div>
                             </div>
                             <div class="mb-3">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" id="remember-me" />
-                                    <label class="form-check-label" for="remember-me"> Ingat Saya </label>
+                                <div class="form-group captcha">
+                                    <span>{!! captcha_img('math') !!}</span>
+                                    <button type="button" class="btn btn-danger reload" id="reload">
+                                        &#x21bb;
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <div class="form-group">
+                                    <input type="text" name="captcha"
+                                        class="form-control @error('captcha') is-invalid @enderror"
+                                        placeholder="Masukan Captcha">
+                                    @error('captcha')
+                                        <div class="invalid-feedback">
+                                            {{ $message }}
+                                        </div>
+                                    @enderror
                                 </div>
                             </div>
                             <div class="mb-3">
@@ -204,6 +218,19 @@
             @if (Session::has('error'))
                 toastr.error("{{ Session::get('error') }}");
             @endif
+        });
+    </script>
+    <script>
+        $(document).ready(function() {
+            $('#reload').click(function() {
+                $.ajax({
+                    type: 'GET',
+                    url: '{{ route('reload-captcha') }}',
+                    success: function(data) {
+                        $(".captcha span").html(data.captcha);
+                    }
+                });
+            });
         });
     </script>
 </body>

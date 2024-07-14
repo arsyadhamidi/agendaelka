@@ -47,6 +47,7 @@ use Illuminate\Support\Facades\Route;
 
 //  Login
 Route::get('/login', [LoginController::class, 'index'])->name('login')->middleware('guest');
+Route::get('/reload-captcha', [LoginController::class, 'reloadcaptcha'])->name('reload-captcha');
 Route::post('/login-action', [LoginController::class, 'authenticate'])->name('login.authenticate');
 Route::get('/login-logout', [LoginController::class, 'logout'])->name('login.logout');
 

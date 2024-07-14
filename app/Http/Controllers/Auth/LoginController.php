@@ -15,13 +15,18 @@ class LoginController extends Controller
 
     public function authenticate(Request $request)
     {
-        $credentials = $request->validate([
+        $request->validate([
             'username' => 'required',
             'password' => 'required',
+            'captcha' => 'required|captcha',
         ], [
             'username.required' => 'Username wajib diisi.',
             'password.required' => 'Password wajib diisi.',
+            'captcha.required' => 'Captcha wajib diisi.',
+            'captcha.captcha' => 'Captcha tidak valid.',
         ]);
+
+        $credentials = $request->only('username', 'password');
 
         if (Auth::attempt($credentials)) {
 
@@ -31,6 +36,13 @@ class LoginController extends Controller
         } else {
             return back()->with('error', 'Username atau password anda salah, silahkan coba lagi!');
         }
+    }
+
+    public function reloadcaptcha()
+    {
+        return response()->json([
+            'captcha' => captcha_img('math'),
+        ]);
     }
 
     public function logout(Request $request)
