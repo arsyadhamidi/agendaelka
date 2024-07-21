@@ -10,6 +10,7 @@ use App\Http\Controllers\Admin\AdminMatkulController;
 use App\Http\Controllers\Admin\AdminPenelitianController;
 use App\Http\Controllers\Admin\AdminPengabdianController;
 use App\Http\Controllers\Admin\AdminProdiController;
+use App\Http\Controllers\Admin\AdminPublikasiController;
 use App\Http\Controllers\Admin\AdminRapatController;
 use App\Http\Controllers\Admin\AdminRpsController;
 use App\Http\Controllers\Admin\AdminSeminarController;
@@ -65,6 +66,14 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
 
     // Admin
     Route::group(['middleware' => [CekLevel::class . ':1']], function () {
+
+        // Data Publikasi Ilmiah
+        Route::get('/data-publikasi', [AdminPublikasiController::class, 'index'])->name('data-publikasi.index');
+        Route::get('/data-publikasi/create', [AdminPublikasiController::class, 'create'])->name('data-publikasi.create');
+        Route::get('/data-publikasi/edit/{id}', [AdminPublikasiController::class, 'edit'])->name('data-publikasi.edit');
+        Route::post('/data-publikasi/store', [AdminPublikasiController::class, 'store'])->name('data-publikasi.store');
+        Route::post('/data-publikasi/update/{id}', [AdminPublikasiController::class, 'update'])->name('data-publikasi.update');
+        Route::post('/data-publikasi/destroy/{id}', [AdminPublikasiController::class, 'destroy'])->name('data-publikasi.destroy');
 
         // Data Pengabdian
         Route::get('/data-pengabdian', [AdminPengabdianController::class, 'index'])->name('data-pengabdian.index');

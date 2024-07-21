@@ -230,7 +230,7 @@
                                     </a>
                                 </li>
                                 <li class="menu-item @yield('menuDataPublikasi')">
-                                    <a href="#" class="menu-link">
+                                    <a href="{{ route('data-publikasi.index') }}" class="menu-link">
                                         <div data-i18n="Without menu">Publikasi Ilmiah</div>
                                     </a>
                                 </li>
