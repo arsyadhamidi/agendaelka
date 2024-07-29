@@ -77,7 +77,9 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
 
         // Data Pengabdian
         Route::get('/data-pengabdian', [AdminPengabdianController::class, 'index'])->name('data-pengabdian.index');
-        Route::get('/data-pengabdian/create', [AdminPengabdianController::class, 'create'])->name('data-pengabdian.create');
+        Route::get('/data-pengabdian/tahun/{id}', [AdminPengabdianController::class, 'tahun'])->name('data-pengabdian.tahun');
+        Route::get('/data-pengabdian/pengabdian/{id}', [AdminPengabdianController::class, 'pengabdian'])->name('data-pengabdian.pengabdian');
+        Route::get('/data-pengabdian/create/{id}', [AdminPengabdianController::class, 'create'])->name('data-pengabdian.create');
         Route::get('/data-pengabdian/edit/{id}', [AdminPengabdianController::class, 'edit'])->name('data-pengabdian.edit');
         Route::post('/data-pengabdian/store', [AdminPengabdianController::class, 'store'])->name('data-pengabdian.store');
         Route::post('/data-pengabdian/update/{id}', [AdminPengabdianController::class, 'update'])->name('data-pengabdian.update');
