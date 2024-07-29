@@ -15,4 +15,14 @@ class Penelitian extends Model
     {
         return $this->belongsTo(Dosen::class, 'dosen_id');
     }
+
+    public function tahun()
+    {
+        return $this->belongsTo(Tahun::class, 'tahun_id');
+    }
+
+    public function prodi()
+    {
+        return $this->belongsTo(Prodi::class, 'prodi_id');
+    }
 }

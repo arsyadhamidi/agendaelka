@@ -24,6 +24,26 @@
                         <div class="row">
                             <div class="col-lg">
                                 <div class="mb-3">
+                                    <label>Program Studi</label>
+                                    <input type="text" name="prodi_id" class="form-control"
+                                        value="{{ $penelitians->prodi_id }}" hidden>
+                                    <input type="text" class="form-control"
+                                        value="{{ $penelitians->prodi->nama ?? '-' }}" readonly>
+                                </div>
+                            </div>
+                            <div class="col-lg">
+                                <div class="mb-3">
+                                    <label>Tahun</label>
+                                    <input type="text" name="tahun_id" class="form-control"
+                                        value="{{ $penelitians->tahun_id }}" hidden>
+                                    <input type="text" class="form-control"
+                                        value="{{ $penelitians->tahun->tahun ?? '-' }}" readonly>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg">
+                                <div class="mb-3">
                                     <label>Pilih Dosen</label>
                                     <select name="dosen_id" class="form-control @error('dosen_id') is-invalid @enderror"
                                         id="selectedDosen">

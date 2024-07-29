@@ -13,8 +13,11 @@ return new class extends Migration
     {
         Schema::create('publikasis', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('prodi_id');
+            $table->foreignId('tahun_id');
             $table->foreignId('dosen_id');
-            $table->text('lokasi');
+            $table->text('judul');
+            $table->text('sinta');
             $table->string('file_publikasi')->nullable();
             $table->timestamps();
         });
