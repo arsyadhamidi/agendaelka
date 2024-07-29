@@ -22,6 +22,8 @@
                         <thead>
                             <tr>
                                 <th style="width: 5%; text-align:center">No.</th>
+                                <th style="text-align:center">Prodi</th>
+                                <th style="text-align:center">Tahun</th>
                                 <th style="text-align:center">Dosen</th>
                                 <th style="text-align:center">Tanggal</th>
                                 <th style="text-align:center">Judul</th>
@@ -34,6 +36,8 @@
                             @foreach ($pengabdians as $data)
                                 <tr>
                                     <td>{{ $loop->iteration ?? '-' }}</td>
+                                    <td>{{ $data->prodi->nama ?? '-' }}</td>
+                                    <td>{{ $data->tahun->tahun ?? '-' }}</td>
                                     <td>{{ $data->dosen->nama ?? '-' }}</td>
                                     <td>{{ $data->tanggal ?? '-' }}</td>
                                     <td>{{ $data->judul ?? '-' }}</td>

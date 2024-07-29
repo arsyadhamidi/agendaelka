@@ -1,70 +1,39 @@
 @extends('admin.layout.master')
-@section('title', 'Data Penelitian | Agenda Elka')
+@section('title', 'Data Publikasi | Agenda Elka')
 @section('menuDataNonAkademik', 'active')
-@section('menuDataPenelitian', 'active')
+@section('menuDataPublikasi', 'active')
 
 @section('content')
     <div class="row">
         <div class="col-lg">
             <div class="card">
                 <div class="card-header">
-                    <a href="{{ route('data-penelitian.tahun', $tahuns->prodi_id) }}" class="btn btn-primary">
+                    <a href="{{ route('data-publikasi.index') }}" class="btn btn-primary">
                         <i class="bx bx-left-arrow-alt"></i>
                         Kembali
-                    </a>
-                    <a href="{{ route('data-penelitian.create', $tahuns->id) }}" class="btn btn-primary">
-                        <i class="bx bx-plus"></i>
-                        Tambahkan Data Penelitian
                     </a>
                 </div>
                 <div class="card-body table-responsive">
                     <table class="table table-bordered table-striped" id="myTable">
                         <thead>
                             <tr>
-                                <th style="width: 5%; text-align:center">No.</th>
-                                <th style="text-align:center">Prodi</th>
+                                <th style="width: 4%; text-align:center">No.</th>
+                                <th style="text-align:center">Program Studi</th>
                                 <th style="text-align:center">Tahun</th>
-                                <th style="text-align:center">Dosen</th>
-                                <th style="text-align:center">Tanggal</th>
-                                <th style="text-align:center">Judul</th>
-                                <th style="text-align:center">Lokasi</th>
-                                <th style="text-align:center">Berkas</th>
                                 <th style="text-align:center">Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($penelitians as $data)
+                            @foreach ($tahuns as $data)
                                 <tr>
-                                    <td>{{ $loop->iteration ?? '-' }}</td>
+                                    <td>{{ $loop->iteration }}</td>
                                     <td>{{ $data->prodi->nama ?? '-' }}</td>
-                                    <td>{{ $data->tahun->tahun ?? '-' }}</td>
-                                    <td>{{ $data->dosen->nama ?? '-' }}</td>
-                                    <td>{{ $data->tanggal ?? '-' }}</td>
-                                    <td>{{ $data->judul ?? '-' }}</td>
-                                    <td>{{ $data->lokasi ?? '-' }}</td>
+                                    <td>{{ $data->tahun ?? '-' }}</td>
                                     <td>
-                                        @if (!empty($data->file_penelitian))
-                                            <a href="{{ asset('storage/' . $data->file_penelitian) }}"
-                                                class="btn btn-primary">
-                                                <i class="bx bx-download"></i>
-                                                Download
-                                            </a>
-                                        @else
-                                            -
-                                        @endif
-                                    </td>
-                                    <td>
-                                        <form action="{{ route('data-penelitian.destroy', $data->id) }}" method="POST"
-                                            class="d-flex flex-wrap">
-                                            @csrf
-                                            <a href="{{ route('data-penelitian.edit', $data->id) }}"
-                                                class="btn btn-sm btn-outline-info mx-2">
-                                                <i class="bx bx-edit"></i>
-                                            </a>
-                                            <button type="submit" class="btn btn-sm btn-outline-danger" id="hapusData">
-                                                <i class="bx bx-trash-alt"></i>
-                                            </button>
-                                        </form>
+                                        <a href="{{ route('data-publikasi.publikasi', $data->id) }}"
+                                            class="btn btn-sm btn-outline-info mx-2">
+                                            <i class="bx bx-edit"></i>
+                                        </a>
                                     </td>
                                 </tr>
                             @endforeach
@@ -98,7 +67,7 @@
             // Tampilkan SweetAlert saat tombol di klik
             Swal.fire({
                 icon: 'question',
-                title: 'Hapus Data Penelitian ?',
+                title: 'Hapus Data Tahun?',
                 text: 'Apakah anda yakin untuk menghapus data ini?',
                 showCancelButton: true, // Tampilkan tombol batal
                 confirmButtonText: 'Ya',

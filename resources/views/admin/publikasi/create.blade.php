@@ -10,7 +10,7 @@
                 @csrf
                 <div class="card">
                     <div class="card-header">
-                        <a href="{{ route('data-publikasi.index') }}" class="btn btn-primary">
+                        <a href="{{ route('data-publikasi.publikasi', $tahuns->id) }}" class="btn btn-primary">
                             <i class="bx bx-left-arrow-alt"></i>
                             Kembali
                         </a>
@@ -20,6 +20,25 @@
                         </button>
                     </div>
                     <div class="card-body">
+                        <div class="row">
+                            <div class="col-lg">
+                                <div class="mb-3">
+                                    <label>Program Studi</label>
+                                    <input type="text" name="prodi_id" class="form-control"
+                                        value="{{ $tahuns->prodi_id }}" hidden>
+                                    <input type="text" class="form-control" value="{{ $tahuns->prodi->nama ?? '-' }}"
+                                        readonly>
+                                </div>
+                            </div>
+                            <div class="col-lg">
+                                <div class="mb-3">
+                                    <label>Tahun</label>
+                                    <input type="text" name="tahun_id" class="form-control" value="{{ $tahuns->id }}"
+                                        hidden>
+                                    <input type="text" class="form-control" value="{{ $tahuns->tahun ?? '-' }}" readonly>
+                                </div>
+                            </div>
+                        </div>
                         <div class="row">
                             <div class="col-lg">
                                 <div class="mb-3">
@@ -43,11 +62,26 @@
                         <div class="row">
                             <div class="col-lg">
                                 <div class="mb-3">
-                                    <label>Lokasi</label>
-                                    <input type="text" name="lokasi"
-                                        class="form-control @error('lokasi') is-invalid @enderror"
-                                        value="{{ old('lokasi') }}" placeholder="Masukan lokasi">
-                                    @error('lokasi')
+                                    <label>Judul Publikasi Ilmiah</label>
+                                    <input type="text" name="judul"
+                                        class="form-control @error('judul') is-invalid @enderror"
+                                        value="{{ old('judul') }}" placeholder="Masukan judul">
+                                    @error('judul')
+                                        <div class="invalid-feedback">
+                                            {{ $message }}
+                                        </div>
+                                    @enderror
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg">
+                                <div class="mb-3">
+                                    <label>Sinta</label>
+                                    <input type="text" name="sinta"
+                                        class="form-control @error('sinta') is-invalid @enderror"
+                                        value="{{ old('sinta') }}" placeholder="Masukan sinta">
+                                    @error('sinta')
                                         <div class="invalid-feedback">
                                             {{ $message }}
                                         </div>

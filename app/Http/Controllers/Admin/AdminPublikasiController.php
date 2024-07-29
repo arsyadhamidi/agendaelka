@@ -4,7 +4,9 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Dosen;
+use App\Models\Prodi;
 use App\Models\Publikasi;
+use App\Models\Tahun;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -12,29 +14,53 @@ class AdminPublikasiController extends Controller
 {
     public function index()
     {
-        $publikasis = Publikasi::latest()->get();
+        $prodis = Prodi::latest()->get();
         return view('admin.publikasi.index', [
-            'publikasis' => $publikasis,
+            'prodis' => $prodis,
         ]);
     }
 
-    public function create()
+    public function tahun($id)
     {
-        $dosens = Dosen::latest()->get();
+        $tahuns = Tahun::where('prodi_id', $id)->latest()->get();
+        return view('admin.publikasi.tahun', [
+            'tahuns' => $tahuns,
+        ]);
+    }
+
+    public function publikasi($id)
+    {
+        $tahuns = Tahun::where('id', $id)->first();
+        $publikasis = Publikasi::where('tahun_id', $id)->latest()->get();
+        return view('admin.publikasi.publikasi', [
+            'publikasis' => $publikasis,
+            'tahuns' => $tahuns,
+        ]);
+    }
+
+    public function create($id)
+    {
+        $tahuns = Tahun::where('id', $id)->first();
+        $dosens = Dosen::where('prodi_id', $tahuns->prodi_id)->latest()->get();
         return view('admin.publikasi.create', [
             'dosens' => $dosens,
+            'tahuns' => $tahuns,
         ]);
     }
 
     public function store(Request $request)
     {
         $validated = $request->validate([
+            'prodi_id' => 'required',
+            'tahun_id' => 'required',
             'dosen_id' => 'required',
-            'lokasi' => 'required',
+            'judul' => 'required',
+            'sinta' => 'required',
             'file_publikasi' => 'required|mimes:pdf|max:2048',
         ], [
             'dosen_id.required' => 'Dosen wajib diisi',
-            'lokasi.required' => 'Lokasi wajib diisi',
+            'judul.required' => 'Judul wajib diisi',
+            'sinta.required' => 'Sinta wajib diisi',
             'file_publikasi.required' => 'File Penelitian wajib diisi',
             'file_publikasi.mimes' => 'File Penelitian harus memiliki format PDF',
             'file_publikasi.max' => 'File Penelitian maksimal 2 MB',
@@ -48,7 +74,7 @@ class AdminPublikasiController extends Controller
 
         Publikasi::create($validated);
 
-        return redirect()->route('data-publikasi.index')->with('success', 'Selamat ! Anda berhasil menambahkan data');
+        return redirect()->route('data-publikasi.publikasi', $request->tahun_id)->with('success', 'Selamat ! Anda berhasil menambahkan data');
     }
 
     public function edit($id)
@@ -65,11 +91,13 @@ class AdminPublikasiController extends Controller
     {
         $validated = $request->validate([
             'dosen_id' => 'required',
-            'lokasi' => 'required',
+            'judul' => 'required',
+            'sinta' => 'required',
             'file_publikasi' => 'required|mimes:pdf|max:2048',
         ], [
             'dosen_id.required' => 'Dosen wajib diisi',
-            'lokasi.required' => 'Lokasi wajib diisi',
+            'judul.required' => 'Judul wajib diisi',
+            'sinta.required' => 'Sinta wajib diisi',
             'file_publikasi.required' => 'File Penelitian wajib diisi',
             'file_publikasi.mimes' => 'File Penelitian harus memiliki format PDF',
             'file_publikasi.max' => 'File Penelitian maksimal 2 MB',
@@ -87,7 +115,7 @@ class AdminPublikasiController extends Controller
 
         $publikasis->update($validated);
 
-        return redirect()->route('data-publikasi.index')->with('success', 'Selamat ! Anda berhasil memperbaharui data');
+        return redirect()->route('data-publikasi.publikasi', $request->tahun_id)->with('success', 'Selamat ! Anda berhasil memperbaharui data');
     }
 
     public function destroy($id)
@@ -97,6 +125,6 @@ class AdminPublikasiController extends Controller
             Storage::delete('file_publikasi');
         }
         $publikasis->delete();
-        return redirect()->route('data-publikasi.index')->with('success', 'Selamat ! Anda berhasil menghapus data');
+        return back()->with('success', 'Selamat ! Anda berhasil menghapus data');
     }
 }
