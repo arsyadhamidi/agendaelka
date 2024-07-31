@@ -81,16 +81,10 @@
                             <div class="col-lg">
                                 <div class="mb-3">
                                     <label>Mata Kuliah</label>
-                                    <select name="matkul_id" class="form-control @error('matkul_id') is-invalid @enderror"
-                                        id="selectedMatkul">
-                                        <option value="" selected>Pilih Mata Kuliah</option>
-                                        @foreach ($matkuls as $data)
-                                            <option
-                                                value="{{ $data->id }}"{{ old('matkul_id') == $data->id ? 'selected' : '' }}>
-                                                {{ $data->matkul ?? '-' }}</option>
-                                        @endforeach
-                                    </select>
-                                    @error('matkul_id')
+                                    <input type="text" name="matkul"
+                                        class="form-control @error('matkul') is-invalid @enderror"
+                                        value="{{ old('matkul') }}" placeholder="Masukan Mata Kuliah">
+                                    @error('matkul')
                                         <div class="invalid-feedback">
                                             {{ $message }}
                                         </div>
