@@ -33,7 +33,7 @@
                             @foreach ($bahans as $data)
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
-                                    <td>{{ $data->matkul->matkul ?? '-' }}</td>
+                                    <td>{{ $data->matkul ?? '-' }}</td>
                                     <td>{{ $data->dosen->nama ?? '-' }}</td>
                                     <td>{{ $data->semester ?? '-' }}</td>
                                     <td>{{ $data->tahun->tahun ?? '-' }}</td>
