@@ -41,16 +41,6 @@
                         <i class="bx bx-plus"></i>
                         Tambah Data Prodi
                     </a>
-                    <div class="form-group">
-                        <a href="{{ route('data-prodi.generateexcel') }}" class="btn btn-success" target="_blank">
-                            <i class="bx bx-download"></i>
-                            Download Excel
-                        </a>
-                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#importModal">
-                            <i class="bx bx-import"></i>
-                            Import Excel
-                        </button>
-                    </div>
                 </div>
                 <div class="card-body table-responsive">
                     <table class="table table-bordered table-striped" id="myTable">
