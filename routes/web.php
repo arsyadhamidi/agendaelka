@@ -174,6 +174,7 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
 
         // Dosen
         Route::get('/data-dosen', [AdminDosenController::class, 'index'])->name('data-dosen.index');
+        Route::get('/data-dosen/generateexcel/{id}', [AdminDosenController::class, 'generateexcel'])->name('data-dosen.generateexcel');
         Route::get('/data-dosen/prodi/{id}', [AdminDosenController::class, 'prodi'])->name('data-dosen.prodi');
         Route::get('/data-dosen/dosen/{id}', [AdminDosenController::class, 'dosen'])->name('data-dosen.dosen');
         Route::get('/data-dosen/create/{id}', [AdminDosenController::class, 'create'])->name('data-dosen.create');

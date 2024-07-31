@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Exports\DosenExport;
 use App\Http\Controllers\Controller;
 use App\Models\Dosen;
 use App\Models\Prodi;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Maatwebsite\Excel\Facades\Excel;
 
 class AdminDosenController extends Controller
 {
@@ -17,6 +19,14 @@ class AdminDosenController extends Controller
         return view('admin.dosen.index', [
             'prodis' => $prodis,
         ]);
+    }
+
+    public function generateexcel($id)
+    {
+        $query = Dosen::where('prodi_id', $id);
+        $data = $query->orderBy('id', 'desc')->get();
+
+        return Excel::download(new DosenExport($data), 'data-dosen.xlsx');
     }
 
     public function dosen($id)

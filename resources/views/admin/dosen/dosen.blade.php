@@ -7,14 +7,20 @@
     <div class="row">
         <div class="col-lg">
             <div class="card">
-                <div class="card-header">
-                    <a href="{{ route('data-dosen.index') }}" class="btn btn-primary">
-                        <i class="bx bx-left-arrow-alt"></i>
-                        Kembali
-                    </a>
-                    <a href="{{ route('data-dosen.create', $prodis->id) }}" class="btn btn-primary">
-                        <i class="bx bx-plus"></i>
-                        Tambahkan Data Dosen
+                <div class="card-header d-flex align-items-center justify-content-between">
+                    <div class="form-group">
+                        <a href="{{ route('data-dosen.index') }}" class="btn btn-primary">
+                            <i class="bx bx-left-arrow-alt"></i>
+                            Kembali
+                        </a>
+                        <a href="{{ route('data-dosen.create', $prodis->id) }}" class="btn btn-primary">
+                            <i class="bx bx-plus"></i>
+                            Tambahkan Data Dosen
+                        </a>
+                    </div>
+                    <a href="{{ route('data-dosen.generateexcel', $prodis->id) }}" class="btn btn-success" target="_blank">
+                        <i class="bx bx-download"></i>
+                        Download Excel
                     </a>
                 </div>
                 <div class="card-body table-responsive">
