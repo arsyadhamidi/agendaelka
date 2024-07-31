@@ -1,14 +1,13 @@
 @extends('admin.layout.master')
-@section('title', 'RPS| Agenda Elka')
-@section('menuDosenPengajaran', 'active')
-@section('menuDosenRps', 'active')
-
+@section('title', 'Rps | Agenda Elka')
+@section('menuKepalaPengajaran', 'active')
+@section('menuKepalaRps', 'active')
 @section('content')
     <div class="row">
         <div class="col-lg">
             <div class="card">
                 <div class="card-header">
-                    <a href="{{ route('dosen-rps.index') }}" class="btn btn-primary">
+                    <a href="{{ route('kepala-rps.tahun', $tahuns->prodi_id) }}" class="btn btn-primary">
                         <i class="bx bx-left-arrow-alt"></i>
                         Kembali
                     </a>
@@ -17,22 +16,27 @@
                     <table class="table table-bordered table-striped" id="myTable">
                         <thead>
                             <tr>
-                                <th style="width: 4%; text-align:center">No.</th>
-                                <th style="text-align:center">Program Studi</th>
+                                <th style="width: 5%; text-align:center">No.</th>
+                                <th style="text-align:center">Matkul</th>
+                                <th style="text-align:center">Dosen</th>
+                                <th style="text-align:center">Semester</th>
                                 <th style="text-align:center">Tahun</th>
-                                <th style="text-align:center">Aksi</th>
+                                <th style="text-align:center">Bahan</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($tahuns as $data)
+                            @foreach ($rps as $data)
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
-                                    <td>{{ $data->prodi->nama ?? '-' }}</td>
-                                    <td>{{ $data->tahun ?? '-' }}</td>
+                                    <td>{{ $data->matkul->matkul ?? '-' }}</td>
+                                    <td>{{ $data->dosen->nama ?? '-' }}</td>
+                                    <td>{{ $data->semester ?? '-' }}</td>
+                                    <td>{{ $data->tahun->tahun ?? '-' }}</td>
                                     <td>
-                                        <a href="{{ route('dosen-rps.rps', $data->id) }}"
-                                            class="btn btn-sm btn-outline-info mx-2">
-                                            <i class="bx bx-edit"></i>
+                                        <a href="{{ asset('storage/' . $data->file_rps) }}" class="btn btn-info"
+                                            target="_blank">
+                                            <i class="bx bx-download"></i>
+                                            Download
                                         </a>
                                     </td>
                                 </tr>
@@ -67,7 +71,7 @@
             // Tampilkan SweetAlert saat tombol di klik
             Swal.fire({
                 icon: 'question',
-                title: 'Hapus Data Tahun?',
+                title: 'Hapus Data Rps?',
                 text: 'Apakah anda yakin untuk menghapus data ini?',
                 showCancelButton: true, // Tampilkan tombol batal
                 confirmButtonText: 'Ya',

@@ -1,16 +1,20 @@
 @extends('admin.layout.master')
-@section('title', 'RPS| Agenda Elka')
-@section('menuDosenPengajaran', 'active')
-@section('menuDosenRps', 'active')
-
+@section('title', 'Seminar / Ujian | Agenda Elka')
+@section('menuDosenSeminar', 'active')
 @section('content')
     <div class="row">
         <div class="col-lg">
             <div class="card">
-                <div class="card-header">
-                    <a href="{{ route('dosen-rps.index') }}" class="btn btn-primary">
-                        <i class="bx bx-left-arrow-alt"></i>
-                        Kembali
+                <div class="card-header d-flex align-content-center justify-content-between">
+                    <div class="form-group">
+                        <a href="{{ route('dosen-seminar.tahun', $tahuns->prodi_id) }}" class="btn btn-primary">
+                            <i class="bx bx-left-arrow-alt"></i>
+                            Kembali
+                        </a>
+                    </div>
+                    <a href="{{ route('dosen-seminar.generateexcel', $tahuns->id) }}" class="btn btn-success" target="_blank">
+                        <i class="bx bx-download"></i>
+                        Download Excel
                     </a>
                 </div>
                 <div class="card-body table-responsive">
@@ -18,22 +22,37 @@
                         <thead>
                             <tr>
                                 <th style="width: 4%; text-align:center">No.</th>
-                                <th style="text-align:center">Program Studi</th>
-                                <th style="text-align:center">Tahun</th>
-                                <th style="text-align:center">Aksi</th>
+                                <th style="text-align:center">Mahasiswa</th>
+                                <th style="text-align:center">Judul</th>
+                                <th style="text-align:center">Pembimbing</th>
+                                <th style="text-align:center">Penelaah 1</th>
+                                <th style="text-align:center">Penelaah 2</th>
+                                <th style="text-align:center">Seminar</th>
+                                <th style="text-align:center">Ujian</th>
+                                <th style="text-align:center">Berkas</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($tahuns as $data)
+                            @foreach ($seminars as $data)
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
-                                    <td>{{ $data->prodi->nama ?? '-' }}</td>
-                                    <td>{{ $data->tahun ?? '-' }}</td>
+                                    <td>{{ $data->mahasiswa->nama ?? '-' }}</td>
+                                    <td>{{ $data->judul ?? '-' }}</td>
+                                    <td>{{ $data->dosen->nama ?? '-' }}</td>
+                                    <td>{{ $data->penelaah1->nama ?? '-' }}</td>
+                                    <td>{{ $data->penelaah2->nama ?? '-' }}</td>
+                                    <td>{{ $data->tgl_seminar ?? '-' }}</td>
+                                    <td>{{ $data->tgl_ujian ?? '-' }}</td>
                                     <td>
-                                        <a href="{{ route('dosen-rps.rps', $data->id) }}"
-                                            class="btn btn-sm btn-outline-info mx-2">
-                                            <i class="bx bx-edit"></i>
-                                        </a>
+                                        @if (!empty($data->file_seminar))
+                                            <a href="{{ asset('storage/' . $data->file_seminar) }}"
+                                                class="btn btn-primary">
+                                                <i class="bx bx-download"></i>
+                                                Download
+                                            </a>
+                                        @else
+                                            -
+                                        @endif
                                     </td>
                                 </tr>
                             @endforeach
@@ -67,7 +86,7 @@
             // Tampilkan SweetAlert saat tombol di klik
             Swal.fire({
                 icon: 'question',
-                title: 'Hapus Data Tahun?',
+                title: 'Hapus Data Seminar?',
                 text: 'Apakah anda yakin untuk menghapus data ini?',
                 showCancelButton: true, // Tampilkan tombol batal
                 confirmButtonText: 'Ya',

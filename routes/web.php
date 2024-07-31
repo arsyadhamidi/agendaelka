@@ -18,14 +18,20 @@ use App\Http\Controllers\Admin\AdminTahunController;
 use App\Http\Controllers\Admin\AdminUserController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Dashboard\DashboardController;
+use App\Http\Controllers\Dosen\DosenAkademikController;
 use App\Http\Controllers\Dosen\DosenBahanAjarController;
 use App\Http\Controllers\Dosen\DosenJadwalPengajaranController;
 use App\Http\Controllers\Dosen\DosenRapatController;
 use App\Http\Controllers\Dosen\DosenRpsController;
+use App\Http\Controllers\Dosen\DosenSeminarController;
 use App\Http\Controllers\Kaprodi\KaprodiAkademikController;
 use App\Http\Controllers\Kaprodi\KaprodiRapatController;
+use App\Http\Controllers\KepalaDepartemen\KepalaDepartemenAkademikController;
+use App\Http\Controllers\KepalaDepartemen\KepalaDepartemenBahanAjarController;
 use App\Http\Controllers\KepalaDepartemen\KepalaDepartemenJadwalPengajaranController;
 use App\Http\Controllers\KepalaDepartemen\KepalaDepartemenRapatController;
+use App\Http\Controllers\KepalaDepartemen\KepalaDepartemenRpsController;
+use App\Http\Controllers\KepalaDepartemen\KepalaDepartemenSeminarController;
 use App\Http\Controllers\Mahasiswa\MahasiswaAkademikController;
 use App\Http\Controllers\Mahasiswa\MahasiswaBahanAjarController;
 use App\Http\Controllers\Mahasiswa\MahasiswaJadwalPengajaranController;
@@ -225,6 +231,28 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
     // Kepala Departemen
     Route::group(['middleware' => [CekLevel::class . ':3']], function () {
 
+        // Seminar
+        Route::get('/kepala-seminar', [KepalaDepartemenSeminarController::class, 'index'])->name('kepala-seminar.index');
+        Route::get('/kepala-seminar/tahun/{id}', [KepalaDepartemenSeminarController::class, 'tahun'])->name('kepala-seminar.tahun');
+        Route::get('/kepala-seminar/generateexcel/{id}', [KepalaDepartemenSeminarController::class, 'generateexcel'])->name('kepala-seminar.generateexcel');
+        Route::get('/kepala-seminar/seminar/{id}', [KepalaDepartemenSeminarController::class, 'seminar'])->name('kepala-seminar.seminar');
+
+        // Data Akademik
+        Route::get('/kepala-akademik', [KepalaDepartemenAkademikController::class, 'index'])->name('kepala-akademik.index');
+        Route::get('/kepala-akademik/tahun/{id}', [KepalaDepartemenAkademikController::class, 'tahun'])->name('kepala-akademik.tahun');
+        Route::get('/kepala-akademik/akademik/{id}', [KepalaDepartemenAkademikController::class, 'akademik'])->name('kepala-akademik.akademik');
+
+        // Rps
+        Route::get('/kepala-rps', [KepalaDepartemenRpsController::class, 'index'])->name('kepala-rps.index');
+        Route::get('/kepala-rps/tahun/{id}', [KepalaDepartemenRpsController::class, 'tahun'])->name('kepala-rps.tahun');
+        Route::get('/kepala-rps/rps/{id}', [KepalaDepartemenRpsController::class, 'rps'])->name('kepala-rps.rps');
+
+        // Bahan Ajar
+        Route::get('/kepala-bahanajar', [KepalaDepartemenBahanAjarController::class, 'index'])->name('kepala-bahanajar.index');
+        Route::get('/kepala-bahanajar/create/{id}', [KepalaDepartemenBahanAjarController::class, 'create'])->name('kepala-bahanajar.create');
+        Route::get('/kepala-bahanajar/tahun/{id}', [KepalaDepartemenBahanAjarController::class, 'tahun'])->name('kepala-bahanajar.tahun');
+        Route::get('/kepala-bahanajar/bahanajar/{id}', [KepalaDepartemenBahanAjarController::class, 'bahanajar'])->name('kepala-bahanajar.bahanajar');
+
         // Data Rapat
         Route::get('/kepala-rapat', [KepalaDepartemenRapatController::class, 'index'])->name('kepala-rapat.index');
         Route::get('/kepala-rapat/create', [KepalaDepartemenRapatController::class, 'create'])->name('kepala-rapat.create');
@@ -265,6 +293,18 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
     });
     // Dosen
     Route::group(['middleware' => [CekLevel::class . ':5']], function () {
+
+         // Seminar
+         Route::get('/dosen-seminar', [DosenSeminarController::class, 'index'])->name('dosen-seminar.index');
+         Route::get('/dosen-seminar/tahun/{id}', [DosenSeminarController::class, 'tahun'])->name('dosen-seminar.tahun');
+         Route::get('/dosen-seminar/generateexcel/{id}', [DosenSeminarController::class, 'generateexcel'])->name('dosen-seminar.generateexcel');
+         Route::get('/dosen-seminar/seminar/{id}', [DosenSeminarController::class, 'seminar'])->name('dosen-seminar.seminar');
+
+        // Data Akademik
+        Route::get('/dosen-akademik', [DosenAkademikController::class, 'index'])->name('dosen-akademik.index');
+        Route::get('/dosen-akademik/tahun/{id}', [DosenAkademikController::class, 'tahun'])->name('dosen-akademik.tahun');
+        Route::get('/dosen-akademik/create/{id}', [DosenAkademikController::class, 'create'])->name('dosen-akademik.create');
+        Route::get('/dosen-akademik/akademik/{id}', [DosenAkademikController::class, 'akademik'])->name('dosen-akademik.akademik');
 
         // Data Rapat
         Route::get('/dosen-rapat', [DosenRapatController::class, 'index'])->name('dosen-rapat.index');

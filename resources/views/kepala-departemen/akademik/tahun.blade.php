@@ -1,14 +1,13 @@
 @extends('admin.layout.master')
-@section('title', 'RPS| Agenda Elka')
-@section('menuDosenPengajaran', 'active')
-@section('menuDosenRps', 'active')
+@section('title', 'DataAkademik | Agenda Elka')
+@section('menuKepalaAkademik', 'active')
 
 @section('content')
     <div class="row">
         <div class="col-lg">
             <div class="card">
                 <div class="card-header">
-                    <a href="{{ route('dosen-rps.index') }}" class="btn btn-primary">
+                    <a href="{{ route('kepala-akademik.index') }}" class="btn btn-primary">
                         <i class="bx bx-left-arrow-alt"></i>
                         Kembali
                     </a>
@@ -30,7 +29,7 @@
                                     <td>{{ $data->prodi->nama ?? '-' }}</td>
                                     <td>{{ $data->tahun ?? '-' }}</td>
                                     <td>
-                                        <a href="{{ route('dosen-rps.rps', $data->id) }}"
+                                        <a href="{{ route('kepala-akademik.akademik', $data->id) }}"
                                             class="btn btn-sm btn-outline-info mx-2">
                                             <i class="bx bx-edit"></i>
                                         </a>

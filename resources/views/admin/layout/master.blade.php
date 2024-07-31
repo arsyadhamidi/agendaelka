@@ -263,13 +263,48 @@
                             </ul>
                         </li>
                     @elseif (Auth()->user()->level_id == '3')
-                        <!-- Jadwal Pengajaran -->
-                        <li class="menu-item @yield('menuJadwalPengajaran')">
-                            <a href="{{ route('kepala-jadwalpengajaran.index') }}" class="menu-link">
-                                <i class="menu-icon tf-icons bx bx-calendar"></i>
-                                <div data-i18n="Analytics">Jadwal Pengajaran</div>
+                        {{-- Pengajaran --}}
+                        <li class="menu-item @yield('menuKepalaPengajaran')">
+                            <a href="javascript:void(0);" class="menu-link menu-toggle">
+                                <i class="menu-icon tf-icons bx bx-book"></i>
+                                <div data-i18n="Layouts">Pengajaran</div>
+                            </a>
+
+                            <ul class="menu-sub">
+                                <li class="menu-item @yield('menuKepalaJadwalPengajaran')">
+                                    <a href="{{ route('kepala-jadwalpengajaran.index') }}" class="menu-link">
+                                        <div data-i18n="Without menu">Jadwal Pengajaran</div>
+                                    </a>
+                                </li>
+                                <li class="menu-item @yield('menuKepalaBahanAjar')">
+                                    <a href="{{ route('kepala-bahanajar.index') }}" class="menu-link">
+                                        <div data-i18n="Without menu">Bahan Ajar</div>
+                                    </a>
+                                </li>
+                                <li class="menu-item @yield('menuKepalaRps')">
+                                    <a href="{{ route('kepala-rps.index') }}" class="menu-link">
+                                        <div data-i18n="Without menu">Data Rps</div>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+
+                        <!-- Akademik -->
+                        <li class="menu-item @yield('menuKepalaAkademik')">
+                            <a href="{{ route('kepala-akademik.index') }}" class="menu-link">
+                                <i class="menu-icon tf-icons bx bx-data"></i>
+                                <div data-i18n="Analytics">Akademik</div>
                             </a>
                         </li>
+
+                        {{-- Seminar / Ujian --}}
+                        <li class="menu-item @yield('menuKepalaSeminar')">
+                            <a href="{{ route('kepala-seminar.index') }}" class="menu-link">
+                                <i class="menu-icon tf-icons bx bx-folder-open"></i>
+                                <div data-i18n="Analytics">Seminar / Ujian</div>
+                            </a>
+                        </li>
+
                         {{-- Data Rapat --}}
                         <li class="menu-item @yield('menuKepalaRapat')">
                             <a href="{{ route('kepala-rapat.index') }}" class="menu-link">
@@ -293,26 +328,45 @@
                             </a>
                         </li>
                     @elseif(Auth()->user()->level_id == '5')
-                        <!-- Jadwal Pengajaran -->
-                        <li class="menu-item @yield('menuDosenJadwalPengajaran')">
-                            <a href="{{ route('dosen-jadwalpengajaran.index') }}" class="menu-link">
-                                <i class="menu-icon tf-icons bx bx-calendar"></i>
-                                <div data-i18n="Analytics">Jadwal Pengajaran</div>
-                            </a>
-                        </li>
-                        <!-- Bahan Ajar -->
-                        <li class="menu-item @yield('menuDosenBahanAjar')">
-                            <a href="{{ route('dosen-bahanajar.index') }}" class="menu-link">
+                        {{-- Pengajaran --}}
+                        <li class="menu-item @yield('menuDosenPengajaran')">
+                            <a href="javascript:void(0);" class="menu-link menu-toggle">
                                 <i class="menu-icon tf-icons bx bx-book"></i>
-                                <div data-i18n="Analytics">Bahan Ajar</div>
+                                <div data-i18n="Layouts">Pengajaran</div>
+                            </a>
+
+                            <ul class="menu-sub">
+                                <li class="menu-item @yield('menuDosenJadwalPengajaran')">
+                                    <a href="{{ route('dosen-jadwalpengajaran.index') }}" class="menu-link">
+                                        <div data-i18n="Without menu">Jadwal Pengajaran</div>
+                                    </a>
+                                </li>
+                                <li class="menu-item @yield('menuDosenBahanAjar')">
+                                    <a href="{{ route('dosen-bahanajar.index') }}" class="menu-link">
+                                        <div data-i18n="Without menu">Bahan Ajar</div>
+                                    </a>
+                                </li>
+                                <li class="menu-item @yield('menuDosenRps')">
+                                    <a href="{{ route('dosen-rps.index') }}" class="menu-link">
+                                        <div data-i18n="Without menu">Data Rps</div>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+
+                        <!-- Akademik -->
+                        <li class="menu-item @yield('menuDosenAkademik')">
+                            <a href="{{ route('dosen-akademik.index') }}" class="menu-link">
+                                <i class="menu-icon tf-icons bx bx-data"></i>
+                                <div data-i18n="Analytics">Akademik</div>
                             </a>
                         </li>
 
-                        <!-- Bahan Rps -->
-                        <li class="menu-item @yield('menuDosenRps')">
-                            <a href="{{ route('dosen-rps.index') }}" class="menu-link">
-                                <i class="menu-icon tf-icons bx bx-file"></i>
-                                <div data-i18n="Analytics">Rps</div>
+                        {{-- Seminar / Ujian --}}
+                        <li class="menu-item @yield('menuDosenSeminar')">
+                            <a href="{{ route('dosen-seminar.index') }}" class="menu-link">
+                                <i class="menu-icon tf-icons bx bx-folder-open"></i>
+                                <div data-i18n="Analytics">Seminar / Ujian</div>
                             </a>
                         </li>
 
