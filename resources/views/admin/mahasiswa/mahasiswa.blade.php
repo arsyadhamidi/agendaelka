@@ -7,14 +7,21 @@
     <div class="row">
         <div class="col-lg">
             <div class="card">
-                <div class="card-header">
-                    <a href="{{ route('data-mahasiswa.tahun', $tahuns->prodi_id) }}" class="btn btn-primary">
-                        <i class="bx bx-left-arrow-alt"></i>
-                        Kembali
-                    </a>
-                    <a href="{{ route('data-mahasiswa.create', $tahuns->id) }}" class="btn btn-primary">
-                        <i class="bx bx-plus"></i>
-                        Tambahkan Data Mahasiswa
+                <div class="card-header d-flex align-items-center justify-content-between">
+                    <div class="form-group">
+                        <a href="{{ route('data-mahasiswa.tahun', $tahuns->prodi_id) }}" class="btn btn-primary">
+                            <i class="bx bx-left-arrow-alt"></i>
+                            Kembali
+                        </a>
+                        <a href="{{ route('data-mahasiswa.create', $tahuns->id) }}" class="btn btn-primary">
+                            <i class="bx bx-plus"></i>
+                            Tambahkan Data Mahasiswa
+                        </a>
+                    </div>
+                    <a href="{{ route('data-mahasiswa.generateexcel', $tahuns->id) }}" class="btn btn-success"
+                        target="_blank">
+                        <i class="bx bx-download"></i>
+                        Download Excel
                     </a>
                 </div>
                 <div class="card-body table-responsive">

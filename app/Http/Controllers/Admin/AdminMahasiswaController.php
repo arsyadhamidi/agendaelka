@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Exports\MahasiswaExport;
 use App\Http\Controllers\Controller;
 use App\Models\Mahasiswa;
 use App\Models\Prodi;
@@ -9,6 +10,7 @@ use App\Models\Tahun;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Maatwebsite\Excel\Facades\Excel;
 
 class AdminMahasiswaController extends Controller
 {
@@ -18,6 +20,14 @@ class AdminMahasiswaController extends Controller
         return view('admin.mahasiswa.index', [
             'prodis' => $prodis,
         ]);
+    }
+
+    public function generateexcel($id)
+    {
+        $query = Mahasiswa::where('tahun_id', $id);
+        $data = $query->orderBy('id', 'desc')->get();
+
+        return Excel::download(new MahasiswaExport($data), 'data-mahasiswa.xlsx');
     }
 
     public function tahun($id)
