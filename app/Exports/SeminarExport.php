@@ -20,15 +20,15 @@ class SeminarExport implements FromCollection, WithHeadings
         return $this->data->map(function ($item) {
             return [
                 'id' => $item->id,
-                'prodi_id' => $item->prodi->nama,
-                'tahun_id' => $item->tahun->tahun,
-                'dosen_id' => $item->dosen->nama,
                 'mahasiswa_id' => $item->mahasiswa->nama,
+                'judul' => $item->judul,
+                'dosen_id' => $item->dosen->nama,
                 'penelaah1_id' => $item->penelaah1->nama,
                 'penelaah2_id' => $item->penelaah2->nama,
-                'judul' => $item->judul,
                 'tgl_seminar' => $item->tgl_seminar,
                 'tgl_ujian' => $item->tgl_ujian,
+                'prodi_id' => $item->prodi->nama,
+                'tahun_id' => $item->tahun->tahun,
             ];
         });
     }
@@ -37,15 +37,15 @@ class SeminarExport implements FromCollection, WithHeadings
     {
         return [
             'ID',
-            'Program Studi',
-            'Tahun',
-            'Dosen',
             'Mahasiswa',
+            'Judul',
+            'Dosen Pembimbing',
             'Penelaah 1',
             'Penelaah 2',
-            'Judul',
             'Tanggal Seminar',
             'Tanggal Ujian',
+            'Program Studi',
+            'Tahun',
         ];
     }
 }
