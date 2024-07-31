@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Exports\SeminarExport;
 use App\Http\Controllers\Controller;
 use App\Models\Dosen;
 use App\Models\Mahasiswa;
@@ -9,6 +10,7 @@ use App\Models\Prodi;
 use App\Models\Seminar;
 use App\Models\Tahun;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
 
 class AdminSeminarController extends Controller
 {
@@ -36,6 +38,14 @@ class AdminSeminarController extends Controller
             'tahuns' => $tahuns,
             'seminars' => $semianrs,
         ]);
+    }
+
+    public function generateexcel($id)
+    {
+        $query = Seminar::where('tahun_id', $id);
+        $data = $query->orderBy('id', 'desc')->get();
+
+        return Excel::download(new SeminarExport($data), 'data-seminar.xlsx');
     }
 
     public function create($id)

@@ -5,14 +5,21 @@
     <div class="row">
         <div class="col-lg">
             <div class="card">
-                <div class="card-header">
-                    <a href="{{ route('data-seminar.tahun', $tahuns->prodi_id) }}" class="btn btn-primary">
-                        <i class="bx bx-left-arrow-alt"></i>
-                        Kembali
-                    </a>
-                    <a href="{{ route('data-seminar.create', $tahuns->id) }}" class="btn btn-primary">
-                        <i class="bx bx-plus"></i>
-                        Tambahkan Data Seminar
+                <div class="card-header d-flex align-content-center justify-content-between">
+                    <div class="form-group">
+                        <a href="{{ route('data-seminar.tahun', $tahuns->prodi_id) }}" class="btn btn-primary">
+                            <i class="bx bx-left-arrow-alt"></i>
+                            Kembali
+                        </a>
+                        <a href="{{ route('data-seminar.create', $tahuns->id) }}" class="btn btn-primary">
+                            <i class="bx bx-plus"></i>
+                            Tambahkan Data Seminar
+                        </a>
+                    </div>
+                    <a href="{{ route('data-seminar.generateexcel', $tahuns->id) }}" class="btn btn-success"
+                        target="_blank">
+                        <i class="bx bx-download"></i>
+                        Download Excel
                     </a>
                 </div>
                 <div class="card-body table-responsive">

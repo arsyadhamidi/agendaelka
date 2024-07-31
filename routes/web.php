@@ -118,6 +118,7 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
         // Seminar
         Route::get('/data-seminar', [AdminSeminarController::class, 'index'])->name('data-seminar.index');
         Route::get('/data-seminar/tahun/{id}', [AdminSeminarController::class, 'tahun'])->name('data-seminar.tahun');
+        Route::get('/data-seminar/generateexcel/{id}', [AdminSeminarController::class, 'generateexcel'])->name('data-seminar.generateexcel');
         Route::get('/data-seminar/seminar/{id}', [AdminSeminarController::class, 'seminar'])->name('data-seminar.seminar');
         Route::get('/data-seminar/create/{id}', [AdminSeminarController::class, 'create'])->name('data-seminar.create');
         Route::get('/data-seminar/edit/{id}', [AdminSeminarController::class, 'edit'])->name('data-seminar.edit');
