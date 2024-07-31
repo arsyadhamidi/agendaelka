@@ -20,8 +20,6 @@ class MahasiswaExport implements FromCollection, WithHeadings
         return $this->data->map(function ($item) {
             return [
                 'id' => $item->id,
-                'prodi_id' => $item->prodi->nama, // Pastikan ada kolom 'nama_negara' di model Negara
-                'tahun_id' => $item->tahun->tahun, // Pastikan ada kolom 'nama_negara' di model Negara
                 'nim' => $item->nim,
                 'nama' => $item->nama,
                 'tmp_lahir' => $item->tmp_lahir,
@@ -30,6 +28,8 @@ class MahasiswaExport implements FromCollection, WithHeadings
                 'email' => $item->email,
                 'telp' => $item->telp,
                 'alamat' => $item->alamat,
+                'prodi_id' => $item->prodi->nama, // Pastikan ada kolom 'nama_negara' di model Negara
+                'tahun_id' => $item->tahun->tahun, // Pastikan ada kolom 'nama_negara' di model Negara
             ];
         });
     }
@@ -38,8 +38,6 @@ class MahasiswaExport implements FromCollection, WithHeadings
     {
         return [
             'ID',
-            'Program Studi',
-            'Tahun',
             'NIM',
             'Nama Lengkap',
             'Tempat Lahir',
@@ -48,6 +46,8 @@ class MahasiswaExport implements FromCollection, WithHeadings
             'Email',
             'Telepon',
             'Alamat',
+            'Program Studi',
+            'Tahun',
         ];
     }
 }

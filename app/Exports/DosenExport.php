@@ -20,7 +20,6 @@ class DosenExport implements FromCollection, WithHeadings
         return $this->data->map(function ($item) {
             return [
                 'id' => $item->id,
-                'prodi_id' => $item->prodi->nama, // Pastikan ada kolom 'nama_negara' di model Negara
                 'nip' => $item->nip,
                 'nama' => $item->nama,
                 'tmp_lahir' => $item->tmp_lahir,
@@ -29,6 +28,7 @@ class DosenExport implements FromCollection, WithHeadings
                 'email' => $item->email,
                 'telp' => $item->telp,
                 'alamat' => $item->alamat,
+                'prodi_id' => $item->prodi->nama, // Pastikan ada kolom 'nama_negara' di model Negara
             ];
         });
     }
@@ -37,7 +37,6 @@ class DosenExport implements FromCollection, WithHeadings
     {
         return [
             'ID',
-            'Program Studi',
             'NIP',
             'Nama Lengkap',
             'Tempat Lahir',
@@ -46,6 +45,7 @@ class DosenExport implements FromCollection, WithHeadings
             'Email',
             'Telepon',
             'Alamat',
+            'Program Studi',
         ];
     }
 }
