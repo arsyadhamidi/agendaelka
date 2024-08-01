@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Exports\PublikasiExport;
 use App\Http\Controllers\Controller;
 use App\Models\Dosen;
 use App\Models\Prodi;
@@ -9,6 +10,7 @@ use App\Models\Publikasi;
 use App\Models\Tahun;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Maatwebsite\Excel\Facades\Excel;
 
 class AdminPublikasiController extends Controller
 {
@@ -36,6 +38,13 @@ class AdminPublikasiController extends Controller
             'publikasis' => $publikasis,
             'tahuns' => $tahuns,
         ]);
+    }
+    public function generateexcel($id)
+    {
+        $query = Publikasi::where('tahun_id', $id);
+        $data = $query->orderBy('id', 'desc')->get();
+
+        return Excel::download(new PublikasiExport($data), 'data-publikasi.xlsx');
     }
 
     public function create($id)

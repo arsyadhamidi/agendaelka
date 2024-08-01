@@ -91,6 +91,7 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
         // Data Publikasi Ilmiah
         Route::get('/data-publikasi', [AdminPublikasiController::class, 'index'])->name('data-publikasi.index');
         Route::get('/data-publikasi/tahun/{id}', [AdminPublikasiController::class, 'tahun'])->name('data-publikasi.tahun');
+        Route::get('/data-publikasi/generateexcel/{id}', [AdminPublikasiController::class, 'generateexcel'])->name('data-publikasi.generateexcel');
         Route::get('/data-publikasi/publikasi/{id}', [AdminPublikasiController::class, 'publikasi'])->name('data-publikasi.publikasi');
         Route::get('/data-publikasi/create/{id}', [AdminPublikasiController::class, 'create'])->name('data-publikasi.create');
         Route::get('/data-publikasi/edit/{id}', [AdminPublikasiController::class, 'edit'])->name('data-publikasi.edit');
