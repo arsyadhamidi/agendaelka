@@ -44,16 +44,11 @@
                         <div class="row">
                             <div class="col-lg">
                                 <div class="mb-3">
-                                    <label>Pilih Dosen</label>
-                                    <select name="dosen_id" class="form-control @error('dosen_id') is-invalid @enderror"
-                                        id="selectedDosen">
-                                        <option value="" selected>Pilih Dosen</option>
-                                        @foreach ($dosens as $data)
-                                            <option value="{{ $data->id }}" {{ $pengabdians->dosen_id == $data->id }}>
-                                                {{ $data->nama ?? '-' }}</option>
-                                        @endforeach
-                                    </select>
-                                    @error('dosen_id')
+                                    <label>Nama Lengkap</label>
+                                    <input type="text" name="nama"
+                                        class="form-control @error('nama') is-invalid @enderror"
+                                        value="{{ old('nama', $pengabdians->nama ?? '-') }}" placeholder="Masukan nama">
+                                    @error('nama')
                                         <div class="invalid-feedback">
                                             {{ $message }}
                                         </div>
@@ -103,6 +98,23 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="mb-3">
+                            <label>Status</label>
+                            <select name="status" class="form-control @error('status') is-invalid @enderror"
+                                id="selectedStatus">
+                                <option value="" selected>Pilih Status</option>
+                                <option value="Dosen" {{ $pengabdians->status == 'Dosen' ? 'selected' : '' }}>
+                                    Dosen
+                                </option>
+                                <option value="Mahasiswa" {{ $pengabdians->status == 'Mahasiswa' ? 'selected' : '' }}>
+                                    Mahasiswa</option>
+                            </select>
+                            @error('status')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                            @enderror
+                        </div>
                         <div class="row">
                             <div class="col-lg">
                                 <div class="mb-3">
@@ -127,6 +139,9 @@
     <script>
         $(document).ready(function() {
             $('#selectedDosen').select2({
+                theme: 'bootstrap4',
+            });
+            $('#selectedStatus').select2({
                 theme: 'bootstrap4',
             });
         });

@@ -29,6 +29,7 @@
                                 <th style="text-align:center">Lokasi</th>
                                 <th style="text-align:center">Berkas</th>
                                 <th style="text-align:center">Tahun</th>
+                                <th style="text-align:center">Status</th>
                                 <th style="text-align:center">Aksi</th>
                             </tr>
                         </thead>
@@ -42,6 +43,7 @@
                                     <td>{{ $data->tanggal ?? '-' }}</td>
                                     <td>{{ $data->lokasi ?? '-' }}</td>
                                     <td>{{ $data->tahun->tahun ?? '-' }}</td>
+                                    <td>{{ $data->status ?? '-' }}</td>
                                     <td>
                                         @if (!empty($data->file_penelitian))
                                             <a href="{{ asset('storage/' . $data->file_penelitian) }}"

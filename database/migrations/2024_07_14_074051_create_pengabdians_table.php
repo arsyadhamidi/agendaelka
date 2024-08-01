@@ -15,10 +15,11 @@ return new class extends Migration
             $table->id();
             $table->foreignId('prodi_id');
             $table->foreignId('tahun_id');
-            $table->foreignId('dosen_id');
+            $table->string('nama');
             $table->date('tanggal');
             $table->text('judul');
             $table->text('lokasi');
+            $table->string('status');
             $table->string('file_pengabdian')->nullable();
             $table->timestamps();
         });

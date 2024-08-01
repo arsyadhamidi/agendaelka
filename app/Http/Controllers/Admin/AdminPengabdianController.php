@@ -53,16 +53,18 @@ class AdminPengabdianController extends Controller
         $validated = $request->validate([
             'prodi_id' => 'required',
             'tahun_id' => 'required',
-            'dosen_id' => 'required',
+            'nama' => 'required',
             'tanggal' => 'required',
             'judul' => 'required',
             'lokasi' => 'required',
+            'status' => 'required',
             'file_pengabdian' => 'required|mimes:pdf|max:2048',
         ], [
-            'dosen_id.required' => 'Dosen wajib diisi',
+            'nama.required' => 'Nama Lengkap wajib diisi',
             'tanggal.required' => 'Tanggal wajib diisi',
             'judul.required' => 'Judul wajib diisi',
             'lokasi.required' => 'Lokasi wajib diisi',
+            'status.required' => 'Status wajib diisi',
             'file_pengabdian.required' => 'File Pengabdian Masyarakat wajib diisi',
             'file_pengabdian.mimes' => 'File Pengabdian Masyarakat harus memiliki format PDF',
             'file_pengabdian.max' => 'File Pengabdian Masyarakat maksimal 2 MB',
@@ -92,16 +94,20 @@ class AdminPengabdianController extends Controller
     public function update(Request $request, $id)
     {
         $validated = $request->validate([
-            'dosen_id' => 'required',
+            'prodi_id' => 'required',
+            'tahun_id' => 'required',
+            'nama' => 'required',
             'tanggal' => 'required',
             'judul' => 'required',
             'lokasi' => 'required',
+            'status' => 'required',
             'file_pengabdian' => 'required|mimes:pdf|max:2048',
         ], [
-            'dosen_id.required' => 'Dosen wajib diisi',
+            'nama.required' => 'Nama Lengkap wajib diisi',
             'tanggal.required' => 'Tanggal wajib diisi',
             'judul.required' => 'Judul wajib diisi',
             'lokasi.required' => 'Lokasi wajib diisi',
+            'status.required' => 'Status wajib diisi',
             'file_pengabdian.required' => 'File Pengabdian Masyarakat wajib diisi',
             'file_pengabdian.mimes' => 'File Pengabdian Masyarakat harus memiliki format PDF',
             'file_pengabdian.max' => 'File Pengabdian Masyarakat maksimal 2 MB',

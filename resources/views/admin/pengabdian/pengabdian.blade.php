@@ -23,11 +23,12 @@
                             <tr>
                                 <th style="width: 5%; text-align:center">No.</th>
                                 <th style="text-align:center">Prodi</th>
-                                <th style="text-align:center">Tahun</th>
-                                <th style="text-align:center">Dosen</th>
-                                <th style="text-align:center">Tanggal</th>
+                                <th style="text-align:center">Nama</th>
                                 <th style="text-align:center">Judul</th>
+                                <th style="text-align:center">Tanggal</th>
                                 <th style="text-align:center">Lokasi</th>
+                                <th style="text-align:center">Tahun</th>
+                                <th style="text-align:center">Status</th>
                                 <th style="text-align:center">Berkas</th>
                                 <th style="text-align:center">Aksi</th>
                             </tr>
@@ -37,11 +38,12 @@
                                 <tr>
                                     <td>{{ $loop->iteration ?? '-' }}</td>
                                     <td>{{ $data->prodi->nama ?? '-' }}</td>
-                                    <td>{{ $data->tahun->tahun ?? '-' }}</td>
-                                    <td>{{ $data->dosen->nama ?? '-' }}</td>
-                                    <td>{{ $data->tanggal ?? '-' }}</td>
+                                    <td>{{ $data->nama ?? '-' }}</td>
                                     <td>{{ $data->judul ?? '-' }}</td>
+                                    <td>{{ $data->tanggal ?? '-' }}</td>
                                     <td>{{ $data->lokasi ?? '-' }}</td>
+                                    <td>{{ $data->tahun->tahun ?? '-' }}</td>
+                                    <td>{{ $data->status ?? '-' }}</td>
                                     <td>
                                         @if (!empty($data->file_pengabdian))
                                             <a href="{{ asset('storage/' . $data->file_pengabdian) }}"
