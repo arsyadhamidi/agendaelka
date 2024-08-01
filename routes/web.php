@@ -322,11 +322,11 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
     // Dosen
     Route::group(['middleware' => [CekLevel::class . ':5']], function () {
 
-         // Seminar
-         Route::get('/dosen-seminar', [DosenSeminarController::class, 'index'])->name('dosen-seminar.index');
-         Route::get('/dosen-seminar/tahun/{id}', [DosenSeminarController::class, 'tahun'])->name('dosen-seminar.tahun');
-         Route::get('/dosen-seminar/generateexcel/{id}', [DosenSeminarController::class, 'generateexcel'])->name('dosen-seminar.generateexcel');
-         Route::get('/dosen-seminar/seminar/{id}', [DosenSeminarController::class, 'seminar'])->name('dosen-seminar.seminar');
+        // Seminar
+        Route::get('/dosen-seminar', [DosenSeminarController::class, 'index'])->name('dosen-seminar.index');
+        Route::get('/dosen-seminar/tahun/{id}', [DosenSeminarController::class, 'tahun'])->name('dosen-seminar.tahun');
+        Route::get('/dosen-seminar/generateexcel/{id}', [DosenSeminarController::class, 'generateexcel'])->name('dosen-seminar.generateexcel');
+        Route::get('/dosen-seminar/seminar/{id}', [DosenSeminarController::class, 'seminar'])->name('dosen-seminar.seminar');
 
         // Data Akademik
         Route::get('/dosen-akademik', [DosenAkademikController::class, 'index'])->name('dosen-akademik.index');
@@ -362,6 +362,15 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
 
     // Mahasiswa
     Route::group(['middleware' => [CekLevel::class . ':6']], function () {
+
+        // Seminar
+        Route::get('/mahasiswa-seminar', [MahasiswaSeminarController::class, 'index'])->name('mahasiswa-seminar.index');
+        Route::get('/mahasiswa-seminar/generateexcel', [MahasiswaSeminarController::class, 'generateexcel'])->name('mahasiswa-seminar.generateexcel');
+        Route::get('/mahasiswa-seminar/create', [MahasiswaSeminarController::class, 'create'])->name('mahasiswa-seminar.create');
+        Route::get('/mahasiswa-seminar/edit/{id}', [MahasiswaSeminarController::class, 'edit'])->name('mahasiswa-seminar.edit');
+        Route::post('/mahasiswa-seminar/store', [MahasiswaSeminarController::class, 'store'])->name('mahasiswa-seminar.store');
+        Route::post('/mahasiswa-seminar/update/{id}', [MahasiswaSeminarController::class, 'update'])->name('mahasiswa-seminar.update');
+        Route::post('/mahasiswa-seminar/destroy/{id}', [MahasiswaSeminarController::class, 'destroy'])->name('mahasiswa-seminar.destroy');
 
         // Akademik
         Route::get('/mahasiswa-akademik', [MahasiswaAkademikController::class, 'index'])->name('mahasiswa-akademik.index');

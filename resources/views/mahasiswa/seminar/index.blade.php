@@ -5,8 +5,13 @@
     <div class="row">
         <div class="col-lg">
             <div class="card">
-                <div class="card-header">
-                    Data Seminar
+                <div class="card-header d-flex align-content-center justify-content-between">
+                    <div class="form-group">
+                        <a href="{{ route('mahasiswa-seminar.create') }}" class="btn btn-primary">
+                            <i class="bx bx-plus"></i>
+                            Tambahkan Data Seminar
+                        </a>
+                    </div>
                 </div>
                 <div class="card-body table-responsive">
                     <table class="table table-bordered table-striped" id="myTable">
@@ -46,14 +51,10 @@
                                         @endif
                                     </td>
                                     <td>
-                                        @if (!empty($data->file_seminar))
-                                            -
-                                        @else
-                                            <a href="{{ route('mahasiswa-seminar.balas', $data->id) }}"
-                                                class="btn btn-sm btn-outline-info mx-2">
-                                                <i class="bx bx-edit"></i>
-                                            </a>
-                                        @endif
+                                        <a href="{{ route('mahasiswa-seminar.edit', $data->id) }}"
+                                            class="btn btn-sm btn-outline-info mx-2">
+                                            <i class="bx bx-edit"></i>
+                                        </a>
                                     </td>
                                 </tr>
                             @endforeach
