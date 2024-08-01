@@ -1,16 +1,17 @@
 @extends('admin.layout.master')
-@section('title', 'Data Penelitian | Agenda Elka')
+@section('title', 'Data Pengabdian | Agenda Elka')
 @section('menuDosenNonAkademik', 'active')
-@section('menuDosenPenelitian', 'active')
+@section('menuDosenPengabdian', 'active')
 
 @section('content')
     <div class="row">
         <div class="col-lg">
-            <form action="{{ route('dosen-penelitian.store') }}" method="POST" enctype="multipart/form-data">
+            <form action="{{ route('dosen-pengabdian.update', $pengabdians->id) }}" method="POST"
+                enctype="multipart/form-data">
                 @csrf
                 <div class="card">
                     <div class="card-header">
-                        <a href="{{ route('dosen-penelitian.index') }}" class="btn btn-primary">
+                        <a href="{{ route('dosen-pengabdian.index') }}" class="btn btn-primary">
                             <i class="bx bx-left-arrow-alt"></i>
                             Kembali
                         </a>
@@ -60,8 +61,8 @@
                                 <div class="mb-3">
                                     <label>Nama Lengkap</label>
                                     <input type="text" name="nama"
-                                        class="form-control @error('nama') is-invalid @enderror" value="{{ old('nama') }}"
-                                        placeholder="Masukan nama">
+                                        class="form-control @error('nama') is-invalid @enderror"
+                                        value="{{ old('nama', $pengabdians->nama ?? '') }}" placeholder="Masukan nama">
                                     @error('nama')
                                         <div class="invalid-feedback">
                                             {{ $message }}
@@ -74,7 +75,7 @@
                                     <label>Tanggal</label>
                                     <input type="date" name="tanggal"
                                         class="form-control @error('tanggal') is-invalid @enderror"
-                                        value="{{ old('tanggal', \Carbon\Carbon::now()->format('Y-m-d')) }}">
+                                        value="{{ old('tanggal', $pengabdians->tanggal ?? '') }}">
                                     @error('tanggal')
                                         <div class="invalid-feedback">
                                             {{ $message }}
@@ -89,7 +90,7 @@
                                     <label>Judul</label>
                                     <input type="text" name="judul"
                                         class="form-control @error('judul') is-invalid @enderror"
-                                        value="{{ old('judul') }}" placeholder="Masukan judul">
+                                        value="{{ old('judul', $pengabdians->judul ?? '') }}" placeholder="Masukan judul">
                                     @error('judul')
                                         <div class="invalid-feedback">
                                             {{ $message }}
@@ -102,7 +103,8 @@
                                     <label>Lokasi</label>
                                     <input type="text" name="lokasi"
                                         class="form-control @error('lokasi') is-invalid @enderror"
-                                        value="{{ old('lokasi') }}" placeholder="Masukan lokasi">
+                                        value="{{ old('lokasi', $pengabdians->lokasi ?? '') }}"
+                                        placeholder="Masukan lokasi">
                                     @error('lokasi')
                                         <div class="invalid-feedback">
                                             {{ $message }}
@@ -114,10 +116,10 @@
                         <div class="row">
                             <div class="col-lg">
                                 <div class="mb-3">
-                                    <label>File Penelitian</label>
-                                    <input type="file" name="file_penelitian"
-                                        class="form-control @error('file_penelitian') is-invalid @enderror">
-                                    @error('file_penelitian')
+                                    <label>File Pegabdian</label>
+                                    <input type="file" name="file_pengabdian"
+                                        class="form-control @error('file_pengabdian') is-invalid @enderror">
+                                    @error('file_pengabdian')
                                         <div class="invalid-feedback">
                                             {{ $message }}
                                         </div>
@@ -153,7 +155,7 @@
                 if (prodiId) {
                     // Fetch Tahun options from the server
                     $.ajax({
-                        url: '/dosen-penelitian/tahun/' + prodiId,
+                        url: '/dosen-pengabdian/tahun/' + prodiId,
                         type: 'GET',
                         dataType: 'json',
                         success: function(response) {

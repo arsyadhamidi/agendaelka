@@ -23,6 +23,8 @@ use App\Http\Controllers\Dosen\DosenAkademikController;
 use App\Http\Controllers\Dosen\DosenBahanAjarController;
 use App\Http\Controllers\Dosen\DosenJadwalPengajaranController;
 use App\Http\Controllers\Dosen\DosenPenelitianController;
+use App\Http\Controllers\Dosen\DosenPengabdianController;
+use App\Http\Controllers\Dosen\DosenPublikasiController;
 use App\Http\Controllers\Dosen\DosenRapatController;
 use App\Http\Controllers\Dosen\DosenRpsController;
 use App\Http\Controllers\Dosen\DosenSeminarController;
@@ -367,6 +369,24 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
     // Dosen
     Route::group(['middleware' => [CekLevel::class . ':5']], function () {
 
+        // Data Publikasi
+        Route::get('/dosen-publikasi', [DosenPublikasiController::class, 'index'])->name('dosen-publikasi.index');
+        Route::get('/dosen-publikasi/create', [DosenPublikasiController::class, 'create'])->name('dosen-publikasi.create');
+        Route::get('/dosen-publikasi/edit/{id}', [DosenPublikasiController::class, 'edit'])->name('dosen-publikasi.edit');
+        Route::post('/dosen-publikasi/store', [DosenPublikasiController::class, 'store'])->name('dosen-publikasi.store');
+        Route::post('/dosen-publikasi/update/{id}', [DosenPublikasiController::class, 'update'])->name('dosen-publikasi.update');
+        Route::post('/dosen-publikasi/destroy/{id}', [DosenPublikasiController::class, 'destroy'])->name('dosen-publikasi.destroy');
+        Route::get('/dosen-publikasi/tahun/{prodiId}', [DosenPublikasiController::class, 'getTahun']);
+
+        // Data Pengabdian
+        Route::get('/dosen-pengabdian', [DosenPengabdianController::class, 'index'])->name('dosen-pengabdian.index');
+        Route::get('/dosen-pengabdian/create', [DosenPengabdianController::class, 'create'])->name('dosen-pengabdian.create');
+        Route::get('/dosen-pengabdian/edit/{id}', [DosenPengabdianController::class, 'edit'])->name('dosen-pengabdian.edit');
+        Route::post('/dosen-pengabdian/store', [DosenPengabdianController::class, 'store'])->name('dosen-pengabdian.store');
+        Route::post('/dosen-pengabdian/update/{id}', [DosenPengabdianController::class, 'update'])->name('dosen-pengabdian.update');
+        Route::post('/dosen-pengabdian/destroy/{id}', [DosenPengabdianController::class, 'destroy'])->name('dosen-pengabdian.destroy');
+        Route::get('/dosen-pengabdian/tahun/{prodiId}', [DosenPengabdianController::class, 'getTahun']);
+
         // Data Penelitian
         Route::get('/dosen-penelitian', [DosenPenelitianController::class, 'index'])->name('dosen-penelitian.index');
         Route::get('/dosen-penelitian/create', [DosenPenelitianController::class, 'create'])->name('dosen-penelitian.create');
@@ -374,7 +394,7 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
         Route::post('/dosen-penelitian/store', [DosenPenelitianController::class, 'store'])->name('dosen-penelitian.store');
         Route::post('/dosen-penelitian/update/{id}', [DosenPenelitianController::class, 'update'])->name('dosen-penelitian.update');
         Route::post('/dosen-penelitian/destroy/{id}', [DosenPenelitianController::class, 'destroy'])->name('dosen-penelitian.destroy');
-        Route::get('/get-tahun/{prodiId}', [DosenPenelitianController::class, 'getTahun']);
+        Route::get('/dosen-penelitian/tahun/{prodiId}', [DosenPenelitianController::class, 'getTahun']);
 
         // Seminar
         Route::get('/dosen-seminar', [DosenSeminarController::class, 'index'])->name('dosen-seminar.index');

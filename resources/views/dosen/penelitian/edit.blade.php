@@ -156,7 +156,7 @@
                 if (prodiId) {
                     // Fetch Tahun options from the server
                     $.ajax({
-                        url: '/get-tahun/' + prodiId,
+                        url: '/dosen-penelitian/tahun/' + prodiId,
                         type: 'GET',
                         dataType: 'json',
                         success: function(response) {

@@ -457,12 +457,12 @@
                                     </a>
                                 </li>
                                 <li class="menu-item @yield('menuDosenPengabdian')">
-                                    <a href="{{ route('kepala-pengabdian.index') }}" class="menu-link">
+                                    <a href="{{ route('dosen-pengabdian.index') }}" class="menu-link">
                                         <div data-i18n="Without menu">Pengabdian Masyarakat</div>
                                     </a>
                                 </li>
                                 <li class="menu-item @yield('menuDosenPublikasi')">
-                                    <a href="{{ route('kepala-publikasi.index') }}" class="menu-link">
+                                    <a href="{{ route('dosen-publikasi.index') }}" class="menu-link">
                                         <div data-i18n="Without menu">Publikasi Ilmiah</div>
                                     </a>
                                 </li>

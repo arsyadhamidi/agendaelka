@@ -1,16 +1,16 @@
 @extends('admin.layout.master')
-@section('title', 'Data Penelitian | Agenda Elka')
+@section('title', 'Data Pengabdian | Agenda Elka')
 @section('menuDosenNonAkademik', 'active')
-@section('menuDosenPenelitian', 'active')
+@section('menuDosenPengabdian', 'active')
 
 @section('content')
     <div class="row">
         <div class="col-lg">
-            <form action="{{ route('dosen-penelitian.store') }}" method="POST" enctype="multipart/form-data">
+            <form action="{{ route('dosen-pengabdian.store') }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="card">
                     <div class="card-header">
-                        <a href="{{ route('dosen-penelitian.index') }}" class="btn btn-primary">
+                        <a href="{{ route('dosen-pengabdian.index') }}" class="btn btn-primary">
                             <i class="bx bx-left-arrow-alt"></i>
                             Kembali
                         </a>
@@ -114,10 +114,10 @@
                         <div class="row">
                             <div class="col-lg">
                                 <div class="mb-3">
-                                    <label>File Penelitian</label>
-                                    <input type="file" name="file_penelitian"
-                                        class="form-control @error('file_penelitian') is-invalid @enderror">
-                                    @error('file_penelitian')
+                                    <label>File Pegabdian</label>
+                                    <input type="file" name="file_pengabdian"
+                                        class="form-control @error('file_pengabdian') is-invalid @enderror">
+                                    @error('file_pengabdian')
                                         <div class="invalid-feedback">
                                             {{ $message }}
                                         </div>
@@ -153,7 +153,7 @@
                 if (prodiId) {
                     // Fetch Tahun options from the server
                     $.ajax({
-                        url: '/dosen-penelitian/tahun/' + prodiId,
+                        url: '/dosen-pengabdian/tahun/' + prodiId,
                         type: 'GET',
                         dataType: 'json',
                         success: function(response) {
