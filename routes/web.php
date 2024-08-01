@@ -81,6 +81,7 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
         // Studi Lanjut
         Route::get('/data-studilanjut', [AdminStudiLanjutController::class, 'index'])->name('data-studilanjut.index');
         Route::get('/data-studilanjut/tahun/{id}', [AdminStudiLanjutController::class, 'tahun'])->name('data-studilanjut.tahun');
+        Route::get('/data-studilanjut/generateexcel/{id}', [AdminStudiLanjutController::class, 'generateexcel'])->name('data-studilanjut.generateexcel');
         Route::get('/data-studilanjut/studilanjut/{id}', [AdminStudiLanjutController::class, 'studilanjut'])->name('data-studilanjut.studilanjut');
         Route::get('/data-studilanjut/create/{id}', [AdminStudiLanjutController::class, 'create'])->name('data-studilanjut.create');
         Route::get('/data-studilanjut/edit/{id}', [AdminStudiLanjutController::class, 'edit'])->name('data-studilanjut.edit');

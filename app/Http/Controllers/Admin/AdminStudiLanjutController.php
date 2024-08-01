@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
+use App\Exports\StudiLanjutExport;
 use App\Models\Prodi;
-use App\Models\StudiLanjut;
 use App\Models\Tahun;
+use App\Models\StudiLanjut;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\Storage;
 
 class AdminStudiLanjutController extends Controller
@@ -35,6 +37,14 @@ class AdminStudiLanjutController extends Controller
             'studis' => $studis,
             'tahuns' => $tahuns,
         ]);
+    }
+
+    public function generateexcel($id)
+    {
+        $query = StudiLanjut::where('tahun_id', $id);
+        $data = $query->orderBy('id', 'desc')->get();
+
+        return Excel::download(new StudiLanjutExport($data), 'data-studilanjut.xlsx');
     }
 
     public function create($id)
