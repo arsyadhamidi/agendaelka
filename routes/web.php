@@ -22,6 +22,7 @@ use App\Http\Controllers\Dashboard\DashboardController;
 use App\Http\Controllers\Dosen\DosenAkademikController;
 use App\Http\Controllers\Dosen\DosenBahanAjarController;
 use App\Http\Controllers\Dosen\DosenJadwalPengajaranController;
+use App\Http\Controllers\Dosen\DosenPenelitianController;
 use App\Http\Controllers\Dosen\DosenRapatController;
 use App\Http\Controllers\Dosen\DosenRpsController;
 use App\Http\Controllers\Dosen\DosenSeminarController;
@@ -34,9 +35,13 @@ use App\Http\Controllers\Kaprodi\KaprodiSeminarController;
 use App\Http\Controllers\KepalaDepartemen\KepalaDepartemenAkademikController;
 use App\Http\Controllers\KepalaDepartemen\KepalaDepartemenBahanAjarController;
 use App\Http\Controllers\KepalaDepartemen\KepalaDepartemenJadwalPengajaranController;
+use App\Http\Controllers\KepalaDepartemen\KepalaDepartemenPenelitianController;
+use App\Http\Controllers\KepalaDepartemen\KepalaDepartemenPengabdianController;
+use App\Http\Controllers\KepalaDepartemen\KepalaDepartemenPublikasiController;
 use App\Http\Controllers\KepalaDepartemen\KepalaDepartemenRapatController;
 use App\Http\Controllers\KepalaDepartemen\KepalaDepartemenRpsController;
 use App\Http\Controllers\KepalaDepartemen\KepalaDepartemenSeminarController;
+use App\Http\Controllers\KepalaDepartemen\KepalaDepartemenStudiLanjutController;
 use App\Http\Controllers\Mahasiswa\MahasiswaAkademikController;
 use App\Http\Controllers\Mahasiswa\MahasiswaBahanAjarController;
 use App\Http\Controllers\Mahasiswa\MahasiswaJadwalPengajaranController;
@@ -76,7 +81,7 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
     Route::post('/setting/hapusgambar', [SettingController::class, 'hapusgambar'])->name('setting.hapusgambar');
 
     // Admin
-    Route::group(['middleware' => [CekLevel::class . ':1']], function () {
+    Route::group(['middleware' => [CekLevel::class . ':1,2']], function () {
 
         // Studi Lanjut
         Route::get('/data-studilanjut', [AdminStudiLanjutController::class, 'index'])->name('data-studilanjut.index');
@@ -250,6 +255,30 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
     // Kepala Departemen
     Route::group(['middleware' => [CekLevel::class . ':3']], function () {
 
+        // Studi Lanjut
+        Route::get('/kepala-studilanjut', [KepalaDepartemenStudiLanjutController::class, 'index'])->name('kepala-studilanjut.index');
+        Route::get('/kepala-studilanjut/tahun/{id}', [KepalaDepartemenStudiLanjutController::class, 'tahun'])->name('kepala-studilanjut.tahun');
+        Route::get('/kepala-studilanjut/generateexcel/{id}', [KepalaDepartemenStudiLanjutController::class, 'generateexcel'])->name('kepala-studilanjut.generateexcel');
+        Route::get('/kepala-studilanjut/studilanjut/{id}', [KepalaDepartemenStudiLanjutController::class, 'studilanjut'])->name('kepala-studilanjut.studilanjut');
+
+        // Data Publikasi Ilmiah
+        Route::get('/kepala-publikasi', [KepalaDepartemenPublikasiController::class, 'index'])->name('kepala-publikasi.index');
+        Route::get('/kepala-publikasi/tahun/{id}', [KepalaDepartemenPublikasiController::class, 'tahun'])->name('kepala-publikasi.tahun');
+        Route::get('/kepala-publikasi/generateexcel/{id}', [KepalaDepartemenPublikasiController::class, 'generateexcel'])->name('kepala-publikasi.generateexcel');
+        Route::get('/kepala-publikasi/publikasi/{id}', [KepalaDepartemenPublikasiController::class, 'publikasi'])->name('kepala-publikasi.publikasi');
+
+        // Data Pengabdian
+        Route::get('/kepala-pengabdian', [KepalaDepartemenPengabdianController::class, 'index'])->name('kepala-pengabdian.index');
+        Route::get('/kepala-pengabdian/tahun/{id}', [KepalaDepartemenPengabdianController::class, 'tahun'])->name('kepala-pengabdian.tahun');
+        Route::get('/kepala-pengabdian/generateexcel/{id}', [KepalaDepartemenPengabdianController::class, 'generateexcel'])->name('kepala-pengabdian.generateexcel');
+        Route::get('/kepala-pengabdian/pengabdian/{id}', [KepalaDepartemenPengabdianController::class, 'pengabdian'])->name('kepala-pengabdian.pengabdian');
+
+        // Data Penelitian
+        Route::get('/kepala-penelitian', [KepalaDepartemenPenelitianController::class, 'index'])->name('kepala-penelitian.index');
+        Route::get('/kepala-penelitian/tahun/{id}', [KepalaDepartemenPenelitianController::class, 'tahun'])->name('kepala-penelitian.tahun');
+        Route::get('/kepala-penelitian/generateexcel/{id}', [KepalaDepartemenPenelitianController::class, 'generateexcel'])->name('kepala-penelitian.generateexcel');
+        Route::get('/kepala-penelitian/penelitian/{id}', [KepalaDepartemenPenelitianController::class, 'penelitian'])->name('kepala-penelitian.penelitian');
+
         // Seminar
         Route::get('/kepala-seminar', [KepalaDepartemenSeminarController::class, 'index'])->name('kepala-seminar.index');
         Route::get('/kepala-seminar/tahun/{id}', [KepalaDepartemenSeminarController::class, 'tahun'])->name('kepala-seminar.tahun');
@@ -334,8 +363,18 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
         Route::post('/kaprodi-akademik/update/{id}', [KaprodiAkademikController::class, 'update'])->name('kaprodi-akademik.update');
         Route::post('/kaprodi-akademik/destroy/{id}', [KaprodiAkademikController::class, 'destroy'])->name('kaprodi-akademik.destroy');
     });
+
     // Dosen
     Route::group(['middleware' => [CekLevel::class . ':5']], function () {
+
+        // Data Penelitian
+        Route::get('/dosen-penelitian', [DosenPenelitianController::class, 'index'])->name('dosen-penelitian.index');
+        Route::get('/dosen-penelitian/create', [DosenPenelitianController::class, 'create'])->name('dosen-penelitian.create');
+        Route::get('/dosen-penelitian/edit/{id}', [DosenPenelitianController::class, 'edit'])->name('dosen-penelitian.edit');
+        Route::post('/dosen-penelitian/store', [DosenPenelitianController::class, 'store'])->name('dosen-penelitian.store');
+        Route::post('/dosen-penelitian/update/{id}', [DosenPenelitianController::class, 'update'])->name('dosen-penelitian.update');
+        Route::post('/dosen-penelitian/destroy/{id}', [DosenPenelitianController::class, 'destroy'])->name('dosen-penelitian.destroy');
+        Route::get('/get-tahun/{prodiId}', [DosenPenelitianController::class, 'getTahun']);
 
         // Seminar
         Route::get('/dosen-seminar', [DosenSeminarController::class, 'index'])->name('dosen-seminar.index');

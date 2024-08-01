@@ -312,6 +312,37 @@
                                 <div data-i18n="Analytics">Rapat</div>
                             </a>
                         </li>
+
+                        <!-- Data Non Akademik -->
+                        <li class="menu-item @yield('menuKepalaNonAkademik')">
+                            <a href="javascript:void(0);" class="menu-link menu-toggle">
+                                <i class="menu-icon tf-icons bx bx-qr"></i>
+                                <div data-i18n="Layouts">Non Akademik</div>
+                            </a>
+
+                            <ul class="menu-sub">
+                                <li class="menu-item @yield('menuKepalaPenelitian')">
+                                    <a href="{{ route('kepala-penelitian.index') }}" class="menu-link">
+                                        <div data-i18n="Without menu">Data Penelitian</div>
+                                    </a>
+                                </li>
+                                <li class="menu-item @yield('menuKepalaPengabdian')">
+                                    <a href="{{ route('kepala-pengabdian.index') }}" class="menu-link">
+                                        <div data-i18n="Without menu">Pengabdian Masyarakat</div>
+                                    </a>
+                                </li>
+                                <li class="menu-item @yield('menuKepalaPublikasi')">
+                                    <a href="{{ route('kepala-publikasi.index') }}" class="menu-link">
+                                        <div data-i18n="Without menu">Publikasi Ilmiah</div>
+                                    </a>
+                                </li>
+                                <li class="menu-item @yield('menuKepalaStudiLanjut')">
+                                    <a href="{{ route('kepala-studilanjut.index') }}" class="menu-link">
+                                        <div data-i18n="Without menu">Pendidikan Studi Lanjut</div>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
                     @elseif(Auth()->user()->level_id == '4')
                         {{-- Pengajaran --}}
                         <li class="menu-item @yield('menuKaprodiPengajaran')">
@@ -410,6 +441,37 @@
                                 <i class="menu-icon tf-icons bx bx-table"></i>
                                 <div data-i18n="Analytics">Rapat</div>
                             </a>
+                        </li>
+
+                        <!-- Data Non Akademik -->
+                        <li class="menu-item @yield('menuDosenNonAkademik')">
+                            <a href="javascript:void(0);" class="menu-link menu-toggle">
+                                <i class="menu-icon tf-icons bx bx-qr"></i>
+                                <div data-i18n="Layouts">Non Akademik</div>
+                            </a>
+
+                            <ul class="menu-sub">
+                                <li class="menu-item @yield('menuDosenPenelitian')">
+                                    <a href="{{ route('dosen-penelitian.index') }}" class="menu-link">
+                                        <div data-i18n="Without menu">Data Penelitian</div>
+                                    </a>
+                                </li>
+                                <li class="menu-item @yield('menuDosenPengabdian')">
+                                    <a href="{{ route('kepala-pengabdian.index') }}" class="menu-link">
+                                        <div data-i18n="Without menu">Pengabdian Masyarakat</div>
+                                    </a>
+                                </li>
+                                <li class="menu-item @yield('menuDosenPublikasi')">
+                                    <a href="{{ route('kepala-publikasi.index') }}" class="menu-link">
+                                        <div data-i18n="Without menu">Publikasi Ilmiah</div>
+                                    </a>
+                                </li>
+                                <li class="menu-item @yield('menuDosenStudiLanjut')">
+                                    <a href="{{ route('kepala-studilanjut.index') }}" class="menu-link">
+                                        <div data-i18n="Without menu">Pendidikan Studi Lanjut</div>
+                                    </a>
+                                </li>
+                            </ul>
                         </li>
                     @elseif(Auth()->user()->level_id == '6')
                         {{-- Pengajaran --}}

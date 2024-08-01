@@ -25,3 +25,193 @@
         </div>
     </div>
 </div>
+
+<div class="row mb-4">
+    <div class="col-lg">
+        <div class="card" style="border-left: 4px solid #9FA1FF">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-lg-7">
+                        <h4>Program Studi</h4>
+                        <h2>{{ $prodis ?? '0' }}</h2>
+                    </div>
+                    <div class="col-lg text-end align-content-center">
+                        <i class="bx bxs-graduation" style="font-size: 50px"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg">
+        <div class="card" style="border-left: 4px solid #29CCEF">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-lg-7">
+                        <h4>Data Tahun</h4>
+                        <h2>{{ $tahuns ?? '0' }}</h2>
+                    </div>
+                    <div class="col-lg text-end align-content-center">
+                        <i class="bx bxs-calendar" style="font-size: 50px"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg">
+        <div class="card" style="border-left: 4px solid #9FA1FF">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-lg-7">
+                        <h4>Mahasiswa</h4>
+                        <h2>{{ $mahasiswas ?? '0' }}</h2>
+                    </div>
+                    <div class="col-lg text-end align-content-center">
+                        <i class="bx bxs-user" style="font-size: 50px"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row mb-4">
+    <div class="col-lg">
+        <div class="card" style="border-left: 4px solid #9FA1FF">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-lg-7">
+                        <h4>Data Dosen</h4>
+                        <h2>{{ $dosens ?? '0' }}</h2>
+                    </div>
+                    <div class="col-lg text-end align-content-center">
+                        <i class="bx bxs-user-badge" style="font-size: 50px"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg">
+        <div class="card" style="border-left: 4px solid #29CCEF">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-lg-7">
+                        <h4>Jadwal</h4>
+                        <h2>{{ $jadwals ?? '0' }}</h2>
+                    </div>
+                    <div class="col-lg text-end align-content-center">
+                        <i class="bx bxs-timer" style="font-size: 50px"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg">
+        <div class="card" style="border-left: 4px solid #9FA1FF">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-lg-7">
+                        <h4>Bahan Ajar</h4>
+                        <h2>{{ $bahans ?? '0' }}</h2>
+                    </div>
+                    <div class="col-lg text-end align-content-center">
+                        <i class="bx bxs-user" style="font-size: 50px"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row mb-4">
+    <div class="col-lg">
+        <div class="card" style="border-left: 4px solid #9FA1FF">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-lg-7">
+                        <h4>Data RPS</h4>
+                        <h2>{{ $rps ?? '0' }}</h2>
+                    </div>
+                    <div class="col-lg text-end align-content-center">
+                        <i class="bx bxs-file" style="font-size: 50px"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg">
+        <div class="card" style="border-left: 4px solid #29CCEF">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-lg-7">
+                        <h4>Akademik</h4>
+                        <h2>{{ $akademiks ?? '0' }}</h2>
+                    </div>
+                    <div class="col-lg text-end align-content-center">
+                        <i class="bx bxs-purchase-tag" style="font-size: 50px"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg">
+        <div class="card" style="border-left: 4px solid #9FA1FF">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-lg-7">
+                        <h4>Seminar</h4>
+                        <h2>{{ $seminars ?? '0' }}</h2>
+                    </div>
+                    <div class="col-lg text-end align-content-center">
+                        <i class="bx bxs-message-dots" style="font-size: 50px"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg">
+        <div class="card" style="border-left: 4px solid #9FA1FF">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-lg-7">
+                        <h4>Data Rapat</h4>
+                        <h2>{{ $rapats ?? '0' }}</h2>
+                    </div>
+                    <div class="col-lg text-end align-content-center">
+                        <i class="bx bxs-folder" style="font-size: 50px"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg">
+        <div class="card" style="border-left: 4px solid #29CCEF">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-lg-7">
+                        <h4>Users</h4>
+                        <h2>{{ $users ?? '0' }}</h2>
+                    </div>
+                    <div class="col-lg text-end align-content-center">
+                        <i class="bx bxs-user" style="font-size: 50px"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg">
+        <div class="card" style="border-left: 4px solid #9FA1FF">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-lg-7">
+                        <h4>Autentiaksi</h4>
+                        <h2>{{ $levels ?? '0' }}</h2>
+                    </div>
+                    <div class="col-lg text-end align-content-center">
+                        <i class="bx bxs-log-in-circle" style="font-size: 50px"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
