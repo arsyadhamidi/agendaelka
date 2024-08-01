@@ -111,6 +111,7 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
         // Data Penelitian
         Route::get('/data-penelitian', [AdminPenelitianController::class, 'index'])->name('data-penelitian.index');
         Route::get('/data-penelitian/tahun/{id}', [AdminPenelitianController::class, 'tahun'])->name('data-penelitian.tahun');
+        Route::get('/data-penelitian/generateexcel/{id}', [AdminPenelitianController::class, 'generateexcel'])->name('data-penelitian.generateexcel');
         Route::get('/data-penelitian/penelitian/{id}', [AdminPenelitianController::class, 'penelitian'])->name('data-penelitian.penelitian');
         Route::get('/data-penelitian/create/{id}', [AdminPenelitianController::class, 'create'])->name('data-penelitian.create');
         Route::get('/data-penelitian/edit/{id}', [AdminPenelitianController::class, 'edit'])->name('data-penelitian.edit');

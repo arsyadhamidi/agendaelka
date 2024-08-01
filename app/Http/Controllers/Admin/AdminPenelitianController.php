@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Exports\PenelitianExport;
 use App\Http\Controllers\Controller;
 use App\Models\Dosen;
 use App\Models\Penelitian;
@@ -9,6 +10,7 @@ use App\Models\Prodi;
 use App\Models\Tahun;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Maatwebsite\Excel\Facades\Excel;
 
 class AdminPenelitianController extends Controller
 {
@@ -36,6 +38,14 @@ class AdminPenelitianController extends Controller
             'penelitians' => $penelitians,
             'tahuns' => $tahuns,
         ]);
+    }
+
+    public function generateexcel($id)
+    {
+        $query = Penelitian::where('tahun_id', $id);
+        $data = $query->orderBy('id', 'desc')->get();
+
+        return Excel::download(new PenelitianExport($data), 'data-penelitian.xlsx');
     }
 
     public function create($id)

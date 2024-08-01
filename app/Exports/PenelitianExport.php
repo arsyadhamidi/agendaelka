@@ -5,7 +5,7 @@ namespace App\Exports;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 
-class ProdiExport implements FromCollection, WithHeadings
+class PenelitianExport implements FromCollection, WithHeadings
 {
     protected $data;
 
@@ -20,7 +20,13 @@ class ProdiExport implements FromCollection, WithHeadings
         return $this->data->map(function ($item) {
             return [
                 'id' => $item->id,
-                'Nama' => $item->nama, // Pastikan ada kolom 'nama_negara' di model Negara
+                'nama' => $item->nama,
+                'prodi_id' => $item->prodi->nama,
+                'judul' => $item->judul,
+                'tanggal' => $item->tanggal,
+                'lokasi' => $item->lokasi,
+                'tahun_id' => $item->tahun->tahun,
+                'status' => $item->status,
             ];
         });
     }
@@ -29,7 +35,13 @@ class ProdiExport implements FromCollection, WithHeadings
     {
         return [
             'ID',
-            'Nama Program Studi',
+            'Nama Lengkap',
+            'Program Studi',
+            'Judul',
+            'Tanggal',
+            'Lokasi',
+            'Tahun',
+            'Status',
         ];
     }
 }
