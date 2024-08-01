@@ -25,7 +25,11 @@ use App\Http\Controllers\Dosen\DosenRapatController;
 use App\Http\Controllers\Dosen\DosenRpsController;
 use App\Http\Controllers\Dosen\DosenSeminarController;
 use App\Http\Controllers\Kaprodi\KaprodiAkademikController;
+use App\Http\Controllers\Kaprodi\KaprodiBahanAjarController;
+use App\Http\Controllers\Kaprodi\KaprodiJadwalPengajaranController;
 use App\Http\Controllers\Kaprodi\KaprodiRapatController;
+use App\Http\Controllers\Kaprodi\KaprodiRpsController;
+use App\Http\Controllers\Kaprodi\KaprodiSeminarController;
 use App\Http\Controllers\KepalaDepartemen\KepalaDepartemenAkademikController;
 use App\Http\Controllers\KepalaDepartemen\KepalaDepartemenBahanAjarController;
 use App\Http\Controllers\KepalaDepartemen\KepalaDepartemenJadwalPengajaranController;
@@ -272,6 +276,30 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
 
     // Kaprodi
     Route::group(['middleware' => [CekLevel::class . ':4']], function () {
+
+        // Seminar
+        Route::get('/kaprodi-seminar', [KaprodiSeminarController::class, 'index'])->name('kaprodi-seminar.index');
+        Route::get('/kaprodi-seminar/tahun/{id}', [KaprodiSeminarController::class, 'tahun'])->name('kaprodi-seminar.tahun');
+        Route::get('/kaprodi-seminar/generateexcel/{id}', [KaprodiSeminarController::class, 'generateexcel'])->name('kaprodi-seminar.generateexcel');
+        Route::get('/kaprodi-seminar/seminar/{id}', [KaprodiSeminarController::class, 'seminar'])->name('kaprodi-seminar.seminar');
+        Route::get('/kaprodi-seminar/create/{id}', [KaprodiSeminarController::class, 'create'])->name('kaprodi-seminar.create');
+        Route::get('/kaprodi-seminar/edit/{id}', [KaprodiSeminarController::class, 'edit'])->name('kaprodi-seminar.edit');
+        Route::post('/kaprodi-seminar/store', [KaprodiSeminarController::class, 'store'])->name('kaprodi-seminar.store');
+        Route::post('/kaprodi-seminar/update/{id}', [KaprodiSeminarController::class, 'update'])->name('kaprodi-seminar.update');
+        Route::post('/kaprodi-seminar/destroy/{id}', [KaprodiSeminarController::class, 'destroy'])->name('kaprodi-seminar.destroy');
+
+        // Rps
+        Route::get('/kaprodi-rps', [KaprodiRpsController::class, 'index'])->name('kaprodi-rps.index');
+        Route::get('/kaprodi-rps/tahun/{id}', [KaprodiRpsController::class, 'tahun'])->name('kaprodi-rps.tahun');
+        Route::get('/kaprodi-rps/rps/{id}', [KaprodiRpsController::class, 'rps'])->name('kaprodi-rps.rps');
+
+        // Bahan Ajar
+        Route::get('/kaprodi-bahanajar', [KaprodiBahanAjarController::class, 'index'])->name('kaprodi-bahanajar.index');
+        Route::get('/kaprodi-bahanajar/tahun/{id}', [KaprodiBahanAjarController::class, 'tahun'])->name('kaprodi-bahanajar.tahun');
+        Route::get('/kaprodi-bahanajar/bahanajar/{id}', [KaprodiBahanAjarController::class, 'bahanajar'])->name('kaprodi-bahanajar.bahanajar');
+
+        // Jadwal Pengajaran
+        Route::get('/kaprodi-jadwalpengajaran', [KaprodiJadwalPengajaranController::class, 'index'])->name('kaprodi-jadwalpengajaran.index');
 
         // Data Rapat
         Route::get('/kaprodi-rapat', [KaprodiRapatController::class, 'index'])->name('kaprodi-rapat.index');

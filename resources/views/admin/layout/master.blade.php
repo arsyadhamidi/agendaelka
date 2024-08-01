@@ -313,6 +313,31 @@
                             </a>
                         </li>
                     @elseif(Auth()->user()->level_id == '4')
+                        {{-- Pengajaran --}}
+                        <li class="menu-item @yield('menuKaprodiPengajaran')">
+                            <a href="javascript:void(0);" class="menu-link menu-toggle">
+                                <i class="menu-icon tf-icons bx bx-book"></i>
+                                <div data-i18n="Layouts">Pengajaran</div>
+                            </a>
+
+                            <ul class="menu-sub">
+                                <li class="menu-item @yield('menuKaprodiJadwalPengajaran')">
+                                    <a href="{{ route('kaprodi-jadwalpengajaran.index') }}" class="menu-link">
+                                        <div data-i18n="Without menu">Jadwal Pengajaran</div>
+                                    </a>
+                                </li>
+                                <li class="menu-item @yield('menuKaprodiBahanAjar')">
+                                    <a href="{{ route('kaprodi-bahanajar.index') }}" class="menu-link">
+                                        <div data-i18n="Without menu">Bahan Ajar</div>
+                                    </a>
+                                </li>
+                                <li class="menu-item @yield('menuKaprodiRps')">
+                                    <a href="{{ route('kaprodi-rps.index') }}" class="menu-link">
+                                        <div data-i18n="Without menu">Data Rps</div>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
                         <!-- Akademik -->
                         <li class="menu-item @yield('menuKaprodiAkademik')">
                             <a href="{{ route('kaprodi-akademik.index') }}" class="menu-link">
@@ -320,6 +345,15 @@
                                 <div data-i18n="Analytics">Akademik</div>
                             </a>
                         </li>
+
+                        {{-- Seminar / Ujian --}}
+                        <li class="menu-item @yield('menuKaprodiSeminar')">
+                            <a href="{{ route('kaprodi-seminar.index') }}" class="menu-link">
+                                <i class="menu-icon tf-icons bx bx-folder-open"></i>
+                                <div data-i18n="Analytics">Seminar / Ujian</div>
+                            </a>
+                        </li>
+
                         {{-- Data Rapat --}}
                         <li class="menu-item @yield('menuKaprodiRapat')">
                             <a href="{{ route('kaprodi-rapat.index') }}" class="menu-link">
