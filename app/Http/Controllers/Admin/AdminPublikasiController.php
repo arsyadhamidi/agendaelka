@@ -53,14 +53,16 @@ class AdminPublikasiController extends Controller
         $validated = $request->validate([
             'prodi_id' => 'required',
             'tahun_id' => 'required',
-            'dosen_id' => 'required',
+            'nama' => 'required',
             'judul' => 'required',
             'sinta' => 'required',
+            'status' => 'required',
             'file_publikasi' => 'required|mimes:pdf|max:2048',
         ], [
-            'dosen_id.required' => 'Dosen wajib diisi',
+            'nama.required' => 'Nama Lengkap wajib diisi',
             'judul.required' => 'Judul wajib diisi',
             'sinta.required' => 'Sinta wajib diisi',
+            'status.required' => 'Status wajib diisi',
             'file_publikasi.required' => 'File Penelitian wajib diisi',
             'file_publikasi.mimes' => 'File Penelitian harus memiliki format PDF',
             'file_publikasi.max' => 'File Penelitian maksimal 2 MB',
@@ -90,14 +92,18 @@ class AdminPublikasiController extends Controller
     public function update(Request $request, $id)
     {
         $validated = $request->validate([
-            'dosen_id' => 'required',
+            'prodi_id' => 'required',
+            'tahun_id' => 'required',
+            'nama' => 'required',
             'judul' => 'required',
             'sinta' => 'required',
+            'status' => 'required',
             'file_publikasi' => 'required|mimes:pdf|max:2048',
         ], [
-            'dosen_id.required' => 'Dosen wajib diisi',
+            'nama.required' => 'Nama Lengkap wajib diisi',
             'judul.required' => 'Judul wajib diisi',
             'sinta.required' => 'Sinta wajib diisi',
+            'status.required' => 'Status wajib diisi',
             'file_publikasi.required' => 'File Penelitian wajib diisi',
             'file_publikasi.mimes' => 'File Penelitian harus memiliki format PDF',
             'file_publikasi.max' => 'File Penelitian maksimal 2 MB',
