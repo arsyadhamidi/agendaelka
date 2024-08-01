@@ -101,6 +101,28 @@
                         <div class="row">
                             <div class="col-lg">
                                 <div class="mb-3">
+                                    <label>Status</label>
+                                    <select name="status" class="form-control @error('status') is-invalid @enderror"
+                                        id="selectedStatus">
+                                        <option value="" selected>Pilih Status</option>
+                                        <option value="Dosen" {{ $penelitians->status == 'Dosen' ? 'selected' : '' }}>
+                                            Dosen
+                                        </option>
+                                        <option value="Mahasiswa"
+                                            {{ $penelitians->status == 'Mahasiswa' ? 'selected' : '' }}>
+                                            Mahasiswa</option>
+                                    </select>
+                                    @error('status')
+                                        <div class="invalid-feedback">
+                                            {{ $message }}
+                                        </div>
+                                    @enderror
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg">
+                                <div class="mb-3">
                                     <label>File Penelitian</label>
                                     <input type="file" name="file_penelitian"
                                         class="form-control @error('file_penelitian') is-invalid @enderror">
@@ -122,6 +144,9 @@
     <script>
         $(document).ready(function() {
             $('#selectedDosen').select2({
+                theme: 'bootstrap4',
+            });
+            $('#selectedStatus').select2({
                 theme: 'bootstrap4',
             });
         });

@@ -19,6 +19,7 @@ return new class extends Migration
             $table->date('tanggal');
             $table->text('judul');
             $table->text('lokasi');
+            $table->string('status');
             $table->string('file_penelitian')->nullable();
             $table->timestamps();
         });
