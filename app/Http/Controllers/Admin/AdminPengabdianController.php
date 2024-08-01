@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
 use App\Models\Dosen;
-use App\Models\Pengabdian;
 use App\Models\Prodi;
 use App\Models\Tahun;
+use App\Models\Pengabdian;
 use Illuminate\Http\Request;
+use App\Exports\PengabdianExport;
+use App\Http\Controllers\Controller;
+use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\Storage;
 
 class AdminPengabdianController extends Controller
@@ -36,6 +38,14 @@ class AdminPengabdianController extends Controller
             'pengabdians' => $pengabdians,
             'tahuns' => $tahuns,
         ]);
+    }
+
+    public function generateexcel($id)
+    {
+        $query = Pengabdian::where('tahun_id', $id);
+        $data = $query->orderBy('id', 'desc')->get();
+
+        return Excel::download(new PengabdianExport($data), 'data-pengabdian.xlsx');
     }
 
     public function create($id)
