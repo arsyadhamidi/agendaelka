@@ -42,16 +42,11 @@
                         <div class="row">
                             <div class="col-lg">
                                 <div class="mb-3">
-                                    <label>Pilih Dosen</label>
-                                    <select name="dosen_id" class="form-control @error('dosen_id') is-invalid @enderror"
-                                        id="selectedDosen">
-                                        <option value="" selected>Pilih Dosen</option>
-                                        @foreach ($dosens as $data)
-                                            <option value="{{ $data->id }}" {{ old('dosen_id') == $data->id }}>
-                                                {{ $data->nama ?? '-' }}</option>
-                                        @endforeach
-                                    </select>
-                                    @error('dosen_id')
+                                    <label>Nama Lengkap</label>
+                                    <input type="text" name="nama"
+                                        class="form-control @error('nama') is-invalid @enderror" value="{{ old('nama') }}"
+                                        placeholder="Masukan nama">
+                                    @error('nama')
                                         <div class="invalid-feedback">
                                             {{ $message }}
                                         </div>

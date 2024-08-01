@@ -53,13 +53,13 @@ class AdminPenelitianController extends Controller
         $validated = $request->validate([
             'prodi_id' => 'required',
             'tahun_id' => 'required',
-            'dosen_id' => 'required',
+            'nama' => 'required',
             'tanggal' => 'required',
             'judul' => 'required',
             'lokasi' => 'required',
             'file_penelitian' => 'required|mimes:pdf|max:2048',
         ], [
-            'dosen_id.required' => 'Dosen wajib diisi',
+            'nama.required' => 'Nama Lengkap wajib diisi',
             'tanggal.required' => 'Tanggal wajib diisi',
             'judul.required' => 'Judul wajib diisi',
             'lokasi.required' => 'Lokasi wajib diisi',
@@ -92,13 +92,13 @@ class AdminPenelitianController extends Controller
     public function update(Request $request, $id)
     {
         $validated = $request->validate([
-            'dosen_id' => 'required',
+            'nama' => 'required',
             'tanggal' => 'required',
             'judul' => 'required',
             'lokasi' => 'required',
             'file_penelitian' => 'required|mimes:pdf|max:2048',
         ], [
-            'dosen_id.required' => 'Dosen wajib diisi',
+            'nama.required' => 'Nama Lengkap wajib diisi',
             'tanggal.required' => 'Tanggal wajib diisi',
             'judul.required' => 'Judul wajib diisi',
             'lokasi.required' => 'Lokasi wajib diisi',
