@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('nama');
             $table->string('pendidikan');
+            $table->string('universitas');
             $table->string('tahun');
             $table->string('berkas');
             $table->timestamps();

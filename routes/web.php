@@ -14,6 +14,7 @@ use App\Http\Controllers\Admin\AdminPublikasiController;
 use App\Http\Controllers\Admin\AdminRapatController;
 use App\Http\Controllers\Admin\AdminRpsController;
 use App\Http\Controllers\Admin\AdminSeminarController;
+use App\Http\Controllers\Admin\AdminStudiLanjutController;
 use App\Http\Controllers\Admin\AdminTahunController;
 use App\Http\Controllers\Admin\AdminUserController;
 use App\Http\Controllers\Auth\LoginController;
@@ -76,6 +77,14 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
 
     // Admin
     Route::group(['middleware' => [CekLevel::class . ':1']], function () {
+
+        // Studi Lanjut
+        Route::get('/data-studilanjut', [AdminStudiLanjutController::class, 'index'])->name('data-studilanjut.index');
+        Route::get('/data-studilanjut/create', [AdminStudiLanjutController::class, 'create'])->name('data-studilanjut.create');
+        Route::get('/data-studilanjut/edit/{id}', [AdminStudiLanjutController::class, 'edit'])->name('data-studilanjut.edit');
+        Route::post('/data-studilanjut/store', [AdminStudiLanjutController::class, 'store'])->name('data-studilanjut.store');
+        Route::post('/data-studilanjut/update/{id}', [AdminStudiLanjutController::class, 'update'])->name('data-studilanjut.update');
+        Route::post('/data-studilanjut/destroy/{id}', [AdminStudiLanjutController::class, 'destroy'])->name('data-studilanjut.destroy');
 
         // Data Publikasi Ilmiah
         Route::get('/data-publikasi', [AdminPublikasiController::class, 'index'])->name('data-publikasi.index');
