@@ -80,7 +80,9 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
 
         // Studi Lanjut
         Route::get('/data-studilanjut', [AdminStudiLanjutController::class, 'index'])->name('data-studilanjut.index');
-        Route::get('/data-studilanjut/create', [AdminStudiLanjutController::class, 'create'])->name('data-studilanjut.create');
+        Route::get('/data-studilanjut/tahun/{id}', [AdminStudiLanjutController::class, 'tahun'])->name('data-studilanjut.tahun');
+        Route::get('/data-studilanjut/studilanjut/{id}', [AdminStudiLanjutController::class, 'studilanjut'])->name('data-studilanjut.studilanjut');
+        Route::get('/data-studilanjut/create/{id}', [AdminStudiLanjutController::class, 'create'])->name('data-studilanjut.create');
         Route::get('/data-studilanjut/edit/{id}', [AdminStudiLanjutController::class, 'edit'])->name('data-studilanjut.edit');
         Route::post('/data-studilanjut/store', [AdminStudiLanjutController::class, 'store'])->name('data-studilanjut.store');
         Route::post('/data-studilanjut/update/{id}', [AdminStudiLanjutController::class, 'update'])->name('data-studilanjut.update');

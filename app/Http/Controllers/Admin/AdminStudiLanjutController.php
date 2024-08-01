@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Prodi;
 use App\Models\StudiLanjut;
+use App\Models\Tahun;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -11,30 +13,53 @@ class AdminStudiLanjutController extends Controller
 {
     public function index()
     {
-        $studis = StudiLanjut::latest()->get();
+        $prodis = Prodi::latest()->get();
         return view('admin.studi-lanjut.index', [
-            'studis' => $studis,
+            'prodis' => $prodis,
         ]);
     }
 
-    public function create()
+    public function tahun($id)
     {
-        return view('admin.studi-lanjut.create');
+        $tahuns = Tahun::where('prodi_id', $id)->latest()->get();
+        return view('admin.studi-lanjut.tahun', [
+            'tahuns' => $tahuns,
+        ]);
+    }
+
+    public function studilanjut($id)
+    {
+        $tahuns = Tahun::where('id', $id)->first();
+        $studis = StudiLanjut::with('tahun')->where('tahun_id', $id)->latest()->get();
+        return view('admin.studi-lanjut.studi', [
+            'studis' => $studis,
+            'tahuns' => $tahuns,
+        ]);
+    }
+
+    public function create($id)
+    {
+        $tahuns = Tahun::where('id', $id)->first();
+        return view('admin.studi-lanjut.create', [
+            'tahuns' => $tahuns,
+        ]);
     }
 
     public function store(Request $request)
     {
         $validated = $request->validate([
+            'prodi_id' => 'required',
+            'tahun_id' => 'required',
             'nama' => 'required',
             'pendidikan' => 'required',
             'universitas' => 'required',
-            'tahun' => 'required',
             'berkas' => 'required|mimes:pdf',
         ], [
+            'prodi_id.required' => 'Program Studi wajib diisi',
+            'tahun_id.required' => 'Tahun wajib diisi',
             'nama.required' => 'Nama Lengkap wajib diisi',
             'pendidikan.required' => 'Pendidikan wajib diisi',
             'universitas.required' => 'Universitas wajib diisi',
-            'tahun.required' => 'Tahun wajib diisi',
             'berkas.required' => 'Berkas wajib diisi',
             'berkas.mimes' => 'Berkas harus wajib memiliki format PDF',
         ]);
@@ -47,7 +72,7 @@ class AdminStudiLanjutController extends Controller
 
         StudiLanjut::create($validated);
 
-        return redirect()->route('data-studilanjut.index')->with('success', 'Selamat ! Anda berhasil menambahkan data');
+        return redirect()->route('data-studilanjut.studilanjut', $request->tahun_id)->with('success', 'Selamat ! Anda berhasil menambahkan data');
     }
 
     public function edit($id)
@@ -61,16 +86,18 @@ class AdminStudiLanjutController extends Controller
     public function update(Request $request, $id)
     {
         $validated = $request->validate([
+            'prodi_id' => 'required',
+            'tahun_id' => 'required',
             'nama' => 'required',
             'pendidikan' => 'required',
             'universitas' => 'required',
-            'tahun' => 'required',
             'berkas' => 'required|mimes:pdf',
         ], [
+            'prodi_id.required' => 'Program Studi wajib diisi',
+            'tahun_id.required' => 'Tahun wajib diisi',
             'nama.required' => 'Nama Lengkap wajib diisi',
             'pendidikan.required' => 'Pendidikan wajib diisi',
             'universitas.required' => 'Universitas wajib diisi',
-            'tahun.required' => 'Tahun wajib diisi',
             'berkas.required' => 'Berkas wajib diisi',
             'berkas.mimes' => 'Berkas harus wajib memiliki format PDF',
         ]);
@@ -87,7 +114,7 @@ class AdminStudiLanjutController extends Controller
 
         $studis->update($validated);
 
-        return redirect()->route('data-studilanjut.index')->with('success', 'Selamat ! Anda berhasil memperbaharui data');
+        return redirect()->route('data-studilanjut.studilanjut', $request->tahun_id)->with('success', 'Selamat ! Anda berhasil memperbaharui data');
     }
 
     public function destroy($id)
@@ -97,6 +124,6 @@ class AdminStudiLanjutController extends Controller
             Storage::delete($studis->berkas);
         }
 
-        return redirect()->route('data-studilanjut.index')->with('success', 'Selamat ! Anda berhasil menghapus data');
+        return back()->with('success', 'Selamat ! Anda berhasil menghapus data');
     }
 }

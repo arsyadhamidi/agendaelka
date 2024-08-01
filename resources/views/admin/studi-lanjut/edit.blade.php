@@ -10,7 +10,7 @@
                 @csrf
                 <div class="card">
                     <div class="card-header">
-                        <a href="{{ route('data-studilanjut.index') }}" class="btn btn-primary">
+                        <a href="{{ route('data-studilanjut.studilanjut', $studis->tahun_id) }}" class="btn btn-primary">
                             <i class="bx bx-left-arrow-alt"></i>
                             Kembali
                         </a>
@@ -20,6 +20,26 @@
                         </button>
                     </div>
                     <div class="card-body">
+                        <div class="row">
+                            <div class="col-lg">
+                                <div class="mb-3">
+                                    <label>Program Studi</label>
+                                    <input type="text" name="prodi_id" class="form-control"
+                                        value="{{ $studis->prodi_id }}" hidden>
+                                    <input type="text" class="form-control" value="{{ $studis->prodi->nama ?? '-' }}"
+                                        readonly>
+                                </div>
+                            </div>
+                            <div class="col-lg">
+                                <div class="mb-3">
+                                    <label>Tahun</label>
+                                    <input type="text" name="tahun_id" class="form-control"
+                                        value="{{ $studis->tahun_id }}" hidden>
+                                    <input type="text" class="form-control" value="{{ $studis->tahun->tahun ?? '-' }}"
+                                        readonly>
+                                </div>
+                            </div>
+                        </div>
                         <div class="row">
                             <div class="col-lg">
                                 <div class="mb-3">
@@ -64,19 +84,6 @@
                                         value="{{ old('universitas', $studis->universitas ?? '') }}"
                                         placeholder="Masukan universitas">
                                     @error('universitas')
-                                        <div class="invalid-feedback">
-                                            {{ $message }}
-                                        </div>
-                                    @enderror
-                                </div>
-                            </div>
-                            <div class="col-lg">
-                                <div class="mb-3">
-                                    <label>Tahun</label>
-                                    <input type="number" name="tahun"
-                                        class="form-control @error('tahun') is-invalid @enderror"
-                                        value="{{ old('tahun', $studis->tahun ?? '') }}" placeholder="Masukan tahun">
-                                    @error('tahun')
                                         <div class="invalid-feedback">
                                             {{ $message }}
                                         </div>

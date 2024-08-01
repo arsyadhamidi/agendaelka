@@ -13,10 +13,11 @@ return new class extends Migration
     {
         Schema::create('studi_lanjuts', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('prodi_id');
+            $table->foreignId('tahun_id');
             $table->string('nama');
             $table->string('pendidikan');
             $table->string('universitas');
-            $table->string('tahun');
             $table->string('berkas');
             $table->timestamps();
         });
