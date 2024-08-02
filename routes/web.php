@@ -51,6 +51,7 @@ use App\Http\Controllers\KepalaDepartemen\KepalaDepartemenRapatController;
 use App\Http\Controllers\KepalaDepartemen\KepalaDepartemenRpsController;
 use App\Http\Controllers\KepalaDepartemen\KepalaDepartemenSeminarController;
 use App\Http\Controllers\KepalaDepartemen\KepalaDepartemenStudiLanjutController;
+use App\Http\Controllers\Landing\LandingController;
 use App\Http\Controllers\Mahasiswa\MahasiswaAkademikController;
 use App\Http\Controllers\Mahasiswa\MahasiswaBahanAjarController;
 use App\Http\Controllers\Mahasiswa\MahasiswaJadwalPengajaranController;
@@ -74,6 +75,9 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
  */
+
+//  Landing
+Route::get('/', [LandingController::class, 'index']);
 
 //  Login
 Route::get('/login', [LoginController::class, 'index'])->name('login')->middleware('guest');
