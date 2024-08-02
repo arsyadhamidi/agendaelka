@@ -8,7 +8,7 @@
     <meta name="viewport"
         content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
 
-    <title>Login | Agenda Elka</title>
+    <title>Lupa Password | Agenda Elka</title>
 
     <meta name="description" content="" />
 
@@ -110,10 +110,10 @@
                             </a>
                         </div>
                         <!-- /Logo -->
-                        <h4 class="mb-2">Selamat datang di Agenda Elka! 👋</h4>
-                        <p class="mb-4">Silahkan masuk dengan akun anda dan memulai pertualangan anda</p>
+                        <h4 class="mb-2">Lupa Password ! 👋</h4>
+                        <p class="mb-4">Silahkan masuk dengan akun anda dan memulai untuk reset password</p>
 
-                        <form id="formAuthentication" class="mb-3" action="{{ route('login.authenticate') }}"
+                        <form id="formAuthentication" class="mb-3" action="{{ route('forgot-password.store') }}"
                             method="POST">
                             @csrf
                             <div class="mb-3">
@@ -127,53 +127,17 @@
                                     </div>
                                 @enderror
                             </div>
-                            <div class="mb-3 form-password-toggle">
-                                <div class="d-flex justify-content-between">
-                                    <label class="form-label" for="password">Password</label>
-                                    <a href="{{ route('forgot-password.index') }}">
-                                        <small>Lupa password?</small>
-                                    </a>
-                                </div>
-                                <div class="input-group input-group-merge">
-                                    <input type="password"
-                                        class="form-control @error('password') is-invalid @enderror" name="password"
-                                        placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;"
-                                        aria-describedby="password" />
-                                    <span class="input-group-text cursor-pointer"><i class="bx bx-hide"></i></span>
-                                    @error('password')
-                                        <div class="invalid-feedback">
-                                            {{ $message }}
-                                        </div>
-                                    @enderror
-                                </div>
-                            </div>
                             <div class="mb-3">
-                                <div class="form-group captcha">
-                                    <span>{!! captcha_img('math') !!}</span>
-                                    <button type="button" class="btn btn-danger reload" id="reload">
-                                        &#x21bb;
-                                    </button>
-                                </div>
-                            </div>
-                            <div class="mb-3">
-                                <div class="form-group">
-                                    <input type="text" name="captcha"
-                                        class="form-control @error('captcha') is-invalid @enderror"
-                                        placeholder="Masukan Captcha">
-                                    @error('captcha')
-                                        <div class="invalid-feedback">
-                                            {{ $message }}
-                                        </div>
-                                    @enderror
-                                </div>
-                            </div>
-                            <div class="mb-3">
-                                <button class="btn btn-primary d-grid w-100" type="submit">Masuk</button>
+                                <button class="btn btn-primary d-grid w-100" type="submit">Lupa Password</button>
                             </div>
                         </form>
 
+
+
                         <p class="text-center">
-                            <span>version 1.0.0</span>
+                            <a href="/login">
+                                <small>Kembali ke Halaman Login</small>
+                            </a>
                         </p>
                     </div>
                 </div>
@@ -218,19 +182,6 @@
             @if (Session::has('error'))
                 toastr.error("{{ Session::get('error') }}");
             @endif
-        });
-    </script>
-    <script>
-        $(document).ready(function() {
-            $('#reload').click(function() {
-                $.ajax({
-                    type: 'GET',
-                    url: '{{ route('reload-captcha') }}',
-                    success: function(data) {
-                        $(".captcha span").html(data.captcha);
-                    }
-                });
-            });
         });
     </script>
 </body>

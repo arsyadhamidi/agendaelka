@@ -17,7 +17,9 @@ use App\Http\Controllers\Admin\AdminSeminarController;
 use App\Http\Controllers\Admin\AdminStudiLanjutController;
 use App\Http\Controllers\Admin\AdminTahunController;
 use App\Http\Controllers\Admin\AdminUserController;
+use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Auth\RecoverPasswordController;
 use App\Http\Controllers\Dashboard\DashboardController;
 use App\Http\Controllers\Dosen\DosenAkademikController;
 use App\Http\Controllers\Dosen\DosenBahanAjarController;
@@ -78,6 +80,14 @@ Route::get('/login', [LoginController::class, 'index'])->name('login')->middlewa
 Route::get('/reload-captcha', [LoginController::class, 'reloadcaptcha'])->name('reload-captcha');
 Route::post('/login-action', [LoginController::class, 'authenticate'])->name('login.authenticate');
 Route::get('/login-logout', [LoginController::class, 'logout'])->name('login.logout');
+
+// Forgot Password
+Route::get('/forgot-password', [ForgotPasswordController::class, 'index'])->name('forgot-password.index');
+Route::post('/forgot-password/store', [ForgotPasswordController::class, 'store'])->name('forgot-password.store');
+
+// Recorver Password
+Route::get('/recover-password', [RecoverPasswordController::class, 'index'])->name('recover-password.index')->middleware('auth');
+Route::post('/recover-password/store', [RecoverPasswordController::class, 'store'])->name('recover-password.store');
 
 Route::group(['middleware' => ['auth', 'verified']], function () {
     // Dashboard
@@ -332,11 +342,11 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
     // Kaprodi
     Route::group(['middleware' => [CekLevel::class . ':4']], function () {
 
-         // Studi Lanjut
-         Route::get('/kaprodi-studilanjut', [KaprodiStudiLanjutController::class, 'index'])->name('kaprodi-studilanjut.index');
-         Route::get('/kaprodi-studilanjut/tahun/{id}', [KaprodiStudiLanjutController::class, 'tahun'])->name('kaprodi-studilanjut.tahun');
-         Route::get('/kaprodi-studilanjut/generateexcel/{id}', [KaprodiStudiLanjutController::class, 'generateexcel'])->name('kaprodi-studilanjut.generateexcel');
-         Route::get('/kaprodi-studilanjut/studilanjut/{id}', [KaprodiStudiLanjutController::class, 'studilanjut'])->name('kaprodi-studilanjut.studilanjut');
+        // Studi Lanjut
+        Route::get('/kaprodi-studilanjut', [KaprodiStudiLanjutController::class, 'index'])->name('kaprodi-studilanjut.index');
+        Route::get('/kaprodi-studilanjut/tahun/{id}', [KaprodiStudiLanjutController::class, 'tahun'])->name('kaprodi-studilanjut.tahun');
+        Route::get('/kaprodi-studilanjut/generateexcel/{id}', [KaprodiStudiLanjutController::class, 'generateexcel'])->name('kaprodi-studilanjut.generateexcel');
+        Route::get('/kaprodi-studilanjut/studilanjut/{id}', [KaprodiStudiLanjutController::class, 'studilanjut'])->name('kaprodi-studilanjut.studilanjut');
 
         // Data Publikasi Ilmiah
         Route::get('/kaprodi-publikasi', [KaprodiPublikasiController::class, 'index'])->name('kaprodi-publikasi.index');

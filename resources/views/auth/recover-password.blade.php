@@ -8,7 +8,7 @@
     <meta name="viewport"
         content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
 
-    <title>Login | Agenda Elka</title>
+    <title>Reset Password | Agenda Elka</title>
 
     <meta name="description" content="" />
 
@@ -110,70 +110,45 @@
                             </a>
                         </div>
                         <!-- /Logo -->
-                        <h4 class="mb-2">Selamat datang di Agenda Elka! 👋</h4>
-                        <p class="mb-4">Silahkan masuk dengan akun anda dan memulai pertualangan anda</p>
+                        <h4 class="mb-2">Reset Password ! 👋</h4>
+                        <p class="mb-4">Silahkan masuk dengan akun anda dan memulai untuk reset password</p>
 
-                        <form id="formAuthentication" class="mb-3" action="{{ route('login.authenticate') }}"
+                        <form id="formAuthentication" class="mb-3" action="{{ route('recover-password.store') }}"
                             method="POST">
                             @csrf
+                            <input type="text" name="username" class="form-control"
+                                value="{{ Auth()->user()->username }}" hidden>
                             <div class="mb-3">
-                                <label class="form-label">Username</label>
-                                <input type="text" name="username"
-                                    class="form-control @error('username') is-invalid @enderror" name="username"
-                                    placeholder="Masukan username" autofocus />
-                                @error('username')
+                                <label class="form-label">Password</label>
+                                <input type="password" name="password"
+                                    class="form-control @error('password') is-invalid @enderror" name="password"
+                                    placeholder="Masukan password" autofocus />
+                                @error('password')
                                     <div class="invalid-feedback">
                                         {{ $message }}
                                     </div>
                                 @enderror
                             </div>
-                            <div class="mb-3 form-password-toggle">
-                                <div class="d-flex justify-content-between">
-                                    <label class="form-label" for="password">Password</label>
-                                    <a href="{{ route('forgot-password.index') }}">
-                                        <small>Lupa password?</small>
-                                    </a>
-                                </div>
-                                <div class="input-group input-group-merge">
-                                    <input type="password"
-                                        class="form-control @error('password') is-invalid @enderror" name="password"
-                                        placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;"
-                                        aria-describedby="password" />
-                                    <span class="input-group-text cursor-pointer"><i class="bx bx-hide"></i></span>
-                                    @error('password')
-                                        <div class="invalid-feedback">
-                                            {{ $message }}
-                                        </div>
-                                    @enderror
-                                </div>
+                            <div class="mb-3">
+                                <label class="form-label">Konfirmasi Password</label>
+                                <input type="password" name="konfirmasipassword"
+                                    class="form-control @error('konfirmasipassword') is-invalid @enderror"
+                                    name="konfirmasipassword" placeholder="Masukan konfirmasi password" autofocus />
+                                @error('konfirmasipassword')
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
                             </div>
                             <div class="mb-3">
-                                <div class="form-group captcha">
-                                    <span>{!! captcha_img('math') !!}</span>
-                                    <button type="button" class="btn btn-danger reload" id="reload">
-                                        &#x21bb;
-                                    </button>
-                                </div>
-                            </div>
-                            <div class="mb-3">
-                                <div class="form-group">
-                                    <input type="text" name="captcha"
-                                        class="form-control @error('captcha') is-invalid @enderror"
-                                        placeholder="Masukan Captcha">
-                                    @error('captcha')
-                                        <div class="invalid-feedback">
-                                            {{ $message }}
-                                        </div>
-                                    @enderror
-                                </div>
-                            </div>
-                            <div class="mb-3">
-                                <button class="btn btn-primary d-grid w-100" type="submit">Masuk</button>
+                                <button class="btn btn-primary d-grid w-100" type="submit">Reset Password</button>
                             </div>
                         </form>
 
                         <p class="text-center">
-                            <span>version 1.0.0</span>
+                            <a href="{{ route('login.logout') }}">
+                                <small>Kembali ke Halaman Login</small>
+                            </a>
                         </p>
                     </div>
                 </div>
@@ -185,7 +160,7 @@
     <!-- / Content -->
 
     <div class="buy-now">
-        <a href="/" target="_blank" class="btn btn-danger btn-buy-now">Halaman Utama</a>
+        <a href="{{ route('login.logout') }}" target="_blank" class="btn btn-danger btn-buy-now">Halaman Utama</a>
     </div>
 
     <!-- Core JS -->
@@ -218,19 +193,6 @@
             @if (Session::has('error'))
                 toastr.error("{{ Session::get('error') }}");
             @endif
-        });
-    </script>
-    <script>
-        $(document).ready(function() {
-            $('#reload').click(function() {
-                $.ajax({
-                    type: 'GET',
-                    url: '{{ route('reload-captcha') }}',
-                    success: function(data) {
-                        $(".captcha span").html(data.captcha);
-                    }
-                });
-            });
         });
     </script>
 </body>
