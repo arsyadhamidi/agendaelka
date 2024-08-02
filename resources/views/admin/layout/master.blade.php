@@ -467,7 +467,7 @@
                                     </a>
                                 </li>
                                 <li class="menu-item @yield('menuDosenStudiLanjut')">
-                                    <a href="{{ route('kepala-studilanjut.index') }}" class="menu-link">
+                                    <a href="{{ route('dosen-studilanjut.index') }}" class="menu-link">
                                         <div data-i18n="Without menu">Pendidikan Studi Lanjut</div>
                                     </a>
                                 </li>

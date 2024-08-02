@@ -28,6 +28,7 @@ use App\Http\Controllers\Dosen\DosenPublikasiController;
 use App\Http\Controllers\Dosen\DosenRapatController;
 use App\Http\Controllers\Dosen\DosenRpsController;
 use App\Http\Controllers\Dosen\DosenSeminarController;
+use App\Http\Controllers\Dosen\DosenStudiLanjutController;
 use App\Http\Controllers\Kaprodi\KaprodiAkademikController;
 use App\Http\Controllers\Kaprodi\KaprodiBahanAjarController;
 use App\Http\Controllers\Kaprodi\KaprodiJadwalPengajaranController;
@@ -368,6 +369,15 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
 
     // Dosen
     Route::group(['middleware' => [CekLevel::class . ':5']], function () {
+
+        // Data Studi Lanjut
+        Route::get('/dosen-studilanjut', [DosenStudiLanjutController::class, 'index'])->name('dosen-studilanjut.index');
+        Route::get('/dosen-studilanjut/create', [DosenStudiLanjutController::class, 'create'])->name('dosen-studilanjut.create');
+        Route::get('/dosen-studilanjut/edit/{id}', [DosenStudiLanjutController::class, 'edit'])->name('dosen-studilanjut.edit');
+        Route::post('/dosen-studilanjut/store', [DosenStudiLanjutController::class, 'store'])->name('dosen-studilanjut.store');
+        Route::post('/dosen-studilanjut/update/{id}', [DosenStudiLanjutController::class, 'update'])->name('dosen-studilanjut.update');
+        Route::post('/dosen-studilanjut/destroy/{id}', [DosenStudiLanjutController::class, 'destroy'])->name('dosen-studilanjut.destroy');
+        Route::get('/dosen-studilanjut/tahun/{prodiId}', [DosenStudiLanjutController::class, 'getTahun']);
 
         // Data Publikasi
         Route::get('/dosen-publikasi', [DosenPublikasiController::class, 'index'])->name('dosen-publikasi.index');
