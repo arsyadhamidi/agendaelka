@@ -33,9 +33,12 @@ use App\Http\Controllers\Kaprodi\KaprodiAkademikController;
 use App\Http\Controllers\Kaprodi\KaprodiBahanAjarController;
 use App\Http\Controllers\Kaprodi\KaprodiJadwalPengajaranController;
 use App\Http\Controllers\Kaprodi\KaprodiPenelitianController;
+use App\Http\Controllers\Kaprodi\KaprodiPengabdianController;
+use App\Http\Controllers\Kaprodi\KaprodiPublikasiController;
 use App\Http\Controllers\Kaprodi\KaprodiRapatController;
 use App\Http\Controllers\Kaprodi\KaprodiRpsController;
 use App\Http\Controllers\Kaprodi\KaprodiSeminarController;
+use App\Http\Controllers\Kaprodi\KaprodiStudiLanjutController;
 use App\Http\Controllers\KepalaDepartemen\KepalaDepartemenAkademikController;
 use App\Http\Controllers\KepalaDepartemen\KepalaDepartemenBahanAjarController;
 use App\Http\Controllers\KepalaDepartemen\KepalaDepartemenJadwalPengajaranController;
@@ -328,6 +331,24 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
 
     // Kaprodi
     Route::group(['middleware' => [CekLevel::class . ':4']], function () {
+
+         // Studi Lanjut
+         Route::get('/kaprodi-studilanjut', [KaprodiStudiLanjutController::class, 'index'])->name('kaprodi-studilanjut.index');
+         Route::get('/kaprodi-studilanjut/tahun/{id}', [KaprodiStudiLanjutController::class, 'tahun'])->name('kaprodi-studilanjut.tahun');
+         Route::get('/kaprodi-studilanjut/generateexcel/{id}', [KaprodiStudiLanjutController::class, 'generateexcel'])->name('kaprodi-studilanjut.generateexcel');
+         Route::get('/kaprodi-studilanjut/studilanjut/{id}', [KaprodiStudiLanjutController::class, 'studilanjut'])->name('kaprodi-studilanjut.studilanjut');
+
+        // Data Publikasi Ilmiah
+        Route::get('/kaprodi-publikasi', [KaprodiPublikasiController::class, 'index'])->name('kaprodi-publikasi.index');
+        Route::get('/kaprodi-publikasi/tahun/{id}', [KaprodiPublikasiController::class, 'tahun'])->name('kaprodi-publikasi.tahun');
+        Route::get('/kaprodi-publikasi/generateexcel/{id}', [KaprodiPublikasiController::class, 'generateexcel'])->name('kaprodi-publikasi.generateexcel');
+        Route::get('/kaprodi-publikasi/publikasi/{id}', [KaprodiPublikasiController::class, 'publikasi'])->name('kaprodi-publikasi.publikasi');
+
+        // Data Pengabdian
+        Route::get('/kaprodi-pengabdian', [KaprodiPengabdianController::class, 'index'])->name('kaprodi-pengabdian.index');
+        Route::get('/kaprodi-pengabdian/tahun/{id}', [KaprodiPengabdianController::class, 'tahun'])->name('kaprodi-pengabdian.tahun');
+        Route::get('/kaprodi-pengabdian/generateexcel/{id}', [KaprodiPengabdianController::class, 'generateexcel'])->name('kaprodi-pengabdian.generateexcel');
+        Route::get('/kaprodi-pengabdian/penelitian/{id}', [KaprodiPengabdianController::class, 'pengabdian'])->name('kaprodi-pengabdian.pengabdian');
 
         // Data Penelitian
         Route::get('/kaprodi-penelitian', [KaprodiPenelitianController::class, 'index'])->name('kaprodi-penelitian.index');

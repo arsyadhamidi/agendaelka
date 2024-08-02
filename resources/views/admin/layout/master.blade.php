@@ -407,17 +407,17 @@
                                     </a>
                                 </li>
                                 <li class="menu-item @yield('menuKaprodiPengabdian')">
-                                    <a href="{{ route('mahasiswa-pengabdian.index') }}" class="menu-link">
+                                    <a href="{{ route('kaprodi-pengabdian.index') }}" class="menu-link">
                                         <div data-i18n="Without menu">Pengabdian Masyarakat</div>
                                     </a>
                                 </li>
                                 <li class="menu-item @yield('menuKaprodiPublikasi')">
-                                    <a href="{{ route('mahasiswa-publikasi.index') }}" class="menu-link">
+                                    <a href="{{ route('kaprodi-publikasi.index') }}" class="menu-link">
                                         <div data-i18n="Without menu">Publikasi Ilmiah</div>
                                     </a>
                                 </li>
                                 <li class="menu-item @yield('menuKaprodiStudiLanjut')">
-                                    <a href="{{ route('mahasiswa-studilanjut.index') }}" class="menu-link">
+                                    <a href="{{ route('kaprodi-studilanjut.index') }}" class="menu-link">
                                         <div data-i18n="Without menu">Pendidikan Studi Lanjut</div>
                                     </a>
                                 </li>
