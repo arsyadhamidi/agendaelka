@@ -32,6 +32,7 @@ use App\Http\Controllers\Dosen\DosenStudiLanjutController;
 use App\Http\Controllers\Kaprodi\KaprodiAkademikController;
 use App\Http\Controllers\Kaprodi\KaprodiBahanAjarController;
 use App\Http\Controllers\Kaprodi\KaprodiJadwalPengajaranController;
+use App\Http\Controllers\Kaprodi\KaprodiPenelitianController;
 use App\Http\Controllers\Kaprodi\KaprodiRapatController;
 use App\Http\Controllers\Kaprodi\KaprodiRpsController;
 use App\Http\Controllers\Kaprodi\KaprodiSeminarController;
@@ -327,6 +328,12 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
 
     // Kaprodi
     Route::group(['middleware' => [CekLevel::class . ':4']], function () {
+
+        // Data Penelitian
+        Route::get('/kaprodi-penelitian', [KaprodiPenelitianController::class, 'index'])->name('kaprodi-penelitian.index');
+        Route::get('/kaprodi-penelitian/tahun/{id}', [KaprodiPenelitianController::class, 'tahun'])->name('kaprodi-penelitian.tahun');
+        Route::get('/kaprodi-penelitian/generateexcel/{id}', [KaprodiPenelitianController::class, 'generateexcel'])->name('kaprodi-penelitian.generateexcel');
+        Route::get('/kaprodi-penelitian/penelitian/{id}', [KaprodiPenelitianController::class, 'penelitian'])->name('kaprodi-penelitian.penelitian');
 
         // Seminar
         Route::get('/kaprodi-seminar', [KaprodiSeminarController::class, 'index'])->name('kaprodi-seminar.index');

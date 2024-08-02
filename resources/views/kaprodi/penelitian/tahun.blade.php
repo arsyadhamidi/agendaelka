@@ -7,55 +7,33 @@
     <div class="row">
         <div class="col-lg">
             <div class="card">
-                <div class="card-header d-flex align-content-center justify-content-between">
-                    <div class="form-group">
-                        <a href="{{ route('kaprodi-penelitian.tahun', $tahuns->prodi_id) }}" class="btn btn-primary">
-                            <i class="bx bx-left-arrow-alt"></i>
-                            Kembali
-                        </a>
-                    </div>
-                    <a href="{{ route('kaprodi-penelitian.generateexcel', $tahuns->id) }}" class="btn btn-success"
-                        target="_blank">
-                        <i class="bx bx-download"></i>
-                        Download Excel
+                <div class="card-header">
+                    <a href="{{ route('kaprodi-penelitian.index') }}" class="btn btn-primary">
+                        <i class="bx bx-left-arrow-alt"></i>
+                        Kembali
                     </a>
                 </div>
                 <div class="card-body table-responsive">
                     <table class="table table-bordered table-striped" id="myTable">
                         <thead>
                             <tr>
-                                <th style="width: 5%; text-align:center">No.</th>
-                                <th style="text-align:center">Nama</th>
-                                <th style="text-align:center">Prodi</th>
-                                <th style="text-align:center">Judul</th>
-                                <th style="text-align:center">Tanggal</th>
-                                <th style="text-align:center">Lokasi</th>
-                                <th style="text-align:center">Berkas</th>
+                                <th style="width: 4%; text-align:center">No.</th>
+                                <th style="text-align:center">Program Studi</th>
                                 <th style="text-align:center">Tahun</th>
-                                <th style="text-align:center">Status</th>
+                                <th style="text-align:center">Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($penelitians as $data)
+                            @foreach ($tahuns as $data)
                                 <tr>
-                                    <td>{{ $loop->iteration ?? '-' }}</td>
-                                    <td>{{ $data->nama ?? '-' }}</td>
+                                    <td>{{ $loop->iteration }}</td>
                                     <td>{{ $data->prodi->nama ?? '-' }}</td>
-                                    <td>{{ $data->judul ?? '-' }}</td>
-                                    <td>{{ $data->tanggal ?? '-' }}</td>
-                                    <td>{{ $data->lokasi ?? '-' }}</td>
-                                    <td>{{ $data->tahun->tahun ?? '-' }}</td>
-                                    <td>{{ $data->status ?? '-' }}</td>
+                                    <td>{{ $data->tahun ?? '-' }}</td>
                                     <td>
-                                        @if (!empty($data->file_penelitian))
-                                            <a href="{{ asset('storage/' . $data->file_penelitian) }}"
-                                                class="btn btn-primary">
-                                                <i class="bx bx-download"></i>
-                                                Download
-                                            </a>
-                                        @else
-                                            -
-                                        @endif
+                                        <a href="{{ route('kaprodi-penelitian.penelitian', $data->id) }}"
+                                            class="btn btn-sm btn-outline-info mx-2">
+                                            <i class="bx bx-edit"></i>
+                                        </a>
                                     </td>
                                 </tr>
                             @endforeach
@@ -89,7 +67,7 @@
             // Tampilkan SweetAlert saat tombol di klik
             Swal.fire({
                 icon: 'question',
-                title: 'Hapus Data Penelitian ?',
+                title: 'Hapus Data Tahun?',
                 text: 'Apakah anda yakin untuk menghapus data ini?',
                 showCancelButton: true, // Tampilkan tombol batal
                 confirmButtonText: 'Ya',
