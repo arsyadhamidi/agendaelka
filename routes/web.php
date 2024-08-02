@@ -48,8 +48,12 @@ use App\Http\Controllers\KepalaDepartemen\KepalaDepartemenStudiLanjutController;
 use App\Http\Controllers\Mahasiswa\MahasiswaAkademikController;
 use App\Http\Controllers\Mahasiswa\MahasiswaBahanAjarController;
 use App\Http\Controllers\Mahasiswa\MahasiswaJadwalPengajaranController;
+use App\Http\Controllers\Mahasiswa\MahasiswaPenelitianController;
+use App\Http\Controllers\Mahasiswa\MahasiswaPengabdianController;
+use App\Http\Controllers\Mahasiswa\MahasiswaPublikasiController;
 use App\Http\Controllers\Mahasiswa\MahasiswaRpsController;
 use App\Http\Controllers\Mahasiswa\MahasiswaSeminarController;
+use App\Http\Controllers\Mahasiswa\MahasiswaStudiLanjutController;
 use App\Http\Controllers\Setting\SettingController;
 use App\Http\Middleware\CekLevel;
 use Illuminate\Support\Facades\Route;
@@ -446,6 +450,42 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
 
     // Mahasiswa
     Route::group(['middleware' => [CekLevel::class . ':6']], function () {
+
+        // Data Studi Lanjut
+        Route::get('/mahasiswa-studilanjut', [MahasiswaStudiLanjutController::class, 'index'])->name('mahasiswa-studilanjut.index');
+        Route::get('/mahasiswa-studilanjut/create', [MahasiswaStudiLanjutController::class, 'create'])->name('mahasiswa-studilanjut.create');
+        Route::get('/mahasiswa-studilanjut/edit/{id}', [MahasiswaStudiLanjutController::class, 'edit'])->name('mahasiswa-studilanjut.edit');
+        Route::post('/mahasiswa-studilanjut/store', [MahasiswaStudiLanjutController::class, 'store'])->name('mahasiswa-studilanjut.store');
+        Route::post('/mahasiswa-studilanjut/update/{id}', [MahasiswaStudiLanjutController::class, 'update'])->name('mahasiswa-studilanjut.update');
+        Route::post('/mahasiswa-studilanjut/destroy/{id}', [MahasiswaStudiLanjutController::class, 'destroy'])->name('mahasiswa-studilanjut.destroy');
+        Route::get('/mahasiswa-studilanjut/tahun/{prodiId}', [MahasiswaStudiLanjutController::class, 'getTahun']);
+
+        // Data Publikasi
+        Route::get('/mahasiswa-publikasi', [MahasiswaPublikasiController::class, 'index'])->name('mahasiswa-publikasi.index');
+        Route::get('/mahasiswa-publikasi/create', [MahasiswaPublikasiController::class, 'create'])->name('mahasiswa-publikasi.create');
+        Route::get('/mahasiswa-publikasi/edit/{id}', [MahasiswaPublikasiController::class, 'edit'])->name('mahasiswa-publikasi.edit');
+        Route::post('/mahasiswa-publikasi/store', [MahasiswaPublikasiController::class, 'store'])->name('mahasiswa-publikasi.store');
+        Route::post('/mahasiswa-publikasi/update/{id}', [MahasiswaPublikasiController::class, 'update'])->name('mahasiswa-publikasi.update');
+        Route::post('/mahasiswa-publikasi/destroy/{id}', [MahasiswaPublikasiController::class, 'destroy'])->name('mahasiswa-publikasi.destroy');
+        Route::get('/mahasiswa-publikasi/tahun/{prodiId}', [MahasiswaPublikasiController::class, 'getTahun']);
+
+        // Data Pengabdian
+        Route::get('/mahasiswa-pengabdian', [MahasiswaPengabdianController::class, 'index'])->name('mahasiswa-pengabdian.index');
+        Route::get('/mahasiswa-pengabdian/create', [MahasiswaPengabdianController::class, 'create'])->name('mahasiswa-pengabdian.create');
+        Route::get('/mahasiswa-pengabdian/edit/{id}', [MahasiswaPengabdianController::class, 'edit'])->name('mahasiswa-pengabdian.edit');
+        Route::post('/mahasiswa-pengabdian/store', [MahasiswaPengabdianController::class, 'store'])->name('mahasiswa-pengabdian.store');
+        Route::post('/mahasiswa-pengabdian/update/{id}', [MahasiswaPengabdianController::class, 'update'])->name('mahasiswa-pengabdian.update');
+        Route::post('/mahasiswa-pengabdian/destroy/{id}', [MahasiswaPengabdianController::class, 'destroy'])->name('mahasiswa-pengabdian.destroy');
+        Route::get('/mahasiswa-pengabdian/tahun/{prodiId}', [MahasiswaPengabdianController::class, 'getTahun']);
+
+        // Data Penelitian
+        Route::get('/mahasiswa-penelitian', [MahasiswaPenelitianController::class, 'index'])->name('mahasiswa-penelitian.index');
+        Route::get('/mahasiswa-penelitian/create', [MahasiswaPenelitianController::class, 'create'])->name('mahasiswa-penelitian.create');
+        Route::get('/mahasiswa-penelitian/edit/{id}', [MahasiswaPenelitianController::class, 'edit'])->name('mahasiswa-penelitian.edit');
+        Route::post('/mahasiswa-penelitian/store', [MahasiswaPenelitianController::class, 'store'])->name('mahasiswa-penelitian.store');
+        Route::post('/mahasiswa-penelitian/update/{id}', [MahasiswaPenelitianController::class, 'update'])->name('mahasiswa-penelitian.update');
+        Route::post('/mahasiswa-penelitian/destroy/{id}', [MahasiswaPenelitianController::class, 'destroy'])->name('mahasiswa-penelitian.destroy');
+        Route::get('/mahasiswa-penelitian/tahun/{prodiId}', [MahasiswaPenelitianController::class, 'getTahun']);
 
         // Seminar
         Route::get('/mahasiswa-seminar', [MahasiswaSeminarController::class, 'index'])->name('mahasiswa-seminar.index');

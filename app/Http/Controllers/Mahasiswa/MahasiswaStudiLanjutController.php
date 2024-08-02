@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Dosen;
+namespace App\Http\Controllers\Mahasiswa;
 
 use App\Http\Controllers\Controller;
 use App\Models\Prodi;
@@ -10,12 +10,12 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
-class DosenStudiLanjutController extends Controller
+class MahasiswaStudiLanjutController extends Controller
 {
     public function index()
     {
         $studis = StudiLanjut::where('users_id', Auth::user()->id)->latest()->get();
-        return view('dosen.studi-lanjut.index', [
+        return view('mahasiswa.studi-lanjut.index', [
             'studis' => $studis,
         ]);
     }
@@ -24,7 +24,7 @@ class DosenStudiLanjutController extends Controller
     {
         $prodis = Prodi::latest()->get();
         $tahuns = Tahun::latest()->get();
-        return view('dosen.studi-lanjut.create', [
+        return view('mahasiswa.studi-lanjut.create', [
             'prodis' => $prodis,
             'tahuns' => $tahuns,
         ]);
@@ -59,7 +59,7 @@ class DosenStudiLanjutController extends Controller
 
         StudiLanjut::create($validated);
 
-        return redirect()->route('dosen-studilanjut.index')->with('success', 'Selamat ! Anda berhasil menambahkan data');
+        return redirect()->route('mahasiswa-studilanjut.index')->with('success', 'Selamat ! Anda berhasil menambahkan data');
     }
 
     public function edit($id)
@@ -67,7 +67,7 @@ class DosenStudiLanjutController extends Controller
         $prodis = Prodi::latest()->get();
         $tahuns = Tahun::latest()->get();
         $studis = StudiLanjut::where('id', $id)->first();
-        return view('dosen.studi-lanjut.edit', [
+        return view('mahasiswa.studi-lanjut.edit', [
             'prodis' => $prodis,
             'tahuns' => $tahuns,
             'studis' => $studis,
@@ -107,7 +107,7 @@ class DosenStudiLanjutController extends Controller
 
         $studis->update($validated);
 
-        return redirect()->route('dosen-studilanjut.index')->with('success', 'Selamat ! Anda berhasil memperbaharui data');
+        return redirect()->route('mahasiswa-studilanjut.index')->with('success', 'Selamat ! Anda berhasil memperbaharui data');
     }
 
     public function destroy($id)

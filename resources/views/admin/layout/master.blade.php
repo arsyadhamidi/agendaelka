@@ -515,6 +515,37 @@
                                 <div data-i18n="Analytics">Akademik</div>
                             </a>
                         </li>
+
+                        <!-- Data Non Akademik -->
+                        <li class="menu-item @yield('menuMahasiswaNonAkademik')">
+                            <a href="javascript:void(0);" class="menu-link menu-toggle">
+                                <i class="menu-icon tf-icons bx bx-qr"></i>
+                                <div data-i18n="Layouts">Non Akademik</div>
+                            </a>
+
+                            <ul class="menu-sub">
+                                <li class="menu-item @yield('menuMahasiswaPenelitian')">
+                                    <a href="{{ route('mahasiswa-penelitian.index') }}" class="menu-link">
+                                        <div data-i18n="Without menu">Data Penelitian</div>
+                                    </a>
+                                </li>
+                                <li class="menu-item @yield('menuMahasiswaPengabdian')">
+                                    <a href="{{ route('mahasiswa-pengabdian.index') }}" class="menu-link">
+                                        <div data-i18n="Without menu">Pengabdian Masyarakat</div>
+                                    </a>
+                                </li>
+                                <li class="menu-item @yield('menuMahasiswaPublikasi')">
+                                    <a href="{{ route('mahasiswa-publikasi.index') }}" class="menu-link">
+                                        <div data-i18n="Without menu">Publikasi Ilmiah</div>
+                                    </a>
+                                </li>
+                                <li class="menu-item @yield('menuMahasiswaStudiLanjut')">
+                                    <a href="{{ route('mahasiswa-studilanjut.index') }}" class="menu-link">
+                                        <div data-i18n="Without menu">Pendidikan Studi Lanjut</div>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
                     @endif
                 </ul>
             </aside>
